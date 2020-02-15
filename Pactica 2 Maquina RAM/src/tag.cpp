@@ -17,7 +17,7 @@
 * @Author: adria
 * @Date:   2020-02-14 14:53:48
 * @Last Modified by:   adria
-* @Last Modified time: 2020-02-15 11:25:00
+* @Last Modified time: 2020-02-15 12:18:38
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -33,7 +33,7 @@
  */
 Tag::Tag(std::string namename, int pos)
 {
-	set_Tag(namename);
+	set_Name(namename);
 	set_Pos(pos);
 }
 
@@ -62,7 +62,7 @@ int Tag::get_Pos(void)
  *
  * @param[in]  name   The new value
  */
-void Tag::set_Tag(std::string name)
+void Tag::set_Name(std::string name)
 {
 	name_ = name; 
 }
