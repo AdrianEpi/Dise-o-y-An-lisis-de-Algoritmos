@@ -2,9 +2,9 @@
 CFLAGS = -c -std=c++17
 
 ram_sim: main.o machineRAM.o inputTape.o instruction.o outputTape.o registers.o tag.o tagRegister.o
-	g++  main.o machineRAM.o inputTape.o instruction.o outputTape.o registers.o tag.o tagRegister.o -o main
+	g++  main.o machineRAM.o inputTape.o instruction.o outputTape.o registers.o tag.o tagRegister.o -o ram_sim
 	mv *.o ./objects
-	mv main ./bin
+	mv ram_sim ./bin
 
 
 main.o: ./src/main.cpp
@@ -36,6 +36,7 @@ tagRegister.o: ./src/tagRegister.cpp ./include/tagRegister.hpp
 .PHONY: clean
 clean:
 	rm -rf ./objects/*.o
+	rm -rf ./bin/*
 
 run1:
 	./bin/ram_sim ./inputs/ram_program.ram ./inputs/input_tape.in ./inputs/output_tape.out 1
