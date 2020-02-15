@@ -2,7 +2,7 @@
 =====================================================================================
 	=                                                                              =
 	=            Proyect:       Practica 2 Simulador de la maquina RAM             =
-	=            File name:     tag.cpp                                            =
+	=            File name:     tagRegister.cpp                                    =
 	=            Author:        Adrián Epifanio Rodríguez Hernández                =
 	=            Fecha:         14/02/2020                                         =
 	=            Subject:       Diseño y Análisis de Algoritmos                    =
@@ -15,64 +15,70 @@
 ===================================================================================*/
 /*
 * @Author: adria
-* @Date:   2020-02-14 14:53:48
+* @Date:   2020-02-15 11:17:46
 * @Last Modified by:   adria
-* @Last Modified time: 2020-02-15 11:25:00
+* @Last Modified time: 2020-02-15 11:33:41
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
-#include "../include/tag.hpp"
+#include "../include/tagRegister.hpp"
 
 /*------------------------------------------------*/
 
+
 /**
- * @brief      Constructs a new instance.
+ * @brief      Gets the tags.
  *
- * @param[in]  namename   The namename
+ * @return     The tags.
+ */
+std::vector<Tag> TagRegister::get_Tags(void)
+{
+	return tags_;
+}
+
+/**
+ * @brief      Sets the tags.
+ *
+ * @param[in]  tags  The tags
+ */
+void TagRegister::set_Tags(std::vector<Tag> tags)
+{
+	tags_ = tags;
+}
+
+/**
+ * @brief      Finds a position.
+ *
+ * @param[in]  name  The name
+ *
+ * @return     The position if it's found or -1 if it's not
+ */
+int TagRegister::findPos(std::string name)
+{
+	for(int i = 0; i < tags_.size(); i++)
+		if(tags_[i].get_Name() == name)
+			return tags_[i].get_Pos();
+	return -1;
+}
+
+/**
+ * @brief      Add a new tag to the vector
+ *
+ * @param[in]  name  The name
  * @param[in]  pos   The position
  */
-Tag::Tag(std::string namename, int pos)
+void TagRegister::insertTag(std::string name, int pos)
 {
-	set_Tag(namename);
-	set_Pos(pos);
+	Tag aux(name, pos);
+	tags_.push_back(aux);
 }
 
 /**
- * @brief      Gets the name.
- *
- * @return     The name.
+ * @brief      Prints the tags by console
  */
-std::string Tag::get_Name(void)
+void TagRegister::write(void)
 {
-	return name_;
-}
-
-/**
- * @brief      Gets the position.
- *
- * @return     The position.
- */
-int Tag::get_Pos(void)
-{
-	return pos_;
-}
-
-/**
- * @brief      Sets the name.
- *
- * @param[in]  name   The new value
- */
-void Tag::set_Tag(std::string name)
-{
-	name_ = name; 
-}
-
-/**
- * @brief      Sets the position.
- *
- * @param[in]  pos   The new value
- */
-void Tag::set_Pos(int pos)
-{
-	pos_ = pos; 
+	std::cout << "Tags: " << std::endl;
+	for(int i = 0; i < tags_.size(); i++)
+		std::cout << tags[i].get_Name() << ": " << tags_.get_Pos() << std::endl;;
 }
