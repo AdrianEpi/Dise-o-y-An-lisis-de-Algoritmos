@@ -23,6 +23,7 @@
 class Instruction
 {
 	private:
+		/*----------  Attribs  ----------*/		
 		enum code_
 		{
 			LOAD = 0000,
@@ -50,11 +51,13 @@ class Instruction
 		std::string operand_;
 
 	public:
+		/*----------  Builders & Destroyer  ----------*/		
 		Instruction();
 		Instruction(int code, int line);
 		Instruction(int code, int mode, int line, std::string operand);
 		~Instruction(){};
 
+		/*----------  Getters & Setters  ----------*/		
 		int get_OperationCode(void);
 		int get_AddressingMode(void);
 		int get_LineNumber(void);
@@ -65,6 +68,7 @@ class Instruction
 		void set_LineNumber(int line_number);
 		void set_Operand(std::string operand);
 
+		/*----------  Functions  ----------*/		
 		void initialize(void);
 		std::string writeString(void);
 };
