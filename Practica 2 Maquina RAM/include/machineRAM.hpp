@@ -16,6 +16,7 @@
 /*------------  LIBRARY DECLARATION  ------------*/
 
 #include <iostream>
+#include <cstring>
 
 /*------------------------------------------------*/
 /*-----------  FUNCTIONS DECLARATION  ------------*/
@@ -39,6 +40,7 @@ class MachineRAM
 		Registers registers_;
 		TagRegister tagRegister_;
 
+		int program_counter_;
 		std::string instructionFileName_;
 		std::string inputTapeFileName_;
 		std::string outputTapeFileName_;
@@ -46,6 +48,7 @@ class MachineRAM
 	public:
 		/*----------  Builders & Destroyer  ----------*/		
 		MachineRAM();
+		MachineRAM(std::string program_file, std::string intputTapeFileName, std::string outputTapeFileName);
 		~MachineRAM();
 
 		/*----------  Getters & Setters  ----------*/		
@@ -54,15 +57,17 @@ class MachineRAM
 		std::vector<Instruction> get_Instruction(void);	
 		Registers get_Registers(void);
 		TagRegister get_TagRegister(void);
+		int get_ProgramCounter(void);
 		std::string get_InstructionFileName(void);
 		std::string get_InputTapeFileName(void);
 		std::string get_OutputTapeFileName(void);
 
-		void  set_InputTape(InputTape inputTape);
-		void  set_OutputTape(OutputTape outputTape);
-		void  set_Instruction(std::vector<Instruction> instruction);	
-		void  set_Registers(Registers registers);
-		void  set_TagRegister(TagRegister tagRegister);
+		void set_InputTape(InputTape inputTape);
+		void set_OutputTape(OutputTape outputTape);
+		void set_Instruction(std::vector<Instruction> instruction);	
+		void set_Registers(Registers registers);
+		void set_TagRegister(TagRegister tagRegister);
+		void set_ProgramCounter(int pc);
 		void set_InstructionFileName(std::string instructionFileName);
 		void set_InputTapeFileName(std::string intputTapeFileName);
 		void set_OutputTapeFileName(std::string outputTapeFileName);	
@@ -73,7 +78,9 @@ class MachineRAM
 		void loadInputTape(void);
 		void loadOutputTape(void);
 		void saveOutputTape(void);
-		void cleanComments(void);
+		bool isAComment(std::string line);
+		bool isTag(std::string &line);
 
-		
+		std::string searchTag(std::string &line);
+		void eraseSpacesTabs(std::string &line);
 };
