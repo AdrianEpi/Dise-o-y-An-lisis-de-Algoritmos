@@ -22,7 +22,7 @@
 
 class Instruction
 {
-	private:
+	public:
 		/*----------  Attribs  ----------*/		
 		enum code_
 		{
@@ -45,6 +45,10 @@ class Instruction
 			DIRECTO = 01,
 			INDIRECTO = 10
 		};
+
+	private:
+		/*----------  Attribs  ----------*/		
+		
 		int operation_code_;
 		int addressing_mode_;
 		int line_number_;
