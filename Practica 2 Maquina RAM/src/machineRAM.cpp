@@ -17,7 +17,7 @@
 * @Author: adria
 * @Date:   2020-02-14 09:41:49
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-15 20:08:43
+* @Last Modified time: 2020-02-16 14:22:54
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -32,6 +32,7 @@ MachineRAM::MachineRAM()
 
 MachineRAM::MachineRAM(std::string program_file, std::string inputTapeFileName, std::string outputTapeFileName)
 {
+	initialize();
 	instructionFileName_ = program_file;
 	inputTapeFileName_ = inputTapeFileName;
 	outputTapeFileName_ = outputTapeFileName;
@@ -65,6 +66,16 @@ std::vector<Instruction> MachineRAM::get_Instruction(void)
 {
 	return instruction_;
 }	
+
+/**
+ * @brief      Gets the instruction codes.
+ *
+ * @return     The instruction codes.
+ */
+Instruction MachineRAM::get_InstructionCodes(void)
+{
+	return instruction_codes_;
+}
 
 /**
  * @brief      Gets the registers.
@@ -157,6 +168,16 @@ void  MachineRAM::set_Instruction(std::vector<Instruction> instruction)
 }	
 
 /**
+ * @brief      Sets the instruction codes.
+ *
+ * @param[in]  codes  The codes
+ */
+void MachineRAM::set_InstructionCodes(Instruction codes)
+{
+	instruction_codes_ = codes;
+}
+
+/**
  * @brief      Sets the registers.
  *
  * @param[in]  registers  The registers
@@ -226,10 +247,14 @@ void MachineRAM::initialize(void)
 	registers_.initialize();
 }
 
+/**
+ * @brief      Loads the program data.
+ */
 void MachineRAM::loadData(void)
 {
 	std::string line, tag_name, operand;
-	int code, line_number = 0;
+	int code, line_number = 0, addresing;
+	loadInputTape();
 
 	std::ifstream file(instructionFileName_.c_str());
 	if(file.is_open())
@@ -239,9 +264,33 @@ void MachineRAM::loadData(void)
 			getline(file, line);
 			if(!isAComment(line))
 			{
-				tag_name.clear();
+				eraseSpacesTabs(line);
+				if(isTag(line))
+				{
+					tag_name.clear();
+					tag_name = searchTag(line);
+					tagRegister_.insertTag(tag_name, instruction_.size());
+				}
+				if(line.size() > 0) //If there's anything else on the line
+				{
+					code = searchInstructionCode(line);
+					if(code == instruction_codes_.HALT)
+					{
+						Instruction new_instruction(code, line_number);
+						instruction_.push_back(new_instruction);
+					}
+					else
+					{
+						operand = searchOperand(line);
+						addresing = searchAddressing(line);
+						Instruction new_instruction(code, addresing, line_number, operand);
+						instruction_.push_back(new_instruction);
+					}
+				}
+				line_number++;
 			}
 		}
+		file.close();
 	}
 	else
 	{
@@ -289,19 +338,78 @@ bool MachineRAM::isAComment(std::string line)
 		return true;
 	return false;
 }
-////////////////////////////////////////////////////////////7
+
+/**
+ * @brief      Searchs the tag name.
+ *
+ * @param      line  The line
+ *
+ * @return     The tag name.
+ */
 std::string MachineRAM::searchTag(std::string &line)
 {
 	std::string tag_name;
 	int pos;
+	pos = line.find(':'); //We search for the tag end position
+	tag_name = line.substr(0, pos);
+	line.erase(0, pos+1);
 	eraseSpacesTabs(line);
-
-
-
+	return tag_name;
 }
 
 /**
- * @brief      Erase the initial spaces and tabs of the line
+ * @brief      Searchs the operand.
+ *
+ * @param      line  The line
+ *
+ * @return     The operand.
+ */
+std::string MachineRAM::searchOperand(std::string &line)
+{
+	std::string aux = "", operand = "";
+	int pos;
+	if(line.find(' '))
+	{
+		pos = line.find(' ');
+		if( line[pos+1] == '*' || line[pos+1] == '=')
+			aux = line.substr(pos+2, line.size());
+		else
+			aux = line.substr(pos+1, line.size());
+		for(int i = 0; i < aux.size(); i++)
+			if((aux[i] >= 48 && aux[i] <= 57) || (aux[i] >= 65 && aux[i] <= 90) || (aux[i] >= 97 && aux[i] <= 122) || aux[i] == '-' || aux[i] == '_')
+				operand += aux[i];
+			/**
+			 *
+			 * ASCII 48-57 -> 0-9
+			 * ASCII 65-90 -> A-Z
+			 * ASCII 97-122 -> a-z
+			 *
+			 */
+		return operand;
+	}
+}
+
+/**
+ * @brief      Searchs the addressing code.
+ *
+ * @param[in]  line  The line
+ *
+ * @return     The code.
+ */
+int MachineRAM::searchAddressing(std::string line)
+{
+	int pos;
+	pos = line.find(' ');
+	if(line[pos+1] == '=')
+		return instruction_codes_.INMEDIATO;
+	else if(line[pos+1] == '*')
+		return instruction_codes_.INDIRECTO;
+	else
+		return instruction_codes_.DIRECTO;
+}
+
+/**
+ * @brief      Erase the initial spaces and tabs of the line.
  *
  * @param      line  The line
  */
@@ -310,7 +418,7 @@ void MachineRAM::eraseSpacesTabs(std::string &line)
 	char aux;
 	int space = 0;
 	aux = line[space];
-	while(aux != ' ' || aux != '\t')
+	while(aux == ' ' || aux == '\t')
 		aux = line[space++];
 	line.erase(0, space-1); //Erases all the spaces and tabs from start to the first letter
 }
@@ -330,4 +438,54 @@ bool MachineRAM::isTag(std::string &line)
 		return true;
 	else
 		return false;
+}
+
+/**
+ * @brief      Gives the instruction code.
+ *
+ * @param[in]  line  The line
+ *
+ * @return     The code.
+ */
+int MachineRAM::searchInstructionCode(std::string line)
+{
+	std::string code;
+	int pos = line.size();
+	if(line.find(' '))
+	{
+		pos = line.find(' '); // Search where does the instruction name end
+		code = line.substr(0, pos);
+	}
+	else
+		code = line;
+
+	if(code == "LOAD")
+		return instruction_codes_.LOAD;
+	else if(code == "STORE")
+		return instruction_codes_.STORE;
+	else if(code == "ADD")
+		return instruction_codes_.ADD;
+	else if(code == "SUB")
+		return instruction_codes_.SUB;
+	else if(code == "MULT")
+		return instruction_codes_.MULT;
+	else if(code == "DIV")
+		return instruction_codes_.DIV;
+	else if(code == "READ")
+		return instruction_codes_.READ;
+	else if(code == "WRITE")
+		return instruction_codes_.WRITE;
+	else if(code == "JUMP")
+		return instruction_codes_.JUMP;
+	else if(code == "JGTZ")
+		return instruction_codes_.JGTZ;
+	else if(code == "JZERO")
+		return instruction_codes_.JZERO;
+	else if(code == "HALT")
+		return instruction_codes_.HALT;
+	else
+	{
+		std::cout << "Error, instruction not found" << std::endl;
+		exit(0);
+	}
 }
