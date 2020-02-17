@@ -17,7 +17,7 @@
 * @Author: adria
 * @Date:   2020-02-14 09:41:49
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-17 12:57:37
+* @Last Modified time: 2020-02-17 16:38:59
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -271,7 +271,7 @@ void MachineRAM::loadData(void)
 					tag_name = searchTag(line);
 					tagRegister_.insertTag(tag_name, instruction_.size());
 				}
-				if(line.size() > 0) //If there's anything else on the line
+				if(line.size() > 1) //If there's anything else on the line
 				{
 					code = searchInstructionCode(line);
 					if(code == instruction_codes_.HALT)
@@ -291,6 +291,7 @@ void MachineRAM::loadData(void)
 			}
 		}
 		file.close();
+		loadInputTape();
 	}
 	else
 	{
@@ -334,7 +335,7 @@ bool MachineRAM::isAComment(std::string line)
 {
 	char aux[line.size()];
 	strcpy(aux, line.c_str());
-	if(aux[0] == '#')
+	if(aux[0] == '#' || aux[0] == '\n')
 		return true;
 	return false;
 }
@@ -418,6 +419,7 @@ void MachineRAM::eraseSpacesTabs(std::string &line)
 	char aux;
 	int space = 0;
 	aux = line[space];
+
 	while(aux == ' ' || aux == '\t')
 		aux = line[space++];
 	line.erase(0, space-1); //Erases all the spaces and tabs from start to the first letter
@@ -434,6 +436,11 @@ bool MachineRAM::isTag(std::string &line)
 {
 	int pos = 0;
 	pos = line.find(':');
+	for(int i = 0; i < line.size(); i++)
+	{
+		if(line[i] == ':')
+			return true;
+	}
 	if(pos > 0)
 		return true;
 	else
@@ -458,7 +465,7 @@ int MachineRAM::searchInstructionCode(std::string line)
 	}
 	else
 		code = line;
-
+	
 	if(code == "LOAD")
 		return instruction_codes_.LOAD;
 	else if(code == "STORE")
@@ -490,6 +497,13 @@ int MachineRAM::searchInstructionCode(std::string line)
 	}
 }
 
+/**
+ * @brief      Writes the program data, instructions, registers, input and output tapes.
+ *
+ * @param      cout  The cout
+ *
+ * @return     Prints by console.
+ */
 std::ostream& MachineRAM::writeProgram(std::ostream& cout)
 {
 	std::cout << std::endl << "Number\tInstruction\tCodification\tAddresing Mode\tOperand" << std::endl;
@@ -504,4 +518,13 @@ std::ostream& MachineRAM::writeProgram(std::ostream& cout)
 			std::cout << std::setw(8);
 		std::cout << instruction_[i].get_Operand() << std::endl;
 	}
+	std::cout << std::endl << "Input Tape: " << std::endl;
+	inputTape_.write();
+	std::cout << std::endl << "Registers: " << std::endl;
+	registers_.write();
+	std::cout << std::endl;
+	tagRegister_.write();
+	std::cout << std::endl << "Output Tape: " << std::endl;
+	outputTape_.write();
+
 }

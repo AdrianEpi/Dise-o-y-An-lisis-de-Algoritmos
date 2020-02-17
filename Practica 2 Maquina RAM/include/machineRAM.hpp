@@ -85,7 +85,7 @@ class MachineRAM
 		void loadOutputTape(void);
 		void saveOutputTape(void);
 
-		/*----------  Functions  ----------*/
+		/*----------  File Functions  ----------*/
 		void eraseSpacesTabs(std::string &line);		
 		bool isAComment(std::string line);
 		bool isTag(std::string &line);

@@ -17,7 +17,7 @@
 * @Author: adria
 * @Date:   2020-02-14 09:40:00
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-17 12:51:29
+* @Last Modified time: 2020-02-17 13:45:49
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -152,7 +152,7 @@ void Instruction::initialize(void)
 	set_Operand("");
 	set_LineNumber(0);
 	set_AddressingMode(-1); //Because we don't know which one is
-	set_OperationCode(1011); //HALT
+	set_OperationCode(11011); //HALT
 
 }
 

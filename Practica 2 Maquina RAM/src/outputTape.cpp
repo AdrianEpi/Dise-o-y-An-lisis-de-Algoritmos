@@ -16,8 +16,8 @@
 /*
 * @Author: adria
 * @Date:   2020-02-14 09:44:03
-* @Last Modified by:   adria
-* @Last Modified time: 2020-02-14 20:26:23
+* @Last Modified by:   Adrián Epifanio
+* @Last Modified time: 2020-02-17 15:50:38
 */
 
 /*-----------  FUNCTIONS DECLARATION  ------------*/
@@ -72,14 +72,13 @@ void OutputTape::load(std::string filename)
 {
 	int data;
 	std::ifstream file(filename.c_str());
-	
+	tape_.resize(0);
 	if(file.is_open())
 	{
-		file >> data;
 		while(!file.eof())
 		{
-			tape_.push_back(data);
 			file >> data;
+			tape_.push_back(data);
 		}
 		file.close();	
 	}
