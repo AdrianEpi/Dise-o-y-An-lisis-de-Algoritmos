@@ -17,7 +17,7 @@
 * @Author: adria
 * @Date:   2020-02-14 09:41:49
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-16 14:22:54
+* @Last Modified time: 2020-02-17 12:57:37
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -487,5 +487,21 @@ int MachineRAM::searchInstructionCode(std::string line)
 	{
 		std::cout << "Error, instruction not found" << std::endl;
 		exit(0);
+	}
+}
+
+std::ostream& MachineRAM::writeProgram(std::ostream& cout)
+{
+	std::cout << std::endl << "Number\tInstruction\tCodification\tAddresing Mode\tOperand" << std::endl;
+	std::cout << "__________________________________________________________________________________________" << std::endl;
+	for(int i = 0; i < instruction_.size(); i++)
+	{
+		std::cout << i << "\t" << instruction_[i].transformCode(instruction_[i].get_OperationCode()) << "\t\t";
+		std::cout << instruction_[i].get_OperationCode() << "\t\t" << instruction_[i].transformAddressing(instruction_[i].get_AddressingMode());
+		if(instruction_[i].get_AddressingMode() == 101)
+			std::cout << std::setw(10);
+		else
+			std::cout << std::setw(8);
+		std::cout << instruction_[i].get_Operand() << std::endl;
 	}
 }

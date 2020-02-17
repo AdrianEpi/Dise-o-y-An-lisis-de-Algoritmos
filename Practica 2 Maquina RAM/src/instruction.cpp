@@ -16,8 +16,8 @@
 /*
 * @Author: adria
 * @Date:   2020-02-14 09:40:00
-* @Last Modified by:   adria
-* @Last Modified time: 2020-02-14 21:28:46
+* @Last Modified by:   Adrián Epifanio
+* @Last Modified time: 2020-02-17 12:51:29
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -61,6 +61,7 @@ Instruction::Instruction(int code, int mode, int line, std::string operand)
 	set_OperationCode(code);
 	set_AddressingMode(mode);
 	set_LineNumber(line);
+	set_Operand(operand);
 }
 
 /**
@@ -231,4 +232,89 @@ std::string Instruction::writeString(void)
 	}
 
 	return (aux + aux2 + get_Operand());
+}
+
+/**
+ * @brief      Transform the operation code to string
+ *
+ * @param[in]  code  The code
+ *
+ * @return     The string
+ */
+std::string Instruction::transformCode(int code)
+{
+	switch(code)
+	{
+		case 10000:
+			return "LOAD";
+			break;
+
+		case 10001:
+			return "STORE";
+			break;
+
+		case 10010:
+			return "ADD";
+			break;
+
+		case 10011:
+			return "SUB";
+			break;
+
+		case 10100:
+			return "MULT";
+			break;
+
+		case 10101:
+			return "DIV";
+			break;
+
+		case 10110:
+			return "READ";
+			break;
+
+		case 10111:
+			return "WRITE";
+			break;
+
+		case 11000:
+			return "JUMP";
+			break;
+
+		case 11001:
+			return "JGTZ";
+			break;
+
+		case 11010:
+			return "JZERO";
+			break;
+
+		case 11011:
+			return "HALT";
+			break;
+	}
+}
+
+std::string Instruction::transformAddressing(int code)
+{
+	switch(code)
+	{
+		case 100:
+			return "INMEDIATO";
+			break;
+
+		case 101:
+			return "DIRECTO";
+			break;
+
+		case 110:
+			return "INDIRECTO";
+			break;
+
+		default:
+			return "       ";
+			break;
+
+		
+	}
 }

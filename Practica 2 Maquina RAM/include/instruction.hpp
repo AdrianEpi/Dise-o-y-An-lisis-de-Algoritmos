@@ -26,24 +26,24 @@ class Instruction
 		/*----------  Attribs  ----------*/		
 		enum code_
 		{
-			LOAD = 0000,
-			STORE = 0001,
-			ADD = 0010,
-			SUB = 0011,
-			MULT = 0100,
-			DIV = 0101,
-			READ = 0110,
-			WRITE = 0111,
-			JUMP = 1000,
-			JGTZ = 1001,
-			JZERO = 1010,
-			HALT = 1011
+			LOAD = 10000,
+			STORE = 10001,
+			ADD = 10010,
+			SUB = 10011,
+			MULT = 10100,
+			DIV = 10101,
+			READ = 10110,
+			WRITE = 10111,
+			JUMP = 11000,
+			JGTZ = 11001,
+			JZERO = 11010,
+			HALT = 11011
 		};
 		enum mode_
 		{
-			INMEDIATO = 00,
-			DIRECTO = 01,
-			INDIRECTO = 10
+			INMEDIATO = 100,
+			DIRECTO = 101,
+			INDIRECTO = 110
 		};
 
 	private:
@@ -75,4 +75,6 @@ class Instruction
 		/*----------  Functions  ----------*/		
 		void initialize(void);
 		std::string writeString(void);
+		std::string transformCode(int code);
+		std::string transformAddressing(int code);
 };

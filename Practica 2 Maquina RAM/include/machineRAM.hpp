@@ -18,6 +18,8 @@
 #include <iostream>
 #include <cstring>
 #include <string>
+#include <iomanip>
+
 
 /*------------------------------------------------*/
 /*-----------  FUNCTIONS DECLARATION  ------------*/
@@ -91,4 +93,7 @@ class MachineRAM
 		std::string searchOperand(std::string &line);
 		int searchAddressing(std::string line);		
 		int searchInstructionCode(std::string line);
+
+		/*----------  Read & Write  ----------*/
+		std::ostream& writeProgram(std::ostream& cout);
 };
