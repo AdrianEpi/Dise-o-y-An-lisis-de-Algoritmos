@@ -2,7 +2,7 @@
 =====================================================================================
 	=                                                                              =
 	=            Proyect:       Practica 2 Simulador de la maquina RAM             =
-	=            File name:     tag.hpp                                            =
+	=            File name:     i_load.cpp                                         =
 	=            Author:        Adrián Epifanio Rodríguez Hernández                =
 	=            Fecha:         14/02/2020                                         =
 	=            Subject:       Diseño y Análisis de Algoritmos                    =
@@ -13,33 +13,37 @@
 	=                                                                              =
 =====================================================================================
 ===================================================================================*/
-/*------------  LIBRARY DECLARATION  ------------*/
+/*
+* @Author: Adrián Epifanio
+* @Date:   2020-02-18 12:38:41
+* @Last Modified by:   Adrián Epifanio
+* @Last Modified time: 2020-02-19 19:22:19
+*/
+/*-----------  FUNCTIONS DECLARATION  ------------*/
 
-#include <iostream>
+#include "../include/i_load.hpp"
 
 /*------------------------------------------------*/
-
-
-class Tag
+I_Load::I_Load(Instruction& instruct, Registers& reg)
 {
-	private:
-		/*----------  Attribs  ----------*/
-		std::string name_;
-		int code_;
-		int pos_;
+	runProcess(instruct, reg);
+}
 
-	public:
-		/*----------  Builders & Destroyer  ----------*/
-		Tag(){}
-		Tag(std::string name, int pos, int code);
-		~Tag(){}
+void I_Load::runProcess(Instruction& instruct, Registers& reg)
+{
+	/*switch(instruct.get_AddressingMode())
+	{
+		case instruct.INMEDIATO:
+			reg.set_Accumulator(instruct.get_Operand());
+			break;
 
-		/*----------  Getters & Setters  ----------*/		
-		std::string get_Name(void);
-		int get_Code(void);
-		int get_Pos(void);
+		case instruct.DIRECTO:
+			reg.set_Accumulator(reg.get_SpecificRegister(instruct.get_Operand()));
+			break;
 
-		void set_Name(std::string name);
-		void set_Code(int code);
-		void set_Pos(int pos);
-};
+		case instruct.INDIRECTO:
+			reg.set_Accumulator(reg.get_SpecificRegister(reg.get_SpecificRegister(instruct.get_Operand())));
+	}*/
+}
+
+

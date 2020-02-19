@@ -25,13 +25,20 @@
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
 #include "inputTape.hpp"
-#include "instruction.hpp"
+//#include "instruction.hpp"
 #include "outputTape.hpp"
-#include "registers.hpp"
+//#include "registers.hpp"
 #include "tagRegister.hpp"
-
+//#include "../src/i_load.cpp"
+#include "i_load.hpp"
+#include "i_store.hpp"
 /*------------------------------------------------*/
-
+		enum mode_
+		{
+			INMEDIATO = 100,
+			DIRECTO = 101,
+			INDIRECTO = 110
+		};
 
 class MachineRAM
 {
@@ -90,10 +97,84 @@ class MachineRAM
 		bool isAComment(std::string line);
 		bool isTag(std::string &line);
 		std::string searchTag(std::string &line);
-		std::string searchOperand(std::string &line);
-		int searchAddressing(std::string line);		
-		int searchInstructionCode(std::string line);
+		int searchOperand(std::string &line);
+		int searchAddressing(std::string &line);		
+		int searchInstructionCode(std::string &line);
+		void toUpperCase(std::string &word)
+		{
+			  for (int i = 0; i < word.length(); i++) {
+			    word[i] = toupper(word[i]);
+			  }
+		}
 
 		/*----------  Read & Write  ----------*/
 		std::ostream& writeProgram(std::ostream& cout);
+
+		/*----------  RUN  ----------*/
+		void runProgram(void)
+		{
+			bool stop = false;
+			set_ProgramCounter(0);
+			Instruction aux;
+			int mem;
+			char c;
+
+			while(!stop)
+			{
+				aux = instruction_[program_counter_];
+				switch(aux.get_OperationCode())
+				{
+					case instruction_codes_.LOAD:
+						program_counter_++;
+						break;
+
+					case instruction_codes_.STORE:
+						program_counter_++;
+						break;
+
+					case instruction_codes_.ADD:
+						program_counter_++;
+						break;
+
+					case instruction_codes_.SUB:
+						program_counter_++;
+						break;
+
+					case instruction_codes_.MULT:
+						program_counter_++;
+						break;
+
+					case instruction_codes_.DIV:
+						program_counter_++;
+						break;
+
+					case instruction_codes_.READ:
+						program_counter_++;
+						break;
+
+					case instruction_codes_.WRITE:
+						program_counter_++;
+						break;
+
+					case instruction_codes_.JUMP:
+						program_counter_++;
+						break;
+
+					case instruction_codes_.JGTZ:
+						program_counter_++;
+						break;
+
+					case instruction_codes_.JZERO:
+						program_counter_++;
+						break;
+
+					case instruction_codes_.HALT:
+						program_counter_++;
+						break;
+
+					default:
+						break;
+				}
+			}
+		}		
 };

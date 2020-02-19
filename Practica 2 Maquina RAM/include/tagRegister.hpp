@@ -42,7 +42,9 @@ class TagRegister
 
 		/*----------  Functions  ----------*/
 		int findPos(std::string name);
+		int findCode(std::string name);
 		void insertTag(std::string name, int pos);
+		void add_Pos(std::string name, int pos);
 
 		/*----------  Write  ----------*/		
 		void write(void);

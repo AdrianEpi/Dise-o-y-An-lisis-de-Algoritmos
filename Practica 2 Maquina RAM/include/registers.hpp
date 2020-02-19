@@ -39,6 +39,7 @@ class Registers
 		std::vector<int> get_Registers(void);
 		int get_SpecificRegister(int number);
 		int get_Accumulator(void);
+		
 		void set_Registers(std::vector<int> registers);
 		void set_SpecificRegister(int data, int number);
 		void set_Accumulator(int data);

@@ -2,7 +2,7 @@
 =====================================================================================
 	=                                                                              =
 	=            Proyect:       Practica 2 Simulador de la maquina RAM             =
-	=            File name:     tag.hpp                                            =
+	=            File name:     i_load.hpp                                         =
 	=            Author:        Adrián Epifanio Rodríguez Hernández                =
 	=            Fecha:         14/02/2020                                         =
 	=            Subject:       Diseño y Análisis de Algoritmos                    =
@@ -13,33 +13,14 @@
 	=                                                                              =
 =====================================================================================
 ===================================================================================*/
-/*------------  LIBRARY DECLARATION  ------------*/
-
-#include <iostream>
-
-/*------------------------------------------------*/
-
-
-class Tag
+#include "instruction.hpp"
+#include "registers.hpp"
+class I_Load
 {
-	private:
-		/*----------  Attribs  ----------*/
-		std::string name_;
-		int code_;
-		int pos_;
-
 	public:
-		/*----------  Builders & Destroyer  ----------*/
-		Tag(){}
-		Tag(std::string name, int pos, int code);
-		~Tag(){}
+		I_Load(){};
+		I_Load(Instruction& instruct, Registers& reg);
+		~I_Load(){};
 
-		/*----------  Getters & Setters  ----------*/		
-		std::string get_Name(void);
-		int get_Code(void);
-		int get_Pos(void);
-
-		void set_Name(std::string name);
-		void set_Code(int code);
-		void set_Pos(int pos);
+		void runProcess(Instruction& instruct, Registers& reg);
 };

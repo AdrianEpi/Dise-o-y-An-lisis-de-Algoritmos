@@ -17,19 +17,30 @@
 * @Author: adria
 * @Date:   2020-02-14 09:41:49
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-17 16:38:59
+* @Last Modified time: 2020-02-19 22:19:26
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
 #include "../include/machineRam.hpp"
 
 /*------------------------------------------------*/
+
+/**
+ * @brief      Constructs a new instance.
+ */
 MachineRAM::MachineRAM()
 {
 	std::cout << "The machine RAM must be initialized with an input program, an input tap and an output tape." << std::endl;
 	exit(0);
 }
 
+/**
+ * @brief      Constructs a new instance.
+ *
+ * @param[in]  program_file        The program file
+ * @param[in]  inputTapeFileName   The input tape file name
+ * @param[in]  outputTapeFileName  The output tape file name
+ */
 MachineRAM::MachineRAM(std::string program_file, std::string inputTapeFileName, std::string outputTapeFileName)
 {
 	initialize();
@@ -37,6 +48,7 @@ MachineRAM::MachineRAM(std::string program_file, std::string inputTapeFileName, 
 	inputTapeFileName_ = inputTapeFileName;
 	outputTapeFileName_ = outputTapeFileName;
 }
+
 /**
  * @brief      Gets the input tape.
  *
@@ -253,7 +265,7 @@ void MachineRAM::initialize(void)
 void MachineRAM::loadData(void)
 {
 	std::string line, tag_name, operand;
-	int code, line_number = 0, addresing;
+	int code, line_number = 0, addresing, asdf;
 	loadInputTape();
 
 	std::ifstream file(instructionFileName_.c_str());
@@ -269,7 +281,11 @@ void MachineRAM::loadData(void)
 				{
 					tag_name.clear();
 					tag_name = searchTag(line);
-					tagRegister_.insertTag(tag_name, instruction_.size());
+					toUpperCase(tag_name);
+					if(tagRegister_.findPos(tag_name) == -1)
+						tagRegister_.add_Pos(tag_name, instruction_.size());
+					else
+						tagRegister_.insertTag(tag_name, instruction_.size());
 				}
 				if(line.size() > 1) //If there's anything else on the line
 				{
@@ -281,9 +297,9 @@ void MachineRAM::loadData(void)
 					}
 					else
 					{
-						operand = searchOperand(line);
 						addresing = searchAddressing(line);
-						Instruction new_instruction(code, addresing, line_number, operand);
+						asdf = searchOperand(line);
+						Instruction new_instruction(code, addresing, line_number, asdf);
 						instruction_.push_back(new_instruction);
 					}
 				}
@@ -365,28 +381,24 @@ std::string MachineRAM::searchTag(std::string &line)
  *
  * @return     The operand.
  */
-std::string MachineRAM::searchOperand(std::string &line)
+int MachineRAM::searchOperand(std::string &line)
 {
-	std::string aux = "", operand = "";
-	int pos;
-	if(line.find(' '))
+	if(isdigit(line[0]))
 	{
-		pos = line.find(' ');
-		if( line[pos+1] == '*' || line[pos+1] == '=')
-			aux = line.substr(pos+2, line.size());
-		else
-			aux = line.substr(pos+1, line.size());
-		for(int i = 0; i < aux.size(); i++)
-			if((aux[i] >= 48 && aux[i] <= 57) || (aux[i] >= 65 && aux[i] <= 90) || (aux[i] >= 97 && aux[i] <= 122) || aux[i] == '-' || aux[i] == '_')
-				operand += aux[i];
-			/**
-			 *
-			 * ASCII 48-57 -> 0-9
-			 * ASCII 65-90 -> A-Z
-			 * ASCII 97-122 -> a-z
-			 *
-			 */
-		return operand;
+		int aux = stoi(line);
+		return aux;
+	}
+
+	else
+	{
+		toUpperCase(line);
+		int aux = tagRegister_.findCode(line);
+		if(aux == -1)
+		{
+			tagRegister_.insertTag(line, -1);
+			aux = tagRegister_.findCode(line);
+		}
+		return aux;
 	}
 }
 
@@ -397,16 +409,25 @@ std::string MachineRAM::searchOperand(std::string &line)
  *
  * @return     The code.
  */
-int MachineRAM::searchAddressing(std::string line)
+int MachineRAM::searchAddressing(std::string &line)
 {
 	int pos;
 	pos = line.find(' ');
 	if(line[pos+1] == '=')
+	{
+		line.erase(pos, pos + 2);
 		return instruction_codes_.INMEDIATO;
+	}
 	else if(line[pos+1] == '*')
+	{
+		line.erase(pos, pos + 2);
 		return instruction_codes_.INDIRECTO;
+	}
 	else
+	{
+		line.erase(pos, pos + 1);
 		return instruction_codes_.DIRECTO;
+	}
 }
 
 /**
@@ -419,7 +440,6 @@ void MachineRAM::eraseSpacesTabs(std::string &line)
 	char aux;
 	int space = 0;
 	aux = line[space];
-
 	while(aux == ' ' || aux == '\t')
 		aux = line[space++];
 	line.erase(0, space-1); //Erases all the spaces and tabs from start to the first letter
@@ -437,10 +457,9 @@ bool MachineRAM::isTag(std::string &line)
 	int pos = 0;
 	pos = line.find(':');
 	for(int i = 0; i < line.size(); i++)
-	{
 		if(line[i] == ':')
 			return true;
-	}
+	
 	if(pos > 0)
 		return true;
 	else
@@ -454,7 +473,7 @@ bool MachineRAM::isTag(std::string &line)
  *
  * @return     The code.
  */
-int MachineRAM::searchInstructionCode(std::string line)
+int MachineRAM::searchInstructionCode(std::string &line)
 {
 	std::string code;
 	int pos = line.size();
@@ -462,33 +481,34 @@ int MachineRAM::searchInstructionCode(std::string line)
 	{
 		pos = line.find(' '); // Search where does the instruction name end
 		code = line.substr(0, pos);
+		line.erase(0, pos);
 	}
 	else
 		code = line;
 	
-	if(code == "LOAD")
+	if(code == "LOAD" || code == "load")
 		return instruction_codes_.LOAD;
-	else if(code == "STORE")
+	else if(code == "STORE" || code == "store")
 		return instruction_codes_.STORE;
-	else if(code == "ADD")
+	else if(code == "ADD" || code == "add")
 		return instruction_codes_.ADD;
-	else if(code == "SUB")
+	else if(code == "SUB" || code == "sub")
 		return instruction_codes_.SUB;
-	else if(code == "MULT")
+	else if(code == "MULT" || code == "mult")
 		return instruction_codes_.MULT;
-	else if(code == "DIV")
+	else if(code == "DIV" || code == "div")
 		return instruction_codes_.DIV;
-	else if(code == "READ")
+	else if(code == "READ" || code == "read")
 		return instruction_codes_.READ;
-	else if(code == "WRITE")
+	else if(code == "WRITE" || code == "write")
 		return instruction_codes_.WRITE;
-	else if(code == "JUMP")
+	else if(code == "JUMP" || code == "jump")
 		return instruction_codes_.JUMP;
-	else if(code == "JGTZ")
+	else if(code == "JGTZ" || code == "jgtz")
 		return instruction_codes_.JGTZ;
-	else if(code == "JZERO")
+	else if(code == "JZERO" || code == "jzero")
 		return instruction_codes_.JZERO;
-	else if(code == "HALT")
+	else if(code == "HALT" || code == "halt")
 		return instruction_codes_.HALT;
 	else
 	{
@@ -516,7 +536,11 @@ std::ostream& MachineRAM::writeProgram(std::ostream& cout)
 			std::cout << std::setw(10);
 		else
 			std::cout << std::setw(8);
-		std::cout << instruction_[i].get_Operand() << std::endl;
+		if(instruction_[i].get_Operand() != -1)
+		{
+
+			std::cout << instruction_[i].get_Operand() << std::endl;
+		}
 	}
 	std::cout << std::endl << "Input Tape: " << std::endl;
 	inputTape_.write();

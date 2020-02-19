@@ -52,25 +52,25 @@ class Instruction
 		int operation_code_;
 		int addressing_mode_;
 		int line_number_;
-		std::string operand_;
+		int operand_;
 
 	public:
 		/*----------  Builders & Destroyer  ----------*/		
 		Instruction();
 		Instruction(int code, int line);
-		Instruction(int code, int mode, int line, std::string operand);
+		Instruction(int code, int mode, int line, int operand);
 		~Instruction(){};
 
 		/*----------  Getters & Setters  ----------*/		
 		int get_OperationCode(void);
 		int get_AddressingMode(void);
 		int get_LineNumber(void);
-		std::string get_Operand(void);
+		int get_Operand(void);
 
 		void set_OperationCode(int operation_code);
 		void set_AddressingMode(int addressing_mode);
 		void set_LineNumber(int line_number);
-		void set_Operand(std::string operand);
+		void set_Operand(int operand);
 
 		/*----------  Functions  ----------*/		
 		void initialize(void);

@@ -16,8 +16,8 @@
 /*
 * @Author: adria
 * @Date:   2020-02-14 14:53:48
-* @Last Modified by:   adria
-* @Last Modified time: 2020-02-15 12:18:38
+* @Last Modified by:   Adrián Epifanio
+* @Last Modified time: 2020-02-19 22:02:15
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -28,13 +28,15 @@
 /**
  * @brief      Constructs a new instance.
  *
- * @param[in]  namename   The namename
- * @param[in]  pos   The position
+ * @param[in]  namename  The namename
+ * @param[in]  pos       The position
+ * @param[in]  code      The code
  */
-Tag::Tag(std::string namename, int pos)
+Tag::Tag(std::string name, int pos, int code)
 {
-	set_Name(namename);
+	set_Name(name);
 	set_Pos(pos);
+	set_Code(code);
 }
 
 /**
@@ -45,6 +47,16 @@ Tag::Tag(std::string namename, int pos)
 std::string Tag::get_Name(void)
 {
 	return name_;
+}
+
+/**
+ * @brief      Gets the code.
+ *
+ * @return     The code.
+ */
+int Tag::get_Code(void)
+{
+	return code_;
 }
 
 /**
@@ -65,6 +77,16 @@ int Tag::get_Pos(void)
 void Tag::set_Name(std::string name)
 {
 	name_ = name; 
+}
+
+/**
+ * @brief      Sets the code. It starts on 90.000
+ *
+ * @param[in]  code  The code
+ */
+void Tag::set_Code(int code)
+{
+	code_ = code + 90000;
 }
 
 /**

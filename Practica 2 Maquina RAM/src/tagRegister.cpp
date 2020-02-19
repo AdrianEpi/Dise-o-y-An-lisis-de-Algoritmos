@@ -16,8 +16,8 @@
 /*
 * @Author: adria
 * @Date:   2020-02-15 11:17:46
-* @Last Modified by:   adria
-* @Last Modified time: 2020-02-15 12:19:14
+* @Last Modified by:   Adrián Epifanio
+* @Last Modified time: 2020-02-19 22:19:36
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -58,6 +58,21 @@ int TagRegister::findPos(std::string name)
 	for(int i = 0; i < tags_.size(); i++)
 		if(tags_[i].get_Name() == name)
 			return tags_[i].get_Pos();
+	return -2;
+}
+
+/**
+ * @brief      Finds the code of the tag by a given name.
+ *
+ * @param[in]  name  The name
+ *
+ * @return     The code.
+ */
+int TagRegister::findCode(std::string name)
+{
+	for(int i = 0; i < tags_.size(); i++)
+		if(tags_[i].get_Name() == name)
+			return tags_[i].get_Code();
 	return -1;
 }
 
@@ -69,8 +84,15 @@ int TagRegister::findPos(std::string name)
  */
 void TagRegister::insertTag(std::string name, int pos)
 {
-	Tag aux(name, pos);
+	Tag aux(name, pos, tags_.size());
 	tags_.push_back(aux);
+}
+
+void TagRegister::add_Pos(std::string name, int pos)
+{
+	for(int i = 0; i < tags_.size(); i++)
+		if(tags_[i].get_Name() == name)
+			tags_[i].set_Pos(pos);
 }
 
 /**

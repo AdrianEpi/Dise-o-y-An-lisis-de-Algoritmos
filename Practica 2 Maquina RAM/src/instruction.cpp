@@ -17,7 +17,7 @@
 * @Author: adria
 * @Date:   2020-02-14 09:40:00
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-17 13:45:49
+* @Last Modified time: 2020-02-19 21:50:50
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -55,7 +55,7 @@ Instruction::Instruction(int code, int line)
  * @param[in]  line     The line
  * @param[in]  operand  The operand
  */
-Instruction::Instruction(int code, int mode, int line, std::string operand)
+Instruction::Instruction(int code, int mode, int line, int operand)
 {
 	initialize();
 	set_OperationCode(code);
@@ -99,7 +99,7 @@ int Instruction::get_LineNumber(void)
  *
  * @return     The operand.
  */
-std::string Instruction::get_Operand(void)
+int Instruction::get_Operand(void)
 {
 	return operand_;
 }
@@ -139,7 +139,7 @@ void Instruction::set_LineNumber(int line_number)
  *
  * @param[in]  operand  The operand
  */
-void Instruction::set_Operand(std::string operand)
+void Instruction::set_Operand(int operand)
 {
 	operand_ = operand;
 }
@@ -149,11 +149,10 @@ void Instruction::set_Operand(std::string operand)
  */
 void Instruction::initialize(void)
 {
-	set_Operand("");
+	set_Operand(-1);
 	set_LineNumber(0);
 	set_AddressingMode(-1); //Because we don't know which one is
 	set_OperationCode(11011); //HALT
-
 }
 
 /**
@@ -231,7 +230,7 @@ std::string Instruction::writeString(void)
 			break;
 	}
 
-	return (aux + aux2 + get_Operand());
+	return (aux + aux2);
 }
 
 /**
