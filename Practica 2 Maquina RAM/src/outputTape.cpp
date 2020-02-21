@@ -17,7 +17,7 @@
 * @Author: adria
 * @Date:   2020-02-14 09:44:03
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-17 15:50:38
+* @Last Modified time: 2020-02-21 19:23:52
 */
 
 /*-----------  FUNCTIONS DECLARATION  ------------*/
@@ -46,6 +46,16 @@ std::vector<int> OutputTape::get_tape(void)
 }
 
 /**
+ * @brief      Gets the filename.
+ *
+ * @return     The filename.
+ */
+std::string OutputTape::get_filename(void)
+{
+	return filename_;
+}
+
+/**
  * @brief      Sets the tape.
  *
  * @param[in]  tape  The tape
@@ -53,6 +63,16 @@ std::vector<int> OutputTape::get_tape(void)
 void OutputTape::set_tape(std::vector<int> tape)
 {
 	tape_ = tape;
+}
+
+/**
+ * @brief      Sets the filename.
+ *
+ * @param[in]  filename  The filename
+ */
+void OutputTape::set_filename(std::string filename)
+{
+	filename_ = filename;
 }
 
 /**
@@ -70,6 +90,7 @@ void OutputTape::initialize(void)
  */
 void OutputTape::load(std::string filename)
 {
+	set_filename(filename);
 	int data;
 	std::ifstream file(filename.c_str());
 	tape_.resize(0);
@@ -87,6 +108,11 @@ void OutputTape::load(std::string filename)
 		std::cout << "Error loading the input tape" << std::endl;
 		exit(0);
 	}
+}
+
+void OutputTape::add_Data(int data)
+{
+	tape_.push_back(data);
 }
 
 /**

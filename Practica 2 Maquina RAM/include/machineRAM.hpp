@@ -24,10 +24,8 @@
 /*------------------------------------------------*/
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
-#include "inputTape.hpp"
-#include "outputTape.hpp"
 #include "tagRegister.hpp"
-#include "i_div.hpp"
+#include "i_write.hpp"
 
 /*------------------------------------------------*/
 		enum mode_
@@ -132,6 +130,14 @@ class MachineRAM
 		{
 			I_Div div(instruction_[program_counter_], registers_);
 		}
+		void runRead(void)
+		{
+			I_Read read(instruction_[program_counter_], registers_, inputTape_);
+		}
+		void runWrite(void)
+		{
+			I_Write write(instruction_[program_counter_], registers_, outputTape_);
+		}
 		void runProgram(void)
 		{
 			bool stop = false;
@@ -170,11 +176,11 @@ class MachineRAM
 						break;
 
 					case instruction_codes_.READ:
-						
+						runRead();
 						break;
 
 					case instruction_codes_.WRITE:
-						
+						runWrite();
 						break;
 
 					case instruction_codes_.JUMP:

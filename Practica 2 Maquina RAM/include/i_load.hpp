@@ -17,6 +17,8 @@
 
 #include "instruction.hpp"
 #include "registers.hpp"
+#include "inputTape.hpp"
+#include "outputTape.hpp"
 
 /*------------------------------------------------*/
 

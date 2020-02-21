@@ -17,7 +17,7 @@
 * @Author: adria 
 * @Date:   2020-02-14 14:53:26
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-17 15:53:06
+* @Last Modified time: 2020-02-21 19:12:31
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -37,12 +37,14 @@ InputTape::InputTape()
 /**
  * @brief      Constructs a new instance.
  *
- * @param[in]  tape  The tape
+ * @param[in]  tape      The tape
+ * @param[in]  filename  The filename
  */
-InputTape::InputTape(std::vector<int> tape)
+InputTape::InputTape(std::vector<int> tape, std::string filename)
 {
 	initialize();
 	set_tape(tape);
+	set_filename(filename);
 }
 
 /**
@@ -66,6 +68,16 @@ std::vector<int> InputTape::get_tape(void)
 }
 
 /**
+ * @brief      Gets the filename.
+ *
+ * @return     The filename.
+ */
+std::string InputTape::get_filename(void)
+{
+	return filename_;
+}
+
+/**
  * @brief      Sets the head.
  *
  * @param[in]  head  The head
@@ -86,6 +98,16 @@ void InputTape::set_tape(std::vector<int> tape)
 }
 
 /**
+ * @brief      Sets the filename.
+ *
+ * @param[in]  filename  The filename
+ */
+void InputTape::set_filename(std::string filename)
+{
+	filename_ = filename;
+}
+
+/**
  * @brief      Initializes the object.
  */
 void InputTape::initialize(void)
@@ -101,6 +123,7 @@ void InputTape::initialize(void)
  */
 void InputTape::load(std::string filename)
 {
+	set_filename(filename);
 	int data;
 	tape_.resize(0);
 	std::ifstream file(filename.c_str());

@@ -27,6 +27,7 @@ class OutputTape
 	private:
 		/*----------  Attribs  ----------*/		
 		std::vector<int> tape_;
+		std::string filename_;
 
 	public:
 		/*----------  Builder & Destroyer  ----------*/
@@ -36,7 +37,10 @@ class OutputTape
 
 		/*----------  Getter & Setter  ----------*/
 		std::vector<int> get_tape(void);
+		std::string get_filename(void);
+
 		void set_tape(std::vector<int> tape);
+		void set_filename(std::string filename);
 
 		/*----------  Functions  ----------*/
 		void initialize(void);

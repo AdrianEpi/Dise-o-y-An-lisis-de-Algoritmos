@@ -17,7 +17,7 @@
 * @Author: adria
 * @Date:   2020-02-14 09:41:49
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-21 08:35:02
+* @Last Modified time: 2020-02-21 19:20:53
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -47,6 +47,8 @@ MachineRAM::MachineRAM(std::string program_file, std::string inputTapeFileName, 
 	instructionFileName_ = program_file;
 	inputTapeFileName_ = inputTapeFileName;
 	outputTapeFileName_ = outputTapeFileName;
+	inputTape_.set_filename(inputTapeFileName_);
+	outputTape_.set_filename(outputTapeFileName_);
 }
 
 /**
@@ -339,7 +341,7 @@ void MachineRAM::loadData(void)
  */
 void MachineRAM::loadInputTape(void)
 {
-	inputTape_.load(inputTapeFileName_);
+	inputTape_.load(inputTape_.get_filename());
 }
 
 /**
@@ -347,7 +349,7 @@ void MachineRAM::loadInputTape(void)
  */
 void MachineRAM::loadOutputTape(void)
 {
-	outputTape_.load(outputTapeFileName_);
+	outputTape_.load(outputTape_.get_filename());
 }
 
 /**
@@ -355,7 +357,7 @@ void MachineRAM::loadOutputTape(void)
  */
 void MachineRAM::saveOutputTape(void)
 {
-	outputTape_.write(outputTapeFileName_);
+	outputTape_.write(outputTape_.get_filename());
 }
 
 /**

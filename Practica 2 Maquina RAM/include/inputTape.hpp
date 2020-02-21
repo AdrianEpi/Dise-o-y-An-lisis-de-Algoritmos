@@ -27,19 +27,22 @@ class InputTape
 		/*----------  Attribs  ----------*/		
 		unsigned head_;
 		std::vector<int> tape_;
+		std::string filename_;
 
 	public:
 		/*----------  Builders & Destroyer  ----------*/		
 		InputTape();
-		InputTape(std::vector<int> tape);
+		InputTape(std::vector<int> tape, std::string filename);
 		~InputTape(){};
 
 		/*----------  Getters & Setters  ----------*/		
 		unsigned get_head(void);
 		std::vector<int> get_tape(void);
+		std::string get_filename(void);
 
 		void set_head(unsigned head);
 		void set_tape(std::vector<int> tape);
+		void set_filename(std::string filename);
 
 		/*----------  Functions  ----------*/		
 		void initialize(void);
