@@ -14,10 +14,10 @@
 =====================================================================================
 ===================================================================================*/
 /*
-* @Author: adria
+* @Author: Adrián Epifanio
 * @Date:   2020-02-15 11:17:46
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-21 08:25:50
+* @Last Modified time: 2020-02-21 19:45:20
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -51,12 +51,27 @@ void TagRegister::set_Tags(std::vector<Tag> tags)
  *
  * @param[in]  name  The name
  *
- * @return     The position if it's found or -1 if it's not
+ * @return     The position if it's found or -2 if it's not
  */
 int TagRegister::findPos(std::string name)
 {
 	for(int i = 0; i < tags_.size(); i++)
 		if(tags_[i].get_Name() == name)
+			return tags_[i].get_Pos();
+	return -2;
+}
+
+/**
+ * @brief      Finds a position.
+ *
+ * @param[in]  code  The code
+ *
+ * @return     position
+ */
+int TagRegister::findPos(int code)
+{
+	for(int i = 0; i < tags_.size(); i++)
+		if(tags_[i].get_Code() == code)
 			return tags_[i].get_Pos();
 	return -2;
 }

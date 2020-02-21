@@ -24,8 +24,7 @@
 /*------------------------------------------------*/
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
-#include "tagRegister.hpp"
-#include "i_write.hpp"
+#include "i_jzero.hpp"
 
 /*------------------------------------------------*/
 		enum mode_
@@ -138,6 +137,18 @@ class MachineRAM
 		{
 			I_Write write(instruction_[program_counter_], registers_, outputTape_);
 		}
+		void runJump(void)
+		{
+			I_Jump jump(instruction_[program_counter_], tagRegister_, program_counter_);
+		}
+		void runJgtz(void)
+		{
+			I_Jgtz jgtz(instruction_[program_counter_], tagRegister_, registers_, program_counter_);
+		}
+		void runJzero(void)
+		{
+			I_Jzero jzero(instruction_[program_counter_], tagRegister_, registers_, program_counter_);
+		}
 		void runProgram(void)
 		{
 			bool stop = false;
@@ -164,7 +175,7 @@ class MachineRAM
 						break;
 
 					case instruction_codes_.SUB:
-						//runSub();
+						runSub();
 						break;
 
 					case instruction_codes_.MULT:
@@ -184,19 +195,19 @@ class MachineRAM
 						break;
 
 					case instruction_codes_.JUMP:
-						
+						runJump();
 						break;
 
 					case instruction_codes_.JGTZ:
-						
+						runJgtz();
 						break;
 
 					case instruction_codes_.JZERO:
-						
+						runJzero();
 						break;
 
 					case instruction_codes_.HALT:
-						
+						stop = true;
 						break;
 
 					default:

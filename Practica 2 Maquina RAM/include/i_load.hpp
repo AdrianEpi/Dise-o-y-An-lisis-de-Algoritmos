@@ -19,6 +19,7 @@
 #include "registers.hpp"
 #include "inputTape.hpp"
 #include "outputTape.hpp"
+#include "tagRegister.hpp"
 
 /*------------------------------------------------*/
 

@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-02-18 12:37:52
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-21 19:27:10
+* @Last Modified time: 2020-02-21 19:33:43
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -28,9 +28,9 @@
 /**
  * @brief      Constructs a new instance.
  *
- * @param      instruct    The instruct
- * @param      reg         The register
- * @param      input_tape  The input tape
+ * @param      instruct     The instruct
+ * @param      reg          The register
+ * @param      output_tape  The input tape
  */
 I_Write::I_Write(Instruction& instruct, Registers& reg, OutputTape& output_tape)
 {
@@ -40,9 +40,9 @@ I_Write::I_Write(Instruction& instruct, Registers& reg, OutputTape& output_tape)
 /**
  * @brief      Writes data from the imput tape and saves it on a register.
  *
- * @param      instruct    The instructions
- * @param      reg         The registers
- * @param      input_tape  The input tape
+ * @param      instruct     The instructions
+ * @param      reg          The registers
+ * @param      output_tape  The input tape
  */
 void I_Write::runProcess(Instruction& instruct, Registers& reg, OutputTape& output_tape)
 {
