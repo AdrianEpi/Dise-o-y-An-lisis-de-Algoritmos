@@ -2,7 +2,7 @@
 * @Author: adria
 * @Date:   2020-02-15 10:32:10
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-19 19:44:24
+* @Last Modified time: 2020-02-21 09:17:52
 */
 
 #include "../include/machineRAM.hpp"
@@ -15,6 +15,8 @@ int main(int argc, char *argv[])
 	std::string outputTapeFileName(argv[3]);
 	MachineRAM ram(instructionFileName, inputTapeFileName, outputTapeFileName);
 	ram.loadData();
+	ram.runProgram();
 	ram.writeProgram(std::cout);
+
 
 }

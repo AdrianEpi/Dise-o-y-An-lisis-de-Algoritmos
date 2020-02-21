@@ -17,32 +17,49 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-02-18 12:38:41
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-21 08:35:41
+* @Last Modified time: 2020-02-21 09:12:49
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
 #include "../include/i_load.hpp"
 
 /*------------------------------------------------*/
+
+/**
+ * @brief      Constructs a new instance.
+ *
+ * @param      instruct  The instruct
+ * @param      reg       The register
+ */
 I_Load::I_Load(Instruction& instruct, Registers& reg)
 {
 	runProcess(instruct, reg);
 }
 
+/**
+ * @brief      Load data in the accumulator
+ *
+ * @param      instruct  The instructions
+ * @param      reg       The registers
+ */
 void I_Load::runProcess(Instruction& instruct, Registers& reg)
 {
+	int aux;
 	switch(instruct.get_AddressingMode())
 	{
 		case instruct.INMEDIATO:
-			reg.set_Accumulator(instruct.get_Operand());
+			aux = instruct.get_Operand();
+			reg.set_Accumulator(aux);
 			break;
 
 		case instruct.DIRECTO:
-			reg.set_Accumulator(reg.get_SpecificRegister(instruct.get_Operand()));
+			aux = reg.get_SpecificRegister(instruct.get_Operand());
+			reg.set_Accumulator(aux);
 			break;
 
 		case instruct.INDIRECTO:
-			reg.set_Accumulator(reg.get_SpecificRegister(reg.get_SpecificRegister(instruct.get_Operand())));
+			aux = reg.get_SpecificRegister(reg.get_SpecificRegister(instruct.get_Operand()));
+			reg.set_Accumulator(aux);
 	}
 }
 

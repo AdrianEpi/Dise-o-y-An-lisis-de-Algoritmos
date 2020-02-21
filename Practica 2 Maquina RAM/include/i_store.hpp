@@ -2,7 +2,7 @@
 =====================================================================================
 	=                                                                              =
 	=            Proyect:       Practica 2 Simulador de la maquina RAM             =
-	=            File name:     load.hpp                                           =
+	=            File name:     i_store.hpp                                        =
 	=            Author:        Adrián Epifanio Rodríguez Hernández                =
 	=            Fecha:         14/02/2020                                         =
 	=            Subject:       Diseño y Análisis de Algoritmos                    =
@@ -13,23 +13,18 @@
 	=                                                                              =
 =====================================================================================
 ===================================================================================*/
-//#include "instruction.hpp"
+/*-----------  FUNCTIONS DECLARATION  ------------*/
+
+#include "i_load.hpp"
+
+/*------------------------------------------------*/
+
 class I_Store
 {
-	private:
-		int addressing_;
-		int operand_;
-
 	public:
 		I_Store(){};
-		//I_Store(int addressing, int operand, Registers& registers);
-		//I_Store(Instruction& instruc);
+		I_Store(Instruction& instruct, Registers& reg);
 		~I_Store(){};
 
-		int get_Addressing(void);
-		int get_Operand(void);
-		int asdas(Instruction asdas);
-
-		void set_Addressing(int addressing);
-		void set_Operand(int operand);
+		void runProcess(Instruction& instruct, Registers& reg);
 };

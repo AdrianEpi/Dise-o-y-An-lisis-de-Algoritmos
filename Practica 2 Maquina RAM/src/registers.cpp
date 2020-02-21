@@ -16,8 +16,8 @@
 /*
 * @Author: adria
 * @Date:   2020-02-14 14:53:40
-* @Last Modified by:   adria
-* @Last Modified time: 2020-02-15 10:54:47
+* @Last Modified by:   Adrián Epifanio
+* @Last Modified time: 2020-02-21 09:52:14
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -81,7 +81,7 @@ void Registers::initialize(void)
  */
 void Registers::set_SpecificRegister(int data, int number)
 {
-	assert(number > 0 && number < MAX_REGISTERS);
+	//assert(number >= 0 && number < MAX_REGISTERS);
 	registers_[number] = data;
 }
 

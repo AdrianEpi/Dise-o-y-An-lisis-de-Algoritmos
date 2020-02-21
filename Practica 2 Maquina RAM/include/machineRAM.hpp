@@ -25,13 +25,10 @@
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
 #include "inputTape.hpp"
-//#include "instruction.hpp"
 #include "outputTape.hpp"
-//#include "registers.hpp"
 #include "tagRegister.hpp"
-//#include "../src/i_load.cpp"
-#include "i_load.hpp"
-#include "i_store.hpp"
+#include "i_div.hpp"
+
 /*------------------------------------------------*/
 		enum mode_
 		{
@@ -111,6 +108,30 @@ class MachineRAM
 		std::ostream& writeProgram(std::ostream& cout);
 
 		/*----------  RUN  ----------*/
+		void runLoad(void)
+		{
+			I_Load load(instruction_[program_counter_], registers_);
+		}
+		void runStore(void)
+		{
+			I_Store store(instruction_[program_counter_], registers_);
+		}
+		void runAdd(void)
+		{
+			I_Add add(instruction_[program_counter_], registers_);
+		}
+		void runSub(void)
+		{
+			I_Sub sub(instruction_[program_counter_], registers_);
+		}
+		void runMult(void)
+		{
+			I_Mult mult(instruction_[program_counter_], registers_);
+		}
+		void runDiv(void)
+		{
+			I_Div div(instruction_[program_counter_], registers_);
+		}
 		void runProgram(void)
 		{
 			bool stop = false;
@@ -125,56 +146,60 @@ class MachineRAM
 				switch(aux.get_OperationCode())
 				{
 					case instruction_codes_.LOAD:
-						program_counter_++;
+						runLoad();						
 						break;
 
 					case instruction_codes_.STORE:
-						program_counter_++;
+						runStore();
 						break;
 
 					case instruction_codes_.ADD:
-						program_counter_++;
+						runAdd();
 						break;
 
 					case instruction_codes_.SUB:
-						program_counter_++;
+						//runSub();
 						break;
 
 					case instruction_codes_.MULT:
-						program_counter_++;
+						runMult();
 						break;
 
 					case instruction_codes_.DIV:
-						program_counter_++;
+						runDiv();
 						break;
 
 					case instruction_codes_.READ:
-						program_counter_++;
+						
 						break;
 
 					case instruction_codes_.WRITE:
-						program_counter_++;
+						
 						break;
 
 					case instruction_codes_.JUMP:
-						program_counter_++;
+						
 						break;
 
 					case instruction_codes_.JGTZ:
-						program_counter_++;
+						
 						break;
 
 					case instruction_codes_.JZERO:
-						program_counter_++;
+						
 						break;
 
 					case instruction_codes_.HALT:
-						program_counter_++;
+						
 						break;
 
 					default:
+
 						break;
 				}
+				program_counter_++;
+				if(program_counter_ == instruction_.size())
+					stop = true;
 			}
 		}		
 };
