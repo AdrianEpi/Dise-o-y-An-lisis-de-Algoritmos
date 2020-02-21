@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-02-18 12:38:41
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-19 19:22:19
+* @Last Modified time: 2020-02-21 08:35:41
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -31,7 +31,7 @@ I_Load::I_Load(Instruction& instruct, Registers& reg)
 
 void I_Load::runProcess(Instruction& instruct, Registers& reg)
 {
-	/*switch(instruct.get_AddressingMode())
+	switch(instruct.get_AddressingMode())
 	{
 		case instruct.INMEDIATO:
 			reg.set_Accumulator(instruct.get_Operand());
@@ -43,7 +43,7 @@ void I_Load::runProcess(Instruction& instruct, Registers& reg)
 
 		case instruct.INDIRECTO:
 			reg.set_Accumulator(reg.get_SpecificRegister(reg.get_SpecificRegister(instruct.get_Operand())));
-	}*/
+	}
 }
 
 

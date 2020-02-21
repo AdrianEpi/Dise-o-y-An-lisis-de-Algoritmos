@@ -17,7 +17,7 @@
 * @Author: adria
 * @Date:   2020-02-15 11:17:46
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-19 22:19:36
+* @Last Modified time: 2020-02-21 08:25:50
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -102,5 +102,5 @@ void TagRegister::write(void)
 {
 	std::cout << "Tags: " << std::endl;
 	for(int i = 0; i < tags_.size(); i++)
-		std::cout << tags_[i].get_Name() << ": " << tags_[i].get_Pos() << std::endl;;
+		std::cout << tags_[i].get_Name() << ": " << tags_[i].get_Pos() << std::endl;
 }

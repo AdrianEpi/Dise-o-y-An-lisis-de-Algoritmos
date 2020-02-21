@@ -17,7 +17,7 @@
 * @Author: adria
 * @Date:   2020-02-14 09:41:49
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-19 22:19:26
+* @Last Modified time: 2020-02-21 08:35:02
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -283,9 +283,26 @@ void MachineRAM::loadData(void)
 					tag_name = searchTag(line);
 					toUpperCase(tag_name);
 					if(tagRegister_.findPos(tag_name) == -1)
-						tagRegister_.add_Pos(tag_name, instruction_.size());
+						tagRegister_.add_Pos(tag_name, line_number);
 					else
-						tagRegister_.insertTag(tag_name, instruction_.size());
+						tagRegister_.insertTag(tag_name, line_number);
+				}
+				line_number++;
+			}
+		}
+		file.clear();	// Cleans the file pointer
+		file.seekg(0, file.beg); 	// Restart the file counter so it can be readed again
+		line_number = 0;
+		while(!file.eof())
+		{
+			getline(file, line);
+			if(!isAComment(line))
+			{
+				eraseSpacesTabs(line);
+				if(isTag(line))
+				{
+					tag_name.clear();
+					tag_name = searchTag(line);
 				}
 				if(line.size() > 1) //If there's anything else on the line
 				{
@@ -307,6 +324,7 @@ void MachineRAM::loadData(void)
 			}
 		}
 		file.close();
+
 		loadInputTape();
 	}
 	else
@@ -392,11 +410,12 @@ int MachineRAM::searchOperand(std::string &line)
 	else
 	{
 		toUpperCase(line);
+		line = line.substr(0, line.size()-1);
 		int aux = tagRegister_.findCode(line);
 		if(aux == -1)
 		{
-			tagRegister_.insertTag(line, -1);
-			aux = tagRegister_.findCode(line);
+			std::cout << "ERROR, tag not defined in program." << std::endl;
+			exit(0);
 		}
 		return aux;
 	}
