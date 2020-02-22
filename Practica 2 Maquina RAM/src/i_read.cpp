@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-02-18 12:38:24
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-21 19:05:17
+* @Last Modified time: 2020-02-22 12:13:06
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -48,12 +48,17 @@ void I_Read::runProcess(Instruction& instruct, Registers& reg, InputTape& input_
 {
 	switch(instruct.get_AddressingMode())
 	{
+		case instruct.INMEDIATO:
+			std::cout << std::endl << "Error, mode INMEDIATO not allowed in READ" << std::endl;
+			exit(0);
+			break;
+			
 		case instruct.DIRECTO:
-			reg.set_SpecificRegister(instruct.get_Operand(), input_tape.read());
+			reg.set_SpecificRegister(input_tape.read(), instruct.get_Operand());
 			break;
 
 		case instruct.INDIRECTO:
-			reg.set_SpecificRegister(reg.get_SpecificRegister(instruct.get_Operand()), input_tape.read());
+			reg.set_SpecificRegister(input_tape.read(), reg.get_SpecificRegister(instruct.get_Operand()));
 			break;
 	}
 }

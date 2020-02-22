@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-02-18 12:38:49
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-21 20:26:08
+* @Last Modified time: 2020-02-22 12:10:49
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -50,7 +50,7 @@ void I_Jzero::runProcess(Instruction& instruct, TagRegister& tag_reg, Registers&
 	if(reg.get_Accumulator() == 0)
 	{
 		if(tag_reg.findPos(instruct.get_Operand()) >= 0)
-			program_counter = tag_reg.findPos(instruct.get_Operand()) - 1;
+			program_counter = tag_reg.findPos(instruct.get_Operand()) - 2;
 		else
 		{
 			std::cout << "Error while JUMP, not tag defined." << std::endl;

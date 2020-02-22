@@ -22,9 +22,11 @@
 class I_Write
 {
 	public:
+		/*----------  Builders & Destroyer  ----------*/
 		I_Write(){};
 		I_Write(Instruction& instruct, Registers& reg, OutputTape& output_tape);
 		~I_Write(){};
 
+		/*----------  Functions  ----------*/
 		void runProcess(Instruction& instruct, Registers& reg, OutputTape& output_tape);
 };

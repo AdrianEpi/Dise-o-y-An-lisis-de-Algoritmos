@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-02-18 12:38:13
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-21 09:22:54
+* @Last Modified time: 2020-02-22 12:12:41
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -46,12 +46,17 @@ void I_Store::runProcess(Instruction& instruct, Registers& reg)
 {
 	switch(instruct.get_AddressingMode())
 	{
+		case instruct.INMEDIATO:
+			std::cout << std::endl << "Error, mode INMEDIATO not allowed in STORE" << std::endl;
+			exit(0);
+			break;
+			
 		case instruct.DIRECTO:
-			reg.set_SpecificRegister(instruct.get_Operand(), reg.get_Accumulator());
+			reg.set_SpecificRegister(reg.get_Accumulator(), instruct.get_Operand());
 			break;
 
 		case instruct.INDIRECTO:
-			reg.set_SpecificRegister(reg.get_SpecificRegister(instruct.get_Operand()), reg.get_Accumulator());
+			reg.set_SpecificRegister(reg.get_Accumulator(), reg.get_SpecificRegister(instruct.get_Operand()));
 			break;
 	}
 }

@@ -22,9 +22,11 @@
 class I_Store
 {
 	public:
+		/*----------  Builders & Destroyer  ----------*/
 		I_Store(){};
 		I_Store(Instruction& instruct, Registers& reg);
 		~I_Store(){};
 
+		/*----------  Functions  ----------*/
 		void runProcess(Instruction& instruct, Registers& reg);
 };

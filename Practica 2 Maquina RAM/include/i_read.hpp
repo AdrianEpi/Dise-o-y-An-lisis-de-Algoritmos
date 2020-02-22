@@ -22,9 +22,11 @@
 class I_Read
 {
 	public:
+		/*----------  Builders & Destroyer  ----------*/
 		I_Read(){};
 		I_Read(Instruction& instruct, Registers& reg, InputTape& input_tape);
 		~I_Read(){};
 
+		/*----------  Functions  ----------*/
 		void runProcess(Instruction& instruct, Registers& reg, InputTape& input_tape);
 };

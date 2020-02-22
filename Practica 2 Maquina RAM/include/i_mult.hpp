@@ -22,9 +22,11 @@
 class I_Mult
 {
 	public:
+		/*----------  Builders & Destroyer  ----------*/
 		I_Mult(){};
 		I_Mult(Instruction& instruct, Registers& reg);
 		~I_Mult(){};
 
+		/*----------  Functions  ----------*/
 		void runProcess(Instruction& instruct, Registers& reg);
 };

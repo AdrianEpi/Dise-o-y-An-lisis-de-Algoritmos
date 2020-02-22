@@ -22,9 +22,11 @@
 class I_Jump
 {
 	public:
+		/*----------  Builders & Destroyer  ----------*/
 		I_Jump(){};
 		I_Jump(Instruction& instruct, TagRegister& tag_reg, int& program_counter);
 		~I_Jump(){};
 
+		/*----------  Functions  ----------*/
 		void runProcess(Instruction& instruct, TagRegister& tag_reg, int& program_counter);
 };

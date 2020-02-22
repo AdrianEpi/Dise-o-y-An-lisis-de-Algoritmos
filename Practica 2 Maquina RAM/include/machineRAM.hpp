@@ -211,12 +211,14 @@ class MachineRAM
 						break;
 
 					default:
-
+						std::cout << "Error running program." << std::endl;
+						exit(0);
 						break;
 				}
 				program_counter_++;
 				if(program_counter_ == instruction_.size())
 					stop = true;
 			}
+			saveOutputTape();
 		}		
 };

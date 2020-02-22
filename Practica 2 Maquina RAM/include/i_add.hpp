@@ -22,9 +22,11 @@
 class I_Add
 {
 	public:
+		/*----------  Builders & Destroyer  ----------*/
 		I_Add(){};
 		I_Add(Instruction& instruct, Registers& reg);
 		~I_Add(){};
 
+		/*----------  Functions  ----------*/
 		void runProcess(Instruction& instruct, Registers& reg);
 };

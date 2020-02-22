@@ -22,9 +22,11 @@
 class I_Jzero
 {
 	public:
+		/*----------  Builders & Destroyer  ----------*/
 		I_Jzero(){};
 		I_Jzero(Instruction& instruct, TagRegister& tag_reg, Registers& reg, int& program_counter);
 		~I_Jzero(){};
 
+		/*----------  Functions  ----------*/
 		void runProcess(Instruction& instruct, TagRegister& tag_reg, Registers& reg, int& program_counter);
 };

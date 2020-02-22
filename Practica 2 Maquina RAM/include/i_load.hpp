@@ -26,9 +26,11 @@
 class I_Load
 {
 	public:
+		/*----------  Builders & Destroyer  ----------*/
 		I_Load(){};
 		I_Load(Instruction& instruct, Registers& reg);
 		~I_Load(){};
 
+		/*----------  Functions  ----------*/
 		void runProcess(Instruction& instruct, Registers& reg);
 };

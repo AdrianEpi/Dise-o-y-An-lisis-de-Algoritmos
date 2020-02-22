@@ -22,9 +22,11 @@
 class I_Div
 {
 	public:
+		/*----------  Builders & Destroyer  ----------*/
 		I_Div(){};
 		I_Div(Instruction& instruct, Registers& reg);
 		~I_Div(){};
 
+		/*----------  Functions  ----------*/
 		void runProcess(Instruction& instruct, Registers& reg);
 };

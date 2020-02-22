@@ -22,9 +22,11 @@
 class I_Jgtz
 {
 	public:
+		/*----------  Builders & Destroyer  ----------*/
 		I_Jgtz(){};
 		I_Jgtz(Instruction& instruct, TagRegister& tag_reg, Registers& reg, int& program_counter);
 		~I_Jgtz(){};
 
+		/*----------  Functions  ----------*/
 		void runProcess(Instruction& instruct, TagRegister& tag_reg, Registers& reg, int& program_counter);
 };

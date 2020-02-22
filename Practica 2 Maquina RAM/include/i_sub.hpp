@@ -22,9 +22,11 @@
 class I_Sub
 {
 	public:
+		/*----------  Builders & Destroyer  ----------*/
 		I_Sub(){};
 		I_Sub(Instruction& instruct, Registers& reg);
 		~I_Sub(){};
 
+		/*----------  Functions  ----------*/
 		void runProcess(Instruction& instruct, Registers& reg);
 };
