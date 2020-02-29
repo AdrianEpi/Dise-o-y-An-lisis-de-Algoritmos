@@ -2,7 +2,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-02-29 16:22:54
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-29 16:51:50
+* @Last Modified time: 2020-02-29 18:19:06
 */
 
 void help(void) 
@@ -40,7 +40,7 @@ void menu(MachineRAM& ram)
 	ram.loadData();
 	while(selector != 'X')
 	{
-		std::cout << std::endl << "Menu de la Máquina RAM" << std::endl;
+		std::cout << std::endl << std::endl << "Menu de la Máquina RAM" << std::endl;
 		std::cout << "____________________________________" << std::endl;
 		std::cout << "R: Ver los registros" << std::endl;
 		std::cout << "T: Mostrar traza del programa" << std::endl;
@@ -54,26 +54,32 @@ void menu(MachineRAM& ram)
 		switch(selector)
 		{
 			case 'R':
+				std::cout << std::endl << "Registers: " << std::endl;
 				ram.get_Registers().write();
 				break;
 
 			case 'T':
-				ram.writeProgram(std::cout);
+				std::cout << std::endl << "Traza: " << std::endl;
+				ram.runTraza();
 				break;
 
 			case 'E':
 				ram.runProgram();
+				std::cout << std::endl << "Program finished correctly " << std::endl;
 				break;
 
 			case 'S':
+				std::cout << std::endl << "Disassembling: " << std::endl;
 				ram.writeProgram(std::cout);
 				break;
 
 			case 'I':
+				std::cout << std::endl << "Input tape: " << std::endl;
 				ram.get_InputTape().write();
 				break;
 
 			case 'O':
+				std::cout << std::endl << "Output tape: " << std::endl;
 				ram.get_OutputTape().write();
 				break;
 

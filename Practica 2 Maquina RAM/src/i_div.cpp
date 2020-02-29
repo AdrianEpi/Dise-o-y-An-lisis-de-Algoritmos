@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-02-18 12:40:10
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-21 09:49:29
+* @Last Modified time: 2020-02-29 18:09:34
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -44,6 +44,11 @@ I_Div::I_Div(Instruction& instruct, Registers& reg)
  */
 void I_Div::runProcess(Instruction& instruct, Registers& reg)
 {
+	if(instruct.get_Operand() == 0)
+	{
+		std::cout << "Error, cannot divide to 0" << std::endl;
+		exit(0);
+	}
 	switch(instruct.get_AddressingMode())
 	{
 		case instruct.INMEDIATO:

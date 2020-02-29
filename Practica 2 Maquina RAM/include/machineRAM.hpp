@@ -27,12 +27,12 @@
 #include "i_jzero.hpp"
 
 /*------------------------------------------------*/
-		enum mode_
-		{
-			INMEDIATO = 100,
-			DIRECTO = 101,
-			INDIRECTO = 110
-		};
+enum mode_
+{
+	INMEDIATO = 100,
+	DIRECTO = 101,
+	INDIRECTO = 110
+};
 
 class MachineRAM
 {
@@ -108,122 +108,18 @@ class MachineRAM
 		std::ostream& writeProgram(std::ostream& cout);
 
 		/*----------  RUN  ----------*/
-		void runLoad(void)
-		{
-			I_Load load(instruction_[program_counter_], registers_);
-		}
-		void runStore(void)
-		{
-			I_Store store(instruction_[program_counter_], registers_);
-		}
-		void runAdd(void)
-		{
-			I_Add add(instruction_[program_counter_], registers_);
-		}
-		void runSub(void)
-		{
-			I_Sub sub(instruction_[program_counter_], registers_);
-		}
-		void runMult(void)
-		{
-			I_Mult mult(instruction_[program_counter_], registers_);
-		}
-		void runDiv(void)
-		{
-			I_Div div(instruction_[program_counter_], registers_);
-		}
-		void runRead(void)
-		{
-			I_Read read(instruction_[program_counter_], registers_, inputTape_);
-		}
-		void runWrite(void)
-		{
-			I_Write write(instruction_[program_counter_], registers_, outputTape_);
-		}
-		void runJump(void)
-		{
-			I_Jump jump(instruction_[program_counter_], tagRegister_, program_counter_);
-		}
-		void runJgtz(void)
-		{
-			I_Jgtz jgtz(instruction_[program_counter_], tagRegister_, registers_, program_counter_);
-		}
-		void runJzero(void)
-		{
-			I_Jzero jzero(instruction_[program_counter_], tagRegister_, registers_, program_counter_);
-		}
-		void runProgram(void)
-		{
-			bool stop = false;
-			set_ProgramCounter(0);
-			set_NumberOfInstructions(0);
-			Instruction aux;
-			int mem;
-			char c;
+		void runLoad(void);
+		void runStore(void);
+		void runAdd(void);
+		void runSub(void);
+		void runMult(void);
+		void runDiv(void);
+		void runRead(void);
+		void runWrite(void);
+		void runJump(void);
+		void runJgtz(void);
+		void runJzero(void);
 
-			while(!stop)
-			{
-				aux = instruction_[program_counter_];
-				switch(aux.get_OperationCode())
-				{
-					case instruction_codes_.LOAD:
-						runLoad();						
-						break;
-
-					case instruction_codes_.STORE:
-						runStore();
-						break;
-
-					case instruction_codes_.ADD:
-						runAdd();
-						break;
-
-					case instruction_codes_.SUB:
-						runSub();
-						break;
-
-					case instruction_codes_.MULT:
-						runMult();
-						break;
-
-					case instruction_codes_.DIV:
-						runDiv();
-						break;
-
-					case instruction_codes_.READ:
-						runRead();
-						break;
-
-					case instruction_codes_.WRITE:
-						runWrite();
-						break;
-
-					case instruction_codes_.JUMP:
-						runJump();
-						break;
-
-					case instruction_codes_.JGTZ:
-						runJgtz();
-						break;
-
-					case instruction_codes_.JZERO:
-						runJzero();
-						break;
-
-					case instruction_codes_.HALT:
-						stop = true;
-						break;
-
-					default:
-						std::cout << "Error running program." << std::endl;
-						exit(0);
-						break;
-				}
-				program_counter_++;
-				number_of_instructions++;
-				if(program_counter_ == instruction_.size())
-					stop = true;
-			}
-			saveOutputTape();
-		}		
+		void runProgram(void);
+		void runTraza(void);
 };

@@ -17,7 +17,7 @@
 * @Author: adria
 * @Date:   2020-02-14 09:41:49
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-29 17:05:56
+* @Last Modified time: 2020-02-29 18:17:00
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -578,10 +578,7 @@ std::ostream& MachineRAM::writeProgram(std::ostream& cout)
 		else
 			std::cout << std::setw(8);
 		if(instruction_[i].get_Operand() != -1)
-		{
-
 			std::cout << instruction_[i].get_Operand() << std::endl;
-		}
 	}
 	std::cout << std::endl << "Input Tape: " << std::endl;
 	inputTape_.write();
@@ -592,4 +589,260 @@ std::ostream& MachineRAM::writeProgram(std::ostream& cout)
 	std::cout << std::endl << "Output Tape: " << std::endl;
 	outputTape_.write();
 
+}
+
+/*----------  Run functions  ----------*/
+
+/**
+ * @brief      Runs Load instruction
+ */
+void MachineRAM::runLoad(void)
+{
+	I_Load load(instruction_[program_counter_], registers_);
+}
+
+/**
+ * @brief      Runs Store instruction
+ */
+void MachineRAM::runStore(void)
+{
+	I_Store store(instruction_[program_counter_], registers_);
+}
+
+/**
+ * @brief      Runs Add instruction
+ */
+void MachineRAM::runAdd(void)
+{
+	I_Add add(instruction_[program_counter_], registers_);
+}
+
+void MachineRAM::runSub(void)
+{
+	I_Sub sub(instruction_[program_counter_], registers_);
+}
+
+/**
+ * @brief      Runs Mult instruction
+ */
+void MachineRAM::runMult(void)
+{
+	I_Mult mult(instruction_[program_counter_], registers_);
+}
+
+/**
+ * @brief      Runs Div instruction
+ */
+void MachineRAM::runDiv(void)
+{
+	I_Div div(instruction_[program_counter_], registers_);
+}
+
+/**
+ * @brief      Runs Read instruction
+ */
+void MachineRAM::runRead(void)
+{
+	I_Read read(instruction_[program_counter_], registers_, inputTape_);
+}
+
+/**
+ * @brief      Runs Write instruction
+ */
+void MachineRAM::runWrite(void)
+{
+	I_Write write(instruction_[program_counter_], registers_, outputTape_);
+}
+
+/**
+ * @brief      Runs Jump instruction
+ */
+void MachineRAM::runJump(void)
+{
+	I_Jump jump(instruction_[program_counter_], tagRegister_, program_counter_);
+}
+
+/**
+ * @brief      Runs Jgtz instruction
+ */
+void MachineRAM::runJgtz(void)
+{
+	I_Jgtz jgtz(instruction_[program_counter_], tagRegister_, registers_, program_counter_);
+}
+
+/**
+ * @brief      Runs Jzero instruction
+ */
+void MachineRAM::runJzero(void)
+{
+	I_Jzero jzero(instruction_[program_counter_], tagRegister_, registers_, program_counter_);
+}
+
+/**
+ * @brief      Runs and excutes the program
+ */
+void MachineRAM::runProgram(void)
+{
+	bool stop = false;
+	set_ProgramCounter(0);
+	set_NumberOfInstructions(0);
+	Instruction aux;
+	int mem;
+	char c;
+
+	while(!stop)
+	{
+		aux = instruction_[program_counter_];
+		switch(aux.get_OperationCode())
+		{
+			case instruction_codes_.LOAD:
+				runLoad();						
+				break;
+
+			case instruction_codes_.STORE:
+				runStore();
+				break;
+
+			case instruction_codes_.ADD:
+				runAdd();
+				break;
+
+			case instruction_codes_.SUB:
+				runSub();
+				break;
+
+			case instruction_codes_.MULT:
+				runMult();
+				break;
+
+			case instruction_codes_.DIV:
+				runDiv();
+				break;
+
+			case instruction_codes_.READ:
+				runRead();
+				break;
+
+			case instruction_codes_.WRITE:
+				runWrite();
+				break;
+
+			case instruction_codes_.JUMP:
+				runJump();
+				break;
+
+			case instruction_codes_.JGTZ:
+				runJgtz();
+				break;
+
+			case instruction_codes_.JZERO:
+				runJzero();
+				break;
+
+			case instruction_codes_.HALT:
+				stop = true;
+				break;
+
+			default:
+				std::cout << "Error running program." << std::endl;
+				exit(0);
+				break;
+		}
+		program_counter_++;
+		number_of_instructions++;
+		if(program_counter_ == instruction_.size())
+			stop = true;
+	}
+	saveOutputTape();
+	inputTape_.set_head(0);
+}
+
+/**
+ * @brief      Runs and excutes the program while its printing on screen
+ */
+void MachineRAM::runTraza(void)
+{
+	bool stop = false;
+	set_ProgramCounter(0);
+	set_NumberOfInstructions(0);
+	Instruction aux;
+	int mem;
+	char c;
+	std::cout << std::endl << "Number\tInstruction\tCodification\tAddresing Mode\tOperand" << std::endl;
+	std::cout << "__________________________________________________________________________________________" << std::endl;
+	while(!stop)
+	{
+		aux = instruction_[program_counter_];
+		switch(aux.get_OperationCode())
+		{
+			case instruction_codes_.LOAD:
+				runLoad();						
+				break;
+
+			case instruction_codes_.STORE:
+				runStore();
+				break;
+
+			case instruction_codes_.ADD:
+				runAdd();
+				break;
+
+			case instruction_codes_.SUB:
+				runSub();
+				break;
+
+			case instruction_codes_.MULT:
+				runMult();
+				break;
+
+			case instruction_codes_.DIV:
+				runDiv();
+				break;
+
+			case instruction_codes_.READ:
+				runRead();
+				break;
+
+			case instruction_codes_.WRITE:
+				runWrite();
+				break;
+
+			case instruction_codes_.JUMP:
+				runJump();
+				break;
+
+			case instruction_codes_.JGTZ:
+				runJgtz();
+				break;
+
+			case instruction_codes_.JZERO:
+				runJzero();
+				break;
+
+			case instruction_codes_.HALT:
+				stop = true;
+				break;
+
+			default:
+				std::cout << "Error running program." << std::endl;
+				exit(0);
+				break;
+		}
+		// Print on screen
+		std::cout << number_of_instructions << "\t" << instruction_[program_counter_].transformCode(instruction_[program_counter_].get_OperationCode()) << "\t\t";
+		std::cout << instruction_[program_counter_].get_OperationCode() << "\t\t" << instruction_[program_counter_].transformAddressing(instruction_[program_counter_].get_AddressingMode());
+		if(instruction_[program_counter_].get_AddressingMode() == 101)
+			std::cout << std::setw(10);
+		else
+			std::cout << std::setw(8);
+		if(instruction_[program_counter_].get_Operand() != -1)
+			std::cout << instruction_[program_counter_].get_Operand() << std::endl;
+
+		program_counter_++;
+		number_of_instructions++;
+		if(program_counter_ == instruction_.size())
+			stop = true;
+	}
+	saveOutputTape();
+	inputTape_.set_head(0);
 }
