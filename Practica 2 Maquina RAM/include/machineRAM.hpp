@@ -46,6 +46,7 @@ class MachineRAM
 		TagRegister tagRegister_;
 
 		int program_counter_;
+		int number_of_instructions;
 		std::string instructionFileName_;
 		std::string inputTapeFileName_;
 		std::string outputTapeFileName_;
@@ -63,6 +64,7 @@ class MachineRAM
 		Instruction get_InstructionCodes(void);
 		Registers get_Registers(void);
 		TagRegister get_TagRegister(void);
+		int get_NumberOfInstructions(void);
 		int get_ProgramCounter(void);
 		std::string get_InstructionFileName(void);
 		std::string get_InputTapeFileName(void);
@@ -74,6 +76,7 @@ class MachineRAM
 		void set_InstructionCodes(Instruction codes);
 		void set_Registers(Registers registers);
 		void set_TagRegister(TagRegister tagRegister);
+		void set_NumberOfInstructions(int number);
 		void set_ProgramCounter(int pc);
 		void set_InstructionFileName(std::string instructionFileName);
 		void set_InputTapeFileName(std::string intputTapeFileName);
@@ -153,6 +156,7 @@ class MachineRAM
 		{
 			bool stop = false;
 			set_ProgramCounter(0);
+			set_NumberOfInstructions(0);
 			Instruction aux;
 			int mem;
 			char c;
@@ -216,6 +220,7 @@ class MachineRAM
 						break;
 				}
 				program_counter_++;
+				number_of_instructions++;
 				if(program_counter_ == instruction_.size())
 					stop = true;
 			}

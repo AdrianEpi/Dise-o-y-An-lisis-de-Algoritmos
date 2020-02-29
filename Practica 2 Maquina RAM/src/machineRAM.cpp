@@ -17,7 +17,7 @@
 * @Author: adria
 * @Date:   2020-02-14 09:41:49
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-21 19:20:53
+* @Last Modified time: 2020-02-29 17:05:56
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -109,6 +109,16 @@ Registers MachineRAM::get_Registers(void)
 TagRegister MachineRAM::get_TagRegister(void)
 {
 	return tagRegister_;
+}
+
+/**
+ * @brief      Gets the number of instructions.
+ *
+ * @return     The number of instructions.
+ */
+int MachineRAM::get_NumberOfInstructions(void)
+{
+	return number_of_instructions;
 }
 
 /**
@@ -210,6 +220,16 @@ void  MachineRAM::set_TagRegister(TagRegister tagRegister)
 {
 	tagRegister_ = tagRegister;
 }	
+
+/**
+ * @brief      Sets the number of instructions.
+ *
+ * @param[in]  num   The new value
+ */
+void MachineRAM::set_NumberOfInstructions(int num)
+{
+	number_of_instructions = num;
+}
 
 /**
  * @brief      Sets the program counter.

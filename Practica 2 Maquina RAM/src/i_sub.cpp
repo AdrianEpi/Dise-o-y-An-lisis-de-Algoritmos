@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-02-18 12:38:00
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-21 09:59:49
+* @Last Modified time: 2020-02-29 17:08:37
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -47,17 +47,14 @@ void I_Sub::runProcess(Instruction& instruct, Registers& reg)
 	switch(instruct.get_AddressingMode())
 	{
 		case instruct.INMEDIATO:
-		std::cout << std::endl << "Restainm: " << reg.get_Accumulator() << " - " << instruct.get_Operand();
 			reg.set_Accumulator(reg.get_Accumulator() - instruct.get_Operand());
 	        break;
 
 		case instruct.DIRECTO:
-		std::cout << std::endl << "Restadir: " << reg.get_Accumulator() << " - " << reg.get_SpecificRegister(instruct.get_Operand());
 			reg.set_Accumulator(reg.get_Accumulator() - reg.get_SpecificRegister(instruct.get_Operand()));
 			break;
 
 		case instruct.INDIRECTO:
-				std::cout << std::endl << "Restaindir: " << reg.get_Accumulator() << " - " << reg.get_SpecificRegister(reg.get_SpecificRegister(instruct.get_Operand()));
 			reg.set_Accumulator(reg.get_Accumulator() - reg.get_SpecificRegister(reg.get_SpecificRegister(instruct.get_Operand())));
 			break;
 	}
