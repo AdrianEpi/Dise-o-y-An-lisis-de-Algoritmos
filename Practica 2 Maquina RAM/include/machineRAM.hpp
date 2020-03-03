@@ -97,12 +97,7 @@ class MachineRAM
 		int searchOperand(std::string &line);
 		int searchAddressing(std::string &line);		
 		int searchInstructionCode(std::string &line);
-		void toUpperCase(std::string &word)
-		{
-			  for (int i = 0; i < word.length(); i++) {
-			    word[i] = toupper(word[i]);
-			  }
-		}
+		void toUpperCase(std::string &word);
 
 		/*----------  Read & Write  ----------*/
 		std::ostream& writeProgram(std::ostream& cout);

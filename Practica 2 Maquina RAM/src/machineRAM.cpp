@@ -17,7 +17,7 @@
 * @Author: adria
 * @Date:   2020-02-14 09:41:49
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-02-29 18:17:00
+* @Last Modified time: 2020-03-03 12:02:22
 */
 /*-----------  FUNCTIONS DECLARATION  ------------*/
 
@@ -589,6 +589,13 @@ std::ostream& MachineRAM::writeProgram(std::ostream& cout)
 	std::cout << std::endl << "Output Tape: " << std::endl;
 	outputTape_.write();
 
+}
+
+void MachineRAM::toUpperCase(std::string &word)
+{
+	  for (int i = 0; i < word.length(); i++) {
+	    word[i] = toupper(word[i]);
+	  }
 }
 
 /*----------  Run functions  ----------*/
