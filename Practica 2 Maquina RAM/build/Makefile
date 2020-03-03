@@ -76,7 +76,7 @@ clean:
 	rm -rf ../bin/*
 
 run1:
-	../bin/ram_sim ../inputs/ram_program.ram ../inputs/input_tape.in ../inputs/output_tape.out 1
+	../bin/ram_sim ../inputs/complejidadLogN.ram ../inputs/input_tape.in ../inputs/output_tape.out 1
 
 run0:
 	../bin/ram_sim ../inputs/ram_program.ram ../inputs/input_tape.in ../inputs/output_tape.out 0

@@ -1,0 +1,20 @@
+# Este prgrama eleva un numero a si mismo con complejidad n
+# Solo lee el primer número de la cinta de entrada.
+
+	LOAD =1
+					STORE 1
+					READ 2
+					LOAD 2
+					STORE 3
+	while:	LOAD 2
+					SUB 1
+					JZERO endwh
+					LOAD 3
+					MULT 3
+					STORE 3
+					LOAD 1
+					MULT =2
+					STORE 1
+					JUMP while
+	endwh:	WRITE 3
+					HALT
