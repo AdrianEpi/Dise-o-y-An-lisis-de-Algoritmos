@@ -1,0 +1,22 @@
+main.o: main.cpp framework/Framework.h framework/Problema.h \
+ framework/Solucion.h includes/mergeSortP.h \
+ includes/../framework/Problema.h includes/mergeSortS.h \
+ includes/../framework/Solucion.h includes/quickSortP.h \
+ includes/quickSortS.h
+Framework.o: framework/Framework.cpp framework/Framework.h \
+ framework/Problema.h framework/Solucion.h
+Problema.o: framework/Problema.cpp framework/Problema.h \
+ framework/Solucion.h
+Solucion.o: framework/Solucion.cpp framework/Solucion.h
+mergeSortP.o: src/mergeSortP.cpp src/../includes/mergeSortP.h \
+ src/../includes/../framework/Problema.h \
+ src/../includes/../framework/Solucion.h src/../includes/mergeSortS.h \
+ src/../includes/../framework/Solucion.h
+mergeSortS.o: src/mergeSortS.cpp src/../includes/mergeSortS.h \
+ src/../includes/../framework/Solucion.h
+quickSortP.o: src/quickSortP.cpp src/../includes/quickSortP.h \
+ src/../includes/../framework/Problema.h \
+ src/../includes/../framework/Solucion.h src/../includes/quickSortS.h \
+ src/../includes/../framework/Solucion.h
+quickSortS.o: src/quickSortS.cpp src/../includes/quickSortS.h \
+ src/../includes/../framework/Solucion.h
