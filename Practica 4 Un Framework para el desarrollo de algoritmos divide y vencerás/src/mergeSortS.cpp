@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-05 12:25:26
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-10 08:48:15
+* @Last Modified time: 2020-03-10 12:09:43
 */
 /*------------  FUNCTIONS DECLARATION  ------------*/
 
@@ -49,6 +49,13 @@ MergeSortS::~MergeSortS()
  */
 void MergeSortS::resolver()
 {
+	for (int i = 0; i < vectorToSort.size(); i++)
+		if(vectorToSort[i] < vectorToSort[i - 1])
+		{
+			std::cout <<  "Error, mal ordenado";
+			exit(0);
+		}
+	
 	cout << "[ ";
 	for (int i = 0; i < vectorToSort.size(); i++)
 	{

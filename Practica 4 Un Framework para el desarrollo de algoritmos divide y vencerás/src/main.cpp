@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-05 08:39:02
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-10 08:58:08
+* @Last Modified time: 2020-03-10 12:25:58
 */ 
 /*------------  FUNCTIONS DECLARATION  ------------*/
 
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 	vector<int> vectorToSort;
 	vectorToSort.resize(atoi(argv[2]));
 	int ordenacion = atoi(argv[1]);
-
+	srand(time(NULL));
 	chrono::time_point<chrono::system_clock> start, end;
 	int timer;
 	cout << "Vector a ordenar:" << endl << "[ ";

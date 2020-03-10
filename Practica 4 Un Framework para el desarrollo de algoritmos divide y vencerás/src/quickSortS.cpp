@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-09 12:25:51
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-10 08:49:13
+* @Last Modified time: 2020-03-10 12:09:03
 */
 /*------------  FUNCTIONS DECLARATION  ------------*/
 
@@ -49,6 +49,14 @@ QuickSortS::~QuickSortS()
  */
 void QuickSortS::resolver()
 {
+
+	for (int i = 0; i < vectorToSort.size(); i++)
+		if(vectorToSort[i] < vectorToSort[i - 1])
+		{
+			std::cout <<  "Error, mal ordenado";
+			exit(0);
+		}
+
 	cout << "[ ";
 	for (int i = 0; i < vectorToSort.size(); i++)
 	{
