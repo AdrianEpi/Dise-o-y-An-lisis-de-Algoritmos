@@ -3,10 +3,10 @@ OBJECTS = main.o monomio.o polinomio.o
 #Flags de compilacion
 CFLAGS = -c -std=c++17
 
-ram_sim: $(OBJECTS)
-	g++  $(OBJECTS) -o ram_sim
+polinomioDyV: $(OBJECTS)
+	g++  $(OBJECTS) -o polinomioDyV
 	mv *.o ../objects
-	mv ram_sim ../bin
+	mv polinomioDyV ../bin
 
 
 main.o: ../src/main.cpp
@@ -24,3 +24,5 @@ clean:
 	rm -rf ../objects/*.o
 	rm -rf ../bin/*
 
+run:
+	../bin/polinomioDyV

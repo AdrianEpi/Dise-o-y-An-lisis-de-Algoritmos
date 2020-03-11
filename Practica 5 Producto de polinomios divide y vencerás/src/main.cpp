@@ -17,9 +17,16 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-11 17:59:57
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-11 18:14:12
+* @Last Modified time: 2020-03-11 21:45:35
 */
-#include "../include/monomio.hpp"
+#include "../include/polinomio.hpp"
 int main() {
-
+	Monomio a(5 ,3);
+	Monomio b(5, 4);
+	Monomio c;
+	a.write(std::cout);
+	b.write(std::cout);
+	c = (a + b);
+	c.write(std::cout);
+	std::cout << std::endl << a << std::endl << b * c;
 }
