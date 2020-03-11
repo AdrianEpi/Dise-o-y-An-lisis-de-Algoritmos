@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-11 17:59:57
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-11 21:45:35
+* @Last Modified time: 2020-03-11 23:04:05
 */
 #include "../include/polinomio.hpp"
 int main() {
@@ -29,4 +29,9 @@ int main() {
 	c = (a + b);
 	c.write(std::cout);
 	std::cout << std::endl << a << std::endl << b * c;
+	Polinomio p;
+	p.introduceMonomio(a);
+	p.introduceMonomio(b);
+	p.introduceMonomio(b*c);
+	std::cout << std::endl << p;	
 }

@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-11 17:59:36
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-11 21:39:54
+* @Last Modified time: 2020-03-11 22:44:16
 */
 /*------------  FUNCTIONS DECLARATION  ------------*/
 
@@ -165,7 +165,7 @@ std::ostream& operator <<(std::ostream& os, const Monomio& mon) {
         os << mon.get_Coefficient() << "x^" << mon.get_Grade();
     else if(mon.get_Grade() == 1)
         os << mon.get_Coefficient() << "x";
-    else
+    else if(mon.get_Coefficient() != 0)
         os << mon.get_Coefficient();
 }
 
