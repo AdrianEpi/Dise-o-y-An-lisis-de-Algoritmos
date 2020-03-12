@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-11 17:59:36
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-11 22:44:16
+* @Last Modified time: 2020-03-12 10:42:28
 */
 /*------------  FUNCTIONS DECLARATION  ------------*/
 
@@ -161,12 +161,40 @@ void Monomio::operator =(const Monomio& mon1) {
  * @return     The result of the bitwise left shift
  */
 std::ostream& operator <<(std::ostream& os, const Monomio& mon) {
+    if(mon.get_Coefficient() > 0)
+        os << "+ ";
+    else if(mon.get_Coefficient() > 0)
+        os << "- ";
+    
     if(mon.get_Grade() > 1)
-        os << mon.get_Coefficient() << "x^" << mon.get_Grade();
+        os << abs(mon.get_Coefficient()) << "x^" << mon.get_Grade();
     else if(mon.get_Grade() == 1)
-        os << mon.get_Coefficient() << "x";
+        os << abs(mon.get_Coefficient()) << "x";
     else if(mon.get_Coefficient() != 0)
-        os << mon.get_Coefficient();
+        os << abs(mon.get_Coefficient());
+}
+
+std::istream& operator >>(std::istream& is, Monomio& mon) {
+    int coef;
+    char x;
+    char exp;
+    int grade;
+    is >> coef >> x >> exp >> grade;
+    mon.set_Grade(grade);
+    mon.set_Coefficient(coef);
+}
+
+/**
+ * @brief      Evaluates a monomial with a value
+ *
+ * @param[in]  xValue  The value
+ *
+ * @return     Result of the evaluated monomial
+ */
+int Monomio::evaluar(int xValue) const {
+    int result;
+    result = get_Coefficient() * pow(xValue, get_Grade());
+    return result;
 }
 
 /**

@@ -17,21 +17,66 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-11 17:59:57
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-11 23:04:05
+* @Last Modified time: 2020-03-12 10:48:53
 */
 #include "../include/polinomio.hpp"
-int main() {
-	Monomio a(5 ,3);
-	Monomio b(5, 4);
-	Monomio c;
-	a.write(std::cout);
-	b.write(std::cout);
-	c = (a + b);
-	c.write(std::cout);
-	std::cout << std::endl << a << std::endl << b * c;
+#include <ctime>
+#include <chrono>
+
+void help(void);
+Polinomio constructPolinomo(int size);
+
+int main(int argc, char *argv[]) {
+	if (argc != 4) {
+		help();
+		exit(0);
+	}
+	int algoritmo = atoi(argv[3]);
 	Polinomio p;
-	p.introduceMonomio(a);
-	p.introduceMonomio(b);
-	p.introduceMonomio(b*c);
-	std::cout << std::endl << p;	
+	Polinomio q;
+	srand(time(NULL));
+	p = constructPolinomo(atoi(argv[1]));
+	q = constructPolinomo(atoi(argv[2]));
+	std::cout << std::endl << "P(x) = ";
+	std::cout << p;
+	std::cout << std::endl << "Q(x) = ";
+	std::cout << q;
+	std::cout << std::endl;
+	Polinomio r;
+	switch(algoritmo) {
+		case 1:
+			r = p * q;
+			std::cout << std::endl << "R(x) = ";
+			std::cout << r;
+			break;
+
+		case 2:
+			break;
+
+		default:
+			std::cout << std::endl <<  "Error, el algoritmo seleccionado es incorrecto." << std::endl;
+			exit(0);
+	}
+
+}
+
+void help(void) {
+	std::cout << std::endl << "Manual de ayuda al usuario";
+	std::cout << std::endl << "Introduzca como parámetros los tamaños de los dos polinomios seguido del tipo de algoritmo";
+	std::cout << std::endl << "1 -> Algoritmo clásico.";
+	std::cout << std::endl << "2 -> Algoitmo Divide y vencerás.";
+	std::cout << std::endl << std::endl << "\t Ejemplo de uso:";
+	std::cout << std::endl << "../bin/polinomio tamaño1 tamaño2 tipoAlgoritmo";
+	std::cout << std::endl;
+}
+
+Polinomio constructPolinomo(int size) {
+	int coef[size];
+	
+	int ramdom_number;
+	for (int i = 0; i < size; i++)
+		coef[i] = rand() % 20;
+	
+	Polinomio polym(coef, size);
+	return polym;
 }

@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-11 17:59:48
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-11 23:09:41
+* @Last Modified time: 2020-03-12 10:49:36
 */
 /*------------  FUNCTIONS DECLARATION  ------------*/
 
@@ -44,6 +44,19 @@ Polinomio::Polinomio(Monomio mon) {
 	polinomio_.push_back(mon);
 }
 
+/**
+ * @brief      Constructs a new instance.
+ *
+ * @param      coef  The coefficients
+ * @param[in]  tam   The size
+ */
+Polinomio::Polinomio(int coef[], const int tam) {
+	resize(tam);
+	for(int i = 0; i < tam; i++) {
+		polinomio_[i].set_Coefficient(coef[i]);
+		polinomio_[i].set_Grade(i);
+	}
+}
 /**
  * @brief      Destroys the object.
  */
@@ -159,7 +172,16 @@ Polinomio operator -(const Polinomio& polyn1, const Polinomio& polyn2) {
  * @return     The result of the multiplication
  */
 Polinomio operator *(const Polinomio& polyn1, const Polinomio& polyn2) {
-
+	Polinomio aux;
+	aux.resize(polyn1.get_Grade() + polyn2.get_Grade());
+	for(int i = 0; i < polyn1.get_Grade(); i++) {
+		for(int j = 0; j < polyn2.get_Grade(); j++) {
+			Monomio mon;
+			mon = polyn1.get_Polinomio()[i] * polyn2.get_Polinomio()[j];
+			aux.introduceMonomio(mon);
+		}
+	}
+	return aux;
 }
 
 /**
@@ -183,9 +205,14 @@ void Polinomio::operator =(const Polinomio& polyn1) {
  * @return     The result of the bitwise left shift
  */
 std::ostream& operator <<(std::ostream& os, const Polinomio& polin) {
-	for(int i = 0; i < polin.get_Grade(); i++)
+	for(int i = polin.get_Grade() - 1; i >= 0; i--) {
+		/*if((polin.get_Polinomio()[i].get_Coefficient() > 0) && (i != (polin.get_Grade() - 1)))
+            os << " +";
+        else if(polin.get_Polinomio()[i].get_Coefficient() < 0)
+        	os << " -";*/
 		if(polin.get_Polinomio()[i].get_Coefficient() != 0)
 			os << " " << polin.get_Polinomio()[i];
+	}
 }
 
 /**
@@ -219,7 +246,7 @@ void Polinomio::introduceMonomio(Monomio mon) {
 	if(polinomio_[mon.get_Grade()].get_Coefficient() == 0)
 		polinomio_[mon.get_Grade()] = mon;
 	else {
-		std::cout << std::endl << "Warning, esa posicion ya existe, se sumarán ambos monomios";
+		//std::cout << std::endl << "Warning, esa posicion ya existe, se sumarán ambos monomios";
 		polinomio_[mon.get_Grade()] = polinomio_[mon.get_Grade()] + mon;
 	}
 }

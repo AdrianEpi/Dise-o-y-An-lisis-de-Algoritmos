@@ -17,6 +17,7 @@
 
 #include <iostream>
 #include <cassert>
+#include <math.h>
 
 /*------------------------------------------------*/
 
@@ -45,6 +46,10 @@ class Monomio {
 		friend Monomio operator *(const Monomio& mon1, const Monomio& mon2);
 		void operator =(const Monomio& mon1);
 		friend std::ostream& operator <<(std::ostream& os, const Monomio& mon);
+		friend std::istream& operator >>(std::istream& is, Monomio& mon);
+
+		// Functinos
+		int evaluar(int xValue) const;
 
 		// Write
 		void write(std::ostream& os);

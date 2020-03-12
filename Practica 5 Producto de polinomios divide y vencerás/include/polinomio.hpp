@@ -24,6 +24,7 @@ class Polinomio {
         // Builders & Destroyer
         Polinomio();
         Polinomio(Monomio mon);
+        Polinomio(int coef[], const int tam);
         ~Polinomio();
 
         // Getters & Setters

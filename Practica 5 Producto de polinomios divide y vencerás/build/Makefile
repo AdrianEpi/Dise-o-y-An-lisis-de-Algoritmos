@@ -25,4 +25,4 @@ clean:
 	rm -rf ../bin/*
 
 run:
-	../bin/polinomioDyV
+	../bin/polinomioDyV 100 100 1
