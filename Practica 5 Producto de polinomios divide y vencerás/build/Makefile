@@ -24,5 +24,8 @@ clean:
 	rm -rf ../objects/*.o
 	rm -rf ../bin/*
 
-run:
+run1:
 	../bin/polinomioDyV 100 100 1
+
+run2:
+	../bin/polinomioDyV 10 10 2

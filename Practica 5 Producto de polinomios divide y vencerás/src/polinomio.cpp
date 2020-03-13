@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-11 17:59:48
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-12 10:49:36
+* @Last Modified time: 2020-03-13 09:00:31
 */
 /*------------  FUNCTIONS DECLARATION  ------------*/
 
@@ -57,6 +57,22 @@ Polinomio::Polinomio(int coef[], const int tam) {
 		polinomio_[i].set_Grade(i);
 	}
 }
+
+/**
+ * @brief      Constructs a new instance.
+ *
+ * @param[in]  polyn  The polyn
+ * @param[in]  i      Vector initial position
+ * @param[in]  j      Vector final position
+ */
+Polinomio::Polinomio(std::vector<Monomio> polyn, int i, int j) {
+	resize(j - i);
+	for(int k = 0; k < (j - i); k++) {
+		polinomio_[k].set_Coefficient(polyn[k + i].get_Coefficient());
+		polinomio_[k].set_Grade(polyn[k + i].get_Grade());
+	}
+}
+
 /**
  * @brief      Destroys the object.
  */
@@ -126,17 +142,12 @@ void Polinomio::set_Monomio(Monomio mon) {
  * @return     The result of the addition
  */
 Polinomio operator +(const Polinomio& polyn1, const Polinomio& polyn2) {
-	int grade;
-	if(polyn1.get_Grade() >= polyn2.get_Grade())
-		grade = polyn1.get_Grade();
-	else
-		grade = polyn2.get_Grade();
-
 	Polinomio aux;
-	aux.resize(grade);
-	for(int i = 0; i < grade; i++) {
-		aux.get_Polinomio()[i] = polyn1.get_Polinomio()[i] + polyn2.get_Polinomio()[i];
-	}
+	aux.resize(std::max(polyn1.get_Grade(), polyn2.get_Grade()));
+	for(int i = 0; i < polyn1.get_Grade(); i++) 
+		for(int j = 0; j < polyn2.get_Grade(); j++) 
+			if(polyn1.get_Polinomio()[i].get_Grade() == polyn2.get_Polinomio()[j].get_Grade())
+				aux.get_Polinomio()[i] = polyn1.get_Polinomio()[i] + polyn2.get_Polinomio()[i];
 	return aux;
 }
 
@@ -149,17 +160,12 @@ Polinomio operator +(const Polinomio& polyn1, const Polinomio& polyn2) {
  * @return     The result of the subtraction
  */
 Polinomio operator -(const Polinomio& polyn1, const Polinomio& polyn2) {
-	int grade;
-	if(polyn1.get_Grade() >= polyn2.get_Grade())
-		grade = polyn1.get_Grade();
-	else
-		grade = polyn2.get_Grade();
-
 	Polinomio aux;
-	aux.resize(grade);
-	for(int i = 0; i < grade; i++) {
-		aux.get_Polinomio()[i] = polyn1.get_Polinomio()[i] - polyn2.get_Polinomio()[i];
-	}
+	aux.resize(std::max(polyn1.get_Grade(), polyn2.get_Grade()));
+	for(int i = 0; i < polyn1.get_Grade(); i++) 
+		for(int j = 0; j < polyn2.get_Grade(); j++) 
+			if(polyn1.get_Polinomio()[i].get_Grade() == polyn2.get_Polinomio()[j].get_Grade())
+				aux.get_Polinomio()[i] = polyn1.get_Polinomio()[i] - polyn2.get_Polinomio()[i];
 	return aux;
 }
 
@@ -204,14 +210,10 @@ void Polinomio::operator =(const Polinomio& polyn1) {
  *
  * @return     The result of the bitwise left shift
  */
-std::ostream& operator <<(std::ostream& os, const Polinomio& polin) {
-	for(int i = polin.get_Grade() - 1; i >= 0; i--) {
-		/*if((polin.get_Polinomio()[i].get_Coefficient() > 0) && (i != (polin.get_Grade() - 1)))
-            os << " +";
-        else if(polin.get_Polinomio()[i].get_Coefficient() < 0)
-        	os << " -";*/
-		if(polin.get_Polinomio()[i].get_Coefficient() != 0)
-			os << " " << polin.get_Polinomio()[i];
+std::ostream& operator <<(std::ostream& os, const Polinomio& polyn) {
+	for(int i = polyn.get_Grade() - 1; i >= 0; i--) {
+		if(polyn.get_Polinomio()[i].get_Coefficient() != 0)
+			os << " " << polyn.get_Polinomio()[i];
 	}
 }
 
@@ -232,6 +234,37 @@ void Polinomio::resize(int size) {
  */
 void Polinomio::destroy(void) {
 	polinomio_.resize(0);
+}
+
+
+Polinomio Polinomio::algorithmDyV(const Polinomio& polyn1, const Polinomio& polyn2, int i, int j) {
+	Polinomio aux;
+	if(j - i <= 1) {
+		aux = polyn1.get_Polinomio()[i] * polyn2.get_Polinomio()[j];
+	}
+	else {
+		int half = (std::max(polyn2.get_Grade(), polyn1.get_Grade()) / 2);
+		Polinomio pl(polyn1.get_Polinomio(), i, polyn1.get_Grade() / 2);
+		Polinomio ph(polyn1.get_Polinomio(), (polyn1.get_Grade() / 2), polyn1.get_Grade());
+		Polinomio ql(polyn2.get_Polinomio(), i, polyn2.get_Grade() / 2);
+		Polinomio qh(polyn2.get_Polinomio(), (polyn2.get_Grade() / 2), polyn2.get_Grade());
+		
+		char i;
+		std::cin >> i;
+		Polinomio p, q, r;
+		std::cout << "Entra en algoritmos      " << half << std::endl;
+		p.algorithmDyV(pl, ql, i, half);
+		p.write(std::cout);
+		std::cout << "salelgoritmos" << std::endl;
+		q.algorithmDyV(ph, qh, half + 1, j);
+		q.write(std::cout);
+		std::cout << "aaaaaaaaaaaaaaaaa" << std::endl;
+		r.algorithmDyV(pl + ql, ph + qh, i, j);
+		r.write(std::cout);
+		std::cout << "sale de algoritmos" << std::endl;
+		aux = p + (r - p + q) + q;
+	}
+	return aux;
 }
 
 /**

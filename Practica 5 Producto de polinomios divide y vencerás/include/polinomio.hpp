@@ -25,6 +25,7 @@ class Polinomio {
         Polinomio();
         Polinomio(Monomio mon);
         Polinomio(int coef[], const int tam);
+        Polinomio(std::vector<Monomio> polyn, int i, int j);
         ~Polinomio();
 
         // Getters & Setters
@@ -37,10 +38,10 @@ class Polinomio {
         void set_Monomio(Monomio mon);
 
         // Operators overload
-        friend Polinomio operator +(const Polinomio& mon1, const Polinomio& mon2);
-        friend Polinomio operator -(const Polinomio& mon1, const Polinomio& mon2);
-        friend Polinomio operator *(const Polinomio& mon1, const Polinomio& mon2);
-        void operator =(const Polinomio& mon1);
+        friend Polinomio operator +(const Polinomio& polyn1, const Polinomio& polyn2);
+        friend Polinomio operator -(const Polinomio& polyn1, const Polinomio& polyn2);
+        friend Polinomio operator *(const Polinomio& polyn1, const Polinomio& polyn2);
+        void operator =(const Polinomio& polyn1);
         friend std::ostream& operator <<(std::ostream& os, const Polinomio& mon);
 
         // Functions
@@ -48,6 +49,7 @@ class Polinomio {
         void destroy(void);
         void introduceMonomio(Monomio mon);
         void eraseMonomio(Monomio mon);
+        Polinomio algorithmDyV(const Polinomio& polyn1, const Polinomio& polyn2, int i, int j);
 
         // Write
         void write(std::ostream& os);

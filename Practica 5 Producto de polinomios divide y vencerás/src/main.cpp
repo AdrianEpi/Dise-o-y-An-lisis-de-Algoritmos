@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-11 17:59:57
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-12 10:48:53
+* @Last Modified time: 2020-03-13 08:37:30
 */
 #include "../include/polinomio.hpp"
 #include <ctime>
@@ -51,6 +51,8 @@ int main(int argc, char *argv[]) {
 			break;
 
 		case 2:
+			r.resize(q.get_Grade() + p.get_Grade());
+			r.algorithmDyV(p, q, 0, r.get_Grade() - 1);
 			break;
 
 		default:
@@ -75,7 +77,7 @@ Polinomio constructPolinomo(int size) {
 	
 	int ramdom_number;
 	for (int i = 0; i < size; i++)
-		coef[i] = rand() % 20;
+		coef[i] = rand() % 20 + 1;
 	
 	Polinomio polym(coef, size);
 	return polym;
