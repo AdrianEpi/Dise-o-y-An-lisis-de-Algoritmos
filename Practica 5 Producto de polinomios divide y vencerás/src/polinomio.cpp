@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-11 17:59:48
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-13 09:00:31
+* @Last Modified time: 2020-03-13 17:44:29
 */
 /*------------  FUNCTIONS DECLARATION  ------------*/
 
@@ -239,7 +239,7 @@ void Polinomio::destroy(void) {
 
 Polinomio Polinomio::algorithmDyV(const Polinomio& polyn1, const Polinomio& polyn2, int i, int j) {
 	Polinomio aux;
-	if(j - i <= 1) {
+	if((j - i) <= 2) {
 		aux = polyn1.get_Polinomio()[i] * polyn2.get_Polinomio()[j];
 	}
 	else {
@@ -249,10 +249,20 @@ Polinomio Polinomio::algorithmDyV(const Polinomio& polyn1, const Polinomio& poly
 		Polinomio ql(polyn2.get_Polinomio(), i, polyn2.get_Grade() / 2);
 		Polinomio qh(polyn2.get_Polinomio(), (polyn2.get_Grade() / 2), polyn2.get_Grade());
 		
-		char i;
-		std::cin >> i;
+		std::cout << std::endl << "pl: " << std::endl;
+		pl.write(std::cout);
+		std::cout << std::endl << "ph: " << std::endl;
+		ph.write(std::cout);
+		std::cout << std::endl << "ql: " << std::endl;
+		ql.write(std::cout);
+		std::cout << std::endl << "qh: " << std::endl;
+		qh.write(std::cout);
+		std::cout << std::endl << std::endl;
+		
+		char z;
+		std::cin >> z;
 		Polinomio p, q, r;
-		std::cout << "Entra en algoritmos      " << half << std::endl;
+		std::cout << "Entra en algoritmos      " <<i <<" " << half << std::endl;
 		p.algorithmDyV(pl, ql, i, half);
 		p.write(std::cout);
 		std::cout << "salelgoritmos" << std::endl;
