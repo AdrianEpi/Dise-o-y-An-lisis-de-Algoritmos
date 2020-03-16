@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-11 17:59:48
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-16 13:49:05
+* @Last Modified time: 2020-03-16 17:17:02
 */
 /*------------  FUNCTIONS DECLARATION  ------------*/
 
@@ -147,9 +147,9 @@ Polinomio operator +(const Polinomio& polyn1, const Polinomio& polyn2) {
 	for(int i = 0; i < polyn1.get_Grade(); i++) 
 		for(int j = 0; j < polyn2.get_Grade(); j++) 
 			if(polyn1.get_Polinomio()[i].get_Grade() == polyn2.get_Polinomio()[j].get_Grade()) {
-				Monomio a;
-				a = polyn1.get_Polinomio()[i] + polyn2.get_Polinomio()[j];
-				aux.introduceMonomio(a);
+				Monomio mon;
+				mon = polyn1.get_Polinomio()[i] + polyn2.get_Polinomio()[j];
+				aux.introduceMonomio(mon);
 			}
 	return aux;
 }
@@ -168,9 +168,9 @@ Polinomio operator -(const Polinomio& polyn1, const Polinomio& polyn2) {
 	for(int i = 0; i < polyn1.get_Grade(); i++) 
 		for(int j = 0; j < polyn2.get_Grade(); j++) 
 			if(polyn1.get_Polinomio()[i].get_Grade() == polyn2.get_Polinomio()[j].get_Grade()) {
-				Monomio a;
-				a = polyn1.get_Polinomio()[i] - polyn2.get_Polinomio()[j];
-				aux.introduceMonomio(a);
+				Monomio mon;
+				mon = polyn1.get_Polinomio()[i] - polyn2.get_Polinomio()[j];
+				aux.introduceMonomio(mon);
 			}
 	return aux;
 }
@@ -245,9 +245,12 @@ void Polinomio::destroy(void) {
 
 Polinomio Polinomio::algorithmDyV(const Polinomio& polyn1, const Polinomio& polyn2, int i, int j) {
 	Polinomio aux;
-	if((j - i) <= 2) {
-		std::cout << std::endl << "caso base" << std::endl;
-		aux = polyn1.get_Polinomio()[i] * polyn2.get_Polinomio()[j];
+	if((j - i) <= 1) {
+		std::cout << std::endl << "caso base" << i << " " << j << std::endl;
+		Monomio mon;
+		mon = polyn1.get_Polinomio()[i] * polyn2.get_Polinomio()[i];
+		aux.introduceMonomio(mon);
+		aux.write(std::cout);
 	}
 	else {
 
@@ -271,14 +274,9 @@ Polinomio Polinomio::algorithmDyV(const Polinomio& polyn1, const Polinomio& poly
 		std::cin >> z;
 		Polinomio p, q, r;
 		p.algorithmDyV(pl, ql, i, half);
-		p.write(std::cout);
 		q.algorithmDyV(ph, qh, half + 1, j);
-		q.write(std::cout);
-		std::cout << std::endl << "entra" << std::endl;
 		r.algorithmDyV((pl + ph), (ql + qh), i, j);
-		std::cout << std::endl << "sale" << std::endl;
-		r.write(std::cout);
-		aux = p + (r - p + q) + q;
+		aux = p + (r - p - q) + q;
 	}
 	return aux;
 }
