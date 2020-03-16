@@ -28,4 +28,4 @@ run1:
 	../bin/polinomioDyV 100 100 1
 
 run2:
-	../bin/polinomioDyV 10 10 2
+	../bin/polinomioDyV 16 16 2

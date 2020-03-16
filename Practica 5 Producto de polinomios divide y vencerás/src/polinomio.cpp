@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-11 17:59:48
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-13 17:47:54
+* @Last Modified time: 2020-03-16 13:49:05
 */
 /*------------  FUNCTIONS DECLARATION  ------------*/
 
@@ -95,7 +95,7 @@ std::vector<Monomio> Polinomio::get_Polinomio(void) const {
  * @return     The grade.
  */
 int Polinomio::get_Grade(void) const {
-	return polinomio_.size();
+	return (polinomio_.size() - 1);
 }
 
 /**
@@ -146,8 +146,11 @@ Polinomio operator +(const Polinomio& polyn1, const Polinomio& polyn2) {
 	aux.resize(std::max(polyn1.get_Grade(), polyn2.get_Grade()));
 	for(int i = 0; i < polyn1.get_Grade(); i++) 
 		for(int j = 0; j < polyn2.get_Grade(); j++) 
-			if(polyn1.get_Polinomio()[i].get_Grade() == polyn2.get_Polinomio()[j].get_Grade())
-				aux.get_Polinomio()[i] = polyn1.get_Polinomio()[i] + polyn2.get_Polinomio()[i];
+			if(polyn1.get_Polinomio()[i].get_Grade() == polyn2.get_Polinomio()[j].get_Grade()) {
+				Monomio a;
+				a = polyn1.get_Polinomio()[i] + polyn2.get_Polinomio()[j];
+				aux.introduceMonomio(a);
+			}
 	return aux;
 }
 
@@ -164,8 +167,11 @@ Polinomio operator -(const Polinomio& polyn1, const Polinomio& polyn2) {
 	aux.resize(std::max(polyn1.get_Grade(), polyn2.get_Grade()));
 	for(int i = 0; i < polyn1.get_Grade(); i++) 
 		for(int j = 0; j < polyn2.get_Grade(); j++) 
-			if(polyn1.get_Polinomio()[i].get_Grade() == polyn2.get_Polinomio()[j].get_Grade())
-				aux.get_Polinomio()[i] = polyn1.get_Polinomio()[i] - polyn2.get_Polinomio()[i];
+			if(polyn1.get_Polinomio()[i].get_Grade() == polyn2.get_Polinomio()[j].get_Grade()) {
+				Monomio a;
+				a = polyn1.get_Polinomio()[i] - polyn2.get_Polinomio()[j];
+				aux.introduceMonomio(a);
+			}
 	return aux;
 }
 
@@ -240,10 +246,12 @@ void Polinomio::destroy(void) {
 Polinomio Polinomio::algorithmDyV(const Polinomio& polyn1, const Polinomio& polyn2, int i, int j) {
 	Polinomio aux;
 	if((j - i) <= 2) {
+		std::cout << std::endl << "caso base" << std::endl;
 		aux = polyn1.get_Polinomio()[i] * polyn2.get_Polinomio()[j];
 	}
 	else {
-		int half = (std::max(polyn2.get_Grade(), polyn1.get_Grade()) / 2);
+
+		int half = round((std::max(polyn2.get_Grade(), polyn1.get_Grade()) / 2));
 		Polinomio pl(polyn1.get_Polinomio(), i, polyn1.get_Grade() / 2);
 		Polinomio ph(polyn1.get_Polinomio(), (polyn1.get_Grade() / 2), polyn1.get_Grade());
 		Polinomio ql(polyn2.get_Polinomio(), i, polyn2.get_Grade() / 2);
@@ -251,7 +259,7 @@ Polinomio Polinomio::algorithmDyV(const Polinomio& polyn1, const Polinomio& poly
 		
 		std::cout << std::endl << "pl: " << std::endl;
 		pl.write(std::cout);
-		std::cout << std::endl << "ph: " << std::endl;
+		std::cout << std::endl << "ph: " <<  std::endl;
 		ph.write(std::cout);
 		std::cout << std::endl << "ql: " << std::endl;
 		ql.write(std::cout);
@@ -262,16 +270,14 @@ Polinomio Polinomio::algorithmDyV(const Polinomio& polyn1, const Polinomio& poly
 		char z;
 		std::cin >> z;
 		Polinomio p, q, r;
-		std::cout << "Entra en algoritmos      " <<i <<" " << half << std::endl;
 		p.algorithmDyV(pl, ql, i, half);
 		p.write(std::cout);
-		std::cout << "salelgoritmos" << std::endl;
 		q.algorithmDyV(ph, qh, half + 1, j);
 		q.write(std::cout);
-		std::cout << "aaaaaaaaaaaaaaaaa" << std::endl;
-		r.algorithmDyV(pl + ql, ph + qh, i, j);
+		std::cout << std::endl << "entra" << std::endl;
+		r.algorithmDyV((pl + ph), (ql + qh), i, j);
+		std::cout << std::endl << "sale" << std::endl;
 		r.write(std::cout);
-		std::cout << "sale de algoritmos" << std::endl;
 		aux = p + (r - p + q) + q;
 	}
 	return aux;
