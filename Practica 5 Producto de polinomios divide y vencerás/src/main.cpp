@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-11 17:59:57
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-13 08:37:30
+* @Last Modified time: 2020-03-17 08:23:54
 */
 #include "../include/polinomio.hpp"
 #include <ctime>
@@ -43,9 +43,12 @@ int main(int argc, char *argv[]) {
 	std::cout << q;
 	std::cout << std::endl;
 	Polinomio r;
+	std::chrono::time_point<std::chrono::system_clock> start, end;
 	switch(algoritmo) {
 		case 1:
+			start = std::chrono::system_clock::now();
 			r = p * q;
+			end = std::chrono::system_clock::now();
 			std::cout << std::endl << "R(x) = ";
 			std::cout << r;
 			break;
@@ -59,6 +62,10 @@ int main(int argc, char *argv[]) {
 			std::cout << std::endl <<  "Error, el algoritmo seleccionado es incorrecto." << std::endl;
 			exit(0);
 	}
+	int elapsed_seconds = std::chrono::duration_cast<std::chrono::microseconds>(end-start).count();
+	time_t end_time = std::chrono::system_clock::to_time_t(end);
+	std::cout << "\nCálculo por columnas terminado  " << ctime(&end_time) << "tiempo transcurrido: " << elapsed_seconds << "microsegundos\n";
+	
 
 }
 

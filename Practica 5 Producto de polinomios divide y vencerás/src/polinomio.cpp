@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-11 17:59:48
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-16 17:17:02
+* @Last Modified time: 2020-03-17 07:38:16
 */
 /*------------  FUNCTIONS DECLARATION  ------------*/
 
@@ -268,7 +268,7 @@ Polinomio Polinomio::algorithmDyV(const Polinomio& polyn1, const Polinomio& poly
 		ql.write(std::cout);
 		std::cout << std::endl << "qh: " << std::endl;
 		qh.write(std::cout);
-		std::cout << std::endl << std::endl;
+		std::cout << std::endl << std::endl << "Presione pra continuar . . .";
 		
 		char z;
 		std::cin >> z;
