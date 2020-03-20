@@ -2,7 +2,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-20 13:07:04
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-20 14:34:41
+* @Last Modified time: 2020-03-20 16:07:06
 */
 
 #include "../include/calendar.hpp"
@@ -27,11 +27,11 @@ Calendar::Calendar (int teamsNumber) {
 		name += std::to_string(i);
 		teams_.push_back(name);
 	}
-	teams_.resize(teamsNumber_);
-	for (int i = 0; i < teamsNumber - 1; i++)
-		teams_[i].resize(teamsNumber_ - 1);
-	std::cout <<"TErmin";
-	generateCalendarPow2(0, 7);
+	calendar_.resize(teamsNumber_);
+	for (int i = 0; i < teamsNumber; i++)
+		calendar_[i].resize(teamsNumber_ - 1);
+	generateCalendarPow2(0, teamsNumber_ - 1);
+	write(std::cout);
 	//generateCalendarPow2(1, teamsNumber_ - 1);
 }
 
@@ -110,18 +110,30 @@ void Calendar::set_Calendar (std::vector<std::vector<int>> calendar) {
 }
 
 void Calendar::generateCalendarPow2 (int i, int j) {
-	std::cout << std::endl << "ASSSSSSSSS" << i << j << std::endl;
 	if ((j - i) == 1) {	
 		// Play between themselves the same day
-		std::cout << std::endl << "CASO base" << std::endl;
-		calendar_[i][1] = j;
-		calendar_[j][1] = i;
-		std::cout << std::endl << "TERMIN base" << std::endl;
+		//std::cout << std::endl << "i: " << i << "   j: " << j << std::endl;
+		calendar_[i][1] = j + 1;
+		calendar_[j][1] = i + 1;
 	}
 	else {
 		int half = round((i + j) / 2);
 		generateCalendarPow2(i, half);
-		generateCalendarPow2(half + 1, i);
+		generateCalendarPow2(half + 1, j);
+		rotateSolution(i, half, (half - i + 1), (j - i), (half + 1));
+		rotateSolution((half + 1), j, (half - i + 1), (j - i), i);
+	}
+}
+
+void Calendar::rotateSolution (int team1, int team2, int day1, int day2, int starterTeam) {
+	for (int i = day1; i <= day2; i++) {
+		calendar_[team1][i] = starterTeam + i - day1 + 1;
+	}
+	for (int i = team1 + 1; i <= team2; i++) {
+		calendar_[i][day1] = calendar_[i - 1][day2]; //el último contrincante de i-1 es ahora el primer contrincante de i
+		for (int j = day1 + 1; j <= day2; j++) {
+			calendar_[i][j] = calendar_[i - 1][j - 1]; //el contrincante de ayer de i-1, es el contrincante de hoy para i
+		}
 	}
 }
 
@@ -135,10 +147,15 @@ std::ostream& operator << (std::ostream& os, const Calendar& calendar) {
 }
 
 void Calendar::write(std::ostream& os) {
+	std::cout << std::endl << std::endl;
+	for (int i = 0; i < teamsNumber_ - 1; i++)
+		std::cout <<"\tDay " << i + 1; 
+
+	std::cout << std::endl << std::endl;
 	for (int i = 0; i < teams_.size(); i++) {
-		std::cout << teams_[i] << ": ";
-		for (int j = 0; j < teams_.size() - 1; j++) {
-			std::cout << calendar_[i][j];
+		std::cout << teams_[i] << "\t";
+		for (int j = 1; j < teams_.size(); j++) {
+			std::cout << calendar_[i][j] << '\t';
 		}
 		std::cout << std::endl;
 

@@ -29,6 +29,7 @@ class Calendar {
 
 		// Functions
 		void generateCalendarPow2 (int i, int j);
+		void rotateSolution (int team1, int team2, int day1, int day2, int starterTeam);
 		void generateCalendar (void);
 
 		// Operators overload
