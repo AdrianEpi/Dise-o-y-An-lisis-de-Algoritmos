@@ -1,8 +1,26 @@
+/*=======================================================================================
+=========================================================================================
+    =                                                                              =
+    =            Proyect:       Practica 6 Calendario de Competiciones DyV         =
+    =            File name:     calendar.hpp                                       =
+    =            Author:        Adrián Epifanio Rodríguez Hernández                =
+    =            Fecha:         20/03/2020                                         =
+    =            Subject:       Diseño y Análisis de Algoritmos                    =
+    =            Language:      C++                                                =
+    =            Email:         alu0101158280@ull.edu.es                           =
+    =            Place:         Universidad De La Laguna                           =
+    =                           Escuela Superior de Ingeniería y Tecnología        =
+    =                                                                              =
+=========================================================================================
+=======================================================================================*/
+/*------------  LIBRARY DECLARATION  ------------*/
+
 #include <iostream>
 #include <vector>
 #include <string>
 #include <cmath>
 
+/*------------------------------------------------*/
 
 class Calendar {
 
@@ -28,6 +46,9 @@ class Calendar {
 		void set_Calendar (std::vector<std::vector<int>> calendar);
 
 		// Functions
+		void initialize (int teamsNumber);
+		bool isPow2 (void);
+		void algorythmSelector (void);
 		void generateCalendarPow2 (int i, int j);
 		void rotateSolution (int team1, int team2, int day1, int day2, int starterTeam);
 		void generateCalendar (void);

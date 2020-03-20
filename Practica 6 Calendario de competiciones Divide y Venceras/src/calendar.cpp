@@ -1,11 +1,30 @@
+/*=======================================================================================
+=========================================================================================
+    =                                                                              =
+    =            Proyect:       Practica 6 Calendario de Competiciones DyV         =
+    =            File name:     calendar.hpp                                       =
+    =            Author:        Adrián Epifanio Rodríguez Hernández                =
+    =            Fecha:         20/03/2020                                         =
+    =            Subject:       Diseño y Análisis de Algoritmos                    =
+    =            Language:      C++                                                =
+    =            Email:         alu0101158280@ull.edu.es                           =
+    =            Place:         Universidad De La Laguna                           =
+    =                           Escuela Superior de Ingeniería y Tecnología        =
+    =                                                                              =
+=========================================================================================
+=======================================================================================*/
 /*
 * @Author: Adrián Epifanio
 * @Date:   2020-03-20 13:07:04
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-20 16:07:06
+* @Last Modified time: 2020-03-20 17:14:15
 */
 
+/*------------  FUNCTIONS DECLARATION  ------------*/
+
 #include "../include/calendar.hpp"
+
+/*-------------------------------------------------*/
 
 /**
  * @brief      Constructs a new instance.
@@ -21,18 +40,14 @@ Calendar::Calendar () {
  * @param[in]  teamsNumber  The teams number
  */
 Calendar::Calendar (int teamsNumber) {
-	teamsNumber_ = teamsNumber;
-	for (int i = 1; i <= teamsNumber; i++) {
+	initialize(teamsNumber);
+	for (int i = 0; i < teamsNumber; i++) {
 		std::string name = "Team";
-		name += std::to_string(i);
-		teams_.push_back(name);
+		name += std::to_string(i + 1);
+		teams_[i] = name;
 	}
-	calendar_.resize(teamsNumber_);
-	for (int i = 0; i < teamsNumber; i++)
-		calendar_[i].resize(teamsNumber_ - 1);
-	generateCalendarPow2(0, teamsNumber_ - 1);
+	algorythmSelector();
 	write(std::cout);
-	//generateCalendarPow2(1, teamsNumber_ - 1);
 }
 
 /**
@@ -42,10 +57,11 @@ Calendar::Calendar (int teamsNumber) {
  * @param[in]  teams        The teams
  */
 Calendar::Calendar (int teamsNumber, std::vector<std::string> teams) {
-	teams_.resize(teamsNumber);
-	teamsNumber_ = teamsNumber;
+	initialize(teamsNumber);
 	for (int i = 0; i < teamsNumber; i++)
 		teams_[i] = teams[i];
+	algorythmSelector();
+	write(std::cout);
 }
 
 /**
@@ -109,10 +125,59 @@ void Calendar::set_Calendar (std::vector<std::vector<int>> calendar) {
 	calendar_ = calendar;
 }
 
+
+/**
+ * @brief      Initializes the given teams number.
+ *
+ * @param[in]  teamsNumber  The teams number
+ */
+void Calendar::initialize (int teamsNumber) {
+	set_TeamsNumber(teamsNumber);
+	teams_.resize(teamsNumber);
+	calendar_.resize(teamsNumber_);
+	for (int i = 0; i < teamsNumber; i++)
+		calendar_[i].resize(teamsNumber - 1);
+}
+
+/**
+ * @brief      Determines if pow 2.
+ *
+ * @return     True if pow 2, False otherwise.
+ */
+bool Calendar::isPow2 (void) {
+	int aux = 1;
+	while (aux < get_TeamsNumber()) {
+		aux *= 2;
+	}
+
+	if (aux == get_TeamsNumber())
+		return true;
+	else
+		return false;
+}
+
+/**
+ * @brief      Selects the algorythm which is going to be used
+ */
+void Calendar::algorythmSelector (void) {
+	if (isPow2())
+		generateCalendarPow2(0, get_TeamsNumber() - 1);
+	else {
+		std::cout << std::endl << "Actualmente solo está disponible el algoritmo para potencias en base 2, disculpe las molestias." << std::endl;
+		exit(0);
+		generateCalendar();
+	}
+}
+
+/**
+ * @brief      Generates the competition calendar
+ *
+ * @param[in]  i     Position i
+ * @param[in]  j     Position j
+ */
 void Calendar::generateCalendarPow2 (int i, int j) {
 	if ((j - i) == 1) {	
 		// Play between themselves the same day
-		//std::cout << std::endl << "i: " << i << "   j: " << j << std::endl;
 		calendar_[i][1] = j + 1;
 		calendar_[j][1] = i + 1;
 	}
@@ -125,15 +190,23 @@ void Calendar::generateCalendarPow2 (int i, int j) {
 	}
 }
 
+/**
+ * @brief      Rotates the solution previously generated
+ *
+ * @param[in]  team1        The lower team
+ * @param[in]  team2        The higher team
+ * @param[in]  day1         The lower day
+ * @param[in]  day2         The higher day
+ * @param[in]  starterTeam  The starter team
+ */
 void Calendar::rotateSolution (int team1, int team2, int day1, int day2, int starterTeam) {
-	for (int i = day1; i <= day2; i++) {
+	for (int i = day1; i <= day2; i++)
 		calendar_[team1][i] = starterTeam + i - day1 + 1;
-	}
+
 	for (int i = team1 + 1; i <= team2; i++) {
-		calendar_[i][day1] = calendar_[i - 1][day2]; //el último contrincante de i-1 es ahora el primer contrincante de i
-		for (int j = day1 + 1; j <= day2; j++) {
-			calendar_[i][j] = calendar_[i - 1][j - 1]; //el contrincante de ayer de i-1, es el contrincante de hoy para i
-		}
+		calendar_[i][day1] = calendar_[i - 1][day2];
+		for (int j = day1 + 1; j <= day2; j++) 
+			calendar_[i][j] = calendar_[i - 1][j - 1];
 	}
 }
 
@@ -141,26 +214,37 @@ void Calendar::generateCalendar (void) {
 
 }
 
-
+/**
+ * @brief      Bitwise left shift operator.
+ *
+ * @param      os        The output stream
+ * @param[in]  calendar  The calendar
+ *
+ * @return     The result of the bitwise left shift
+ */
 std::ostream& operator << (std::ostream& os, const Calendar& calendar) {
+	os << std::endl << std::endl;
+	for (int i = 0; i < calendar.teamsNumber_ - 1; i++)
+		os <<"\tDay " << i + 1; 
 
+	os << std::endl << std::endl;
+	for (int i = 0; i < calendar.teams_.size(); i++) {
+		os << calendar.teams_[i] << "\t";
+		for (int j = 1; j < calendar.teams_.size(); j++) 
+			os << calendar.calendar_[i][j] << '\t';
+
+		os << std::endl;
+	}
+	return os;
 }
 
+/**
+ * @brief      Prints the Calendar on screen
+ *
+ * @param      os    The output stream
+ */
 void Calendar::write(std::ostream& os) {
-	std::cout << std::endl << std::endl;
-	for (int i = 0; i < teamsNumber_ - 1; i++)
-		std::cout <<"\tDay " << i + 1; 
-
-	std::cout << std::endl << std::endl;
-	for (int i = 0; i < teams_.size(); i++) {
-		std::cout << teams_[i] << "\t";
-		for (int j = 1; j < teams_.size(); j++) {
-			std::cout << calendar_[i][j] << '\t';
-		}
-		std::cout << std::endl;
-
-	}
-
+	os << *this;
 }
 
 
