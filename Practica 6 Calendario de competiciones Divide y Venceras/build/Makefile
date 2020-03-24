@@ -22,5 +22,5 @@ clean:
 	rm -rf ../bin/*
 
 run:
-	../bin/calendar 16
+	../bin/calendar 8
 
