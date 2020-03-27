@@ -2,18 +2,18 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-03-27 10:24:01
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-27 11:47:45
+* @Last Modified time: 2020-03-27 13:42:50
 */
 #include "../include/lcs.hpp"
-#include <iostream>
-#include <cstring>
-int main() 
-{ 
-	std::string string1, string2;
+
+int main(void) { 
+	std::string string1 = " ", string2 = " ", aux;
 	std::cout << std::endl << "Introduce the first secuence: ";
-	std::cin >> string1;
+	std::cin >> aux;
+	string1 += aux;
 	std::cout << std::endl << "Introduce the second secuence: ";
-	std::cin >> string2;
+	std::cin >> aux;
+	string2 += aux;
 
 	LCS test(string1, string2);
 } 

@@ -7,7 +7,7 @@ class LCS {
 	private:
 		char X_[];
 		char Y_[];
-		std::vector<std::vector<int>> table_;
+		std::vector<std::vector<int>> C;
 
 	public:
 		LCS();
@@ -15,5 +15,5 @@ class LCS {
 		~LCS();
 
 		int LCSLength(std::string X, std::string Y);
-		//void backTrack(char C[][], char str1[], char str2[], int i, int j);
+		std::string backTrack(std::vector<std::vector<int>> C, std::string X, std::string Y, int i, int j);
 };
