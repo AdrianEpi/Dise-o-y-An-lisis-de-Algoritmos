@@ -1,10 +1,30 @@
+/*=======================================================================================
+=========================================================================================
+    =                                                                              =
+    =            Proyect:       Practica 7 Subsecuencia común mas larga LCS        =
+    =            File name:     lcs.hpp                                            =
+    =            Author:        Adrián Epifanio Rodríguez Hernández                =
+    =            Fecha:         27/03/2020                                         =
+    =            Subject:       Diseño y Análisis de Algoritmos                    =
+    =            Language:      C++                                                =
+    =            Email:         alu0101158280@ull.edu.es                           =
+    =            Place:         Universidad De La Laguna                           =
+    =                           Escuela Superior de Ingeniería y Tecnología        =
+    =                                                                              =
+=========================================================================================
+=======================================================================================*/
 /*
 * @Author: Adrián Epifanio
 * @Date:   2020-03-27 10:25:12
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-03-27 13:42:28
+* @Last Modified time: 2020-03-31 11:43:31
 */
+
+/*----------  DECLARACION DE FUNCIONES  ----------*/
+
 #include "../include/lcs.hpp"
+
+/*------------------------------------------------*/
 
 /**
  * @brief      Constructs a new instance.
