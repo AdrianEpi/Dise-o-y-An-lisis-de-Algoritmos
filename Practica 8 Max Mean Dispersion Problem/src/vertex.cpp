@@ -2,7 +2,7 @@
 =========================================================================================
     =                                                                              =
     =            Proyect:       Practica 8 Max-Mean Problem                        =
-    =            File name:     main.cpp                                           =
+    =            File name:     vertex.cpp                                         =
     =            Author:        Adrián Epifanio Rodríguez Hernández                =
     =            Fecha:         03/04/2020                                         =
     =            Subject:       Diseño y Análisis de Algoritmos                    =
@@ -15,20 +15,81 @@
 =======================================================================================*/
 /*
 * @Author: Adrián Epifanio
-* @Date:   2020-04-03 20:28:44
+* @Date:   2020-04-15 19:34:52
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-15 21:17:24
+* @Last Modified time: 2020-04-15 21:18:11
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
 #include "../include/vertex.hpp"
-#include "../include/edge.hpp"
-#include "../include/graph.hpp"
 
 /*------------------------------------------------*/
-int main() {
-    std::string asd = "../inputs/max-mean-div-10.txt";
-    Graph d(asd);
-    d.generateGraph();
-    d.printGraph();
+
+
+/**
+ * @brief      Constructs a new instance.
+ */
+Vertex::Vertex () {
+}
+
+/**
+ * @brief      Constructs a new instance.
+ *
+ * @param[in]  number  The number
+ */
+Vertex::Vertex (int number) {
+	assert(number >= 0);
+	set_Number(number);
+	generateName();
+}
+
+/**
+ * @brief      Destroys the object.
+ */
+Vertex::~Vertex () {
+}
+
+/**
+ * @brief      Gets the number.
+ *
+ * @return     The number.
+ */
+int Vertex::get_Number (void) const {
+	return number_;
+}
+
+/**
+ * @brief      Gets the name.
+ *
+ * @return     The name.
+ */
+std::string Vertex::get_Name (void) const {
+	return name_;
+}
+
+/**
+ * @brief      Sets the number.
+ *
+ * @param[in]  number  The number
+ */
+void Vertex::set_Number (int number) {
+	number_ = number;
+}
+
+/**
+ * @brief      Sets the name.
+ *
+ * @param[in]  name  The name
+ */
+void Vertex::set_Name (std::string name) {
+	name_ = name;
+}
+
+/**
+ * @brief      Generates the name for the vertex
+ */
+void Vertex::generateName (void) {
+	std::string name = "Vertex ";
+	name += std::to_string(get_Number());
+	set_Name(name);
 }

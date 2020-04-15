@@ -2,7 +2,7 @@
 =========================================================================================
     =                                                                              =
     =            Proyect:       Practica 8 Max-Mean Problem                        =
-    =            File name:     fileReader.hpp                                     =
+    =            File name:     edge.hpp                                           =
     =            Author:        Adrián Epifanio Rodríguez Hernández                =
     =            Fecha:         03/04/2020                                         =
     =            Subject:       Diseño y Análisis de Algoritmos                    =
@@ -13,7 +13,36 @@
     =                                                                              =
 =========================================================================================
 =======================================================================================*/
-/*----------  DECLARACION DE FUNCIONES  ----------*/
+/*----------  DECLARACION DE LIBRERIAS  ----------*/
 
+#include <cassert>
 
 /*------------------------------------------------*/
+/*----------  DECLARACION DE FUNCIONES  ----------*/
+
+#pragma once
+
+/*------------------------------------------------*/
+
+class Edge {
+
+	private:
+		int distance_;
+		int vertexA_;
+		int vertexB_;
+
+	public:
+		// Builders & Destroyer
+		Edge ();
+		Edge (int vertexA, int vertexB, int  distance);
+		~Edge ();
+
+		// Getters & Setters
+		int get_Distance (void) const;
+		int get_VertexA (void) const;
+		int get_VertexB (void) const;
+
+		void set_Distance (int distance);
+		void set_VertexA (int vertexA);
+		void set_VertexB (int vertexB);
+};

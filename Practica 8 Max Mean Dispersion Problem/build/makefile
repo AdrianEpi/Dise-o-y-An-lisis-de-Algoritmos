@@ -1,5 +1,5 @@
 #Variable objetos
-OBJECTS = main.o fileReader.o voraz.o GRASP.o multiarranque.o vns.o
+OBJECTS = main.o vertex.o edge.o graph.o voraz.o GRASP.o multiarranque.o vns.o
 #Flags de compilacion
 CFLAGS = -c -std=c++17
 
@@ -11,8 +11,14 @@ maxmean: $(OBJECTS)
 main.o: ../src/main.cpp
 	g++ $(CFLAGS) ../src/main.cpp
 
-fileReader.o: ../src/fileReader.cpp ../include/fileReader.hpp
-	g++ $(CFLAGS) ../src/fileReader.cpp
+vertex.o: ../src/vertex.cpp ../include/vertex.hpp
+	g++ $(CFLAGS) ../src/vertex.cpp
+
+edge.o: ../src/edge.cpp ../include/edge.hpp
+	g++ $(CFLAGS) ../src/edge.cpp
+
+graph.o: ../src/graph.cpp ../include/graph.hpp
+	g++ $(CFLAGS) ../src/graph.cpp
 
 voraz.o: ../src/voraz.cpp ../include/voraz.hpp
 	g++ $(CFLAGS) ../src/voraz.cpp

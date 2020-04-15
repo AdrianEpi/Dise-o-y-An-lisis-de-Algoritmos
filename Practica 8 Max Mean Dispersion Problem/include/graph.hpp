@@ -2,7 +2,7 @@
 =========================================================================================
     =                                                                              =
     =            Proyect:       Practica 8 Max-Mean Problem                        =
-    =            File name:     main.cpp                                           =
+    =            File name:     graph.hpp                                          =
     =            Author:        Adrián Epifanio Rodríguez Hernández                =
     =            Fecha:         03/04/2020                                         =
     =            Subject:       Diseño y Análisis de Algoritmos                    =
@@ -13,22 +13,53 @@
     =                                                                              =
 =========================================================================================
 =======================================================================================*/
-/*
-* @Author: Adrián Epifanio
-* @Date:   2020-04-03 20:28:44
-* @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-15 21:17:24
-*/
-/*----------  DECLARACION DE FUNCIONES  ----------*/
+/*----------  DECLARACION DE LIBRERIAS  ----------*/
 
-#include "../include/vertex.hpp"
-#include "../include/edge.hpp"
-#include "../include/graph.hpp"
+#include <iostream>
+#include <vector>
+#include <fstream>
 
 /*------------------------------------------------*/
-int main() {
-    std::string asd = "../inputs/max-mean-div-10.txt";
-    Graph d(asd);
-    d.generateGraph();
-    d.printGraph();
-}
+/*----------  DECLARACION DE FUNCIONES  ----------*/
+
+#pragma once
+#include "vertex.hpp"
+#include "edge.hpp"
+
+/*------------------------------------------------*/
+
+
+class Graph {
+
+	private:
+		std::vector<Vertex> vertex_;
+		std::vector<Edge> edges_;
+		std::string textFile_;
+		int vertexNum_;
+
+
+	public:
+		// Builders & Destroyer
+		Graph();
+		Graph(std::string textFile);
+		~Graph();
+
+		// Getters & Setters
+		std::vector<Vertex> get_Vertex(void) const;
+		std::vector<Edge> get_Edges(void) const;
+		std::string get_TextFile(void) const;
+		int get_VertexNum (void) const;
+
+		void set_Vertex(std::vector<Vertex> vertex);
+		void set_Edges(std::vector<Edge> edge);
+		void set_TextFile(std::string textFile);
+		void set_VertexNum (int vertexNum);
+
+		// Functions
+		void generateGraph(void);
+
+		// Write
+		void printGraph(void);
+
+
+};

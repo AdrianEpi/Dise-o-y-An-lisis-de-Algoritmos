@@ -2,7 +2,7 @@
 =========================================================================================
     =                                                                              =
     =            Proyect:       Practica 8 Max-Mean Problem                        =
-    =            File name:     fileReader.cpp                                     =
+    =            File name:     vertex.hpp                                         =
     =            Author:        Adrián Epifanio Rodríguez Hernández                =
     =            Fecha:         03/04/2020                                         =
     =            Subject:       Diseño y Análisis de Algoritmos                    =
@@ -13,13 +13,38 @@
     =                                                                              =
 =========================================================================================
 =======================================================================================*/
-/*
-* @Author: Adrián Epifanio
-* @Date:   2020-04-03 20:31:10
-* @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-03 20:39:05
-*/
-/*----------  DECLARACION DE FUNCIONES  ----------*/
+/*----------  DECLARACION DE LIBRERIAS  ----------*/
 
+#include <cassert>
+#include <string>
 
 /*------------------------------------------------*/
+/*----------  DECLARACION DE FUNCIONES  ----------*/
+
+#pragma once
+
+/*------------------------------------------------*/
+
+class Vertex {
+	
+	private:
+		int number_;
+		std::string name_;
+
+	public: 
+		// Builders & Destroyer
+		Vertex ();
+		Vertex (int number);
+		~Vertex ();
+
+		// Getters & Setters
+		int get_Number (void) const;
+		std::string get_Name (void) const;
+
+		void set_Number (int number);
+		void set_Name (std::string name);
+
+		// Functions
+		void generateName (void);
+
+};
