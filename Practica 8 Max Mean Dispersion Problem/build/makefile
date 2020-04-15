@@ -37,7 +37,5 @@ clean:
 	rm -rf ../objects/*.o
 	rm -rf ../bin/*
 
-run:
-	../bin/maxmean
 
 
