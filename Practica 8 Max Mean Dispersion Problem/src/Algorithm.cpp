@@ -1,11 +1,30 @@
+/*=======================================================================================
+=========================================================================================
+	=                                                                              =
+	=            Proyect:       Practica 8 Max-Mean Problem                        =
+	=            File name:     Algorithm.cpp                                      =
+	=            Author:        Adrián Epifanio Rodríguez Hernández                =
+	=            Fecha:         03/04/2020                                         =
+	=            Subject:       Diseño y Análisis de Algoritmos                    =
+	=            Language:      C++                                                =
+	=            Email:         alu0101158280@ull.edu.es                           =
+	=            Place:         Universidad De La Laguna                           =
+	=                           Escuela Superior de Ingeniería y Tecnología        =
+	=                                                                              =
+=========================================================================================
+=======================================================================================*/
 /*
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-16 18:43:52
+* @Last Modified time: 2020-04-16 21:40:19
 */
+/*----------  DECLARACION DE FUNCIONES  ----------*/
 
 #include "../include/Algorithm.hpp"
+
+/*------------------------------------------------*/
+
 
 /**
  * @brief      Constructs a new instance.
@@ -23,8 +42,12 @@ std::vector<Vertex> Algorithm::get_Solution (void) const {
 	return solutions_;
 }
 
+/**
+ * @brief      Sets the solution.
+ *
+ * @param[in]  solution  The solution
+ */
 void Algorithm::set_Solution (std::vector<Vertex> solution) {
-	std::cout << "TAMA" << solution.size();
 	solutions_ = solution;
 }
 
@@ -63,8 +86,7 @@ float Algorithm::findMean (std::vector<Vertex> vertex, Graph& graph) {
 			}
 		}
 	}
-	mean /= vertex.size();
-	std::cout << "\nmean:" << mean;
+	mean /= ((graph.get_Vertex().size() -1)* vertex.size());
 	return mean;
 }
 
