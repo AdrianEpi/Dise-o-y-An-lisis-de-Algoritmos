@@ -17,18 +17,18 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:28:44
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-15 21:17:24
+* @Last Modified time: 2020-04-16 17:32:51
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
 #include "../include/vertex.hpp"
 #include "../include/edge.hpp"
 #include "../include/graph.hpp"
+#include "../include/Framework.hpp"
 
 /*------------------------------------------------*/
 int main() {
     std::string asd = "../inputs/max-mean-div-10.txt";
-    Graph d(asd);
-    d.generateGraph();
-    d.printGraph();
+    FrameWork a(asd);
+    a.initialize();
 }

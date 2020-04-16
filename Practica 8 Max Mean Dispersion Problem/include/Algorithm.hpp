@@ -2,7 +2,7 @@
 =========================================================================================
     =                                                                              =
     =            Proyect:       Practica 8 Max-Mean Problem                        =
-    =            File name:     multiarranque.cpp                                  =
+    =            File name:     Algorithm.hpp                                      =
     =            Author:        Adrián Epifanio Rodríguez Hernández                =
     =            Fecha:         03/04/2020                                         =
     =            Subject:       Diseño y Análisis de Algoritmos                    =
@@ -13,13 +13,39 @@
     =                                                                              =
 =========================================================================================
 =======================================================================================*/
-/*
-* @Author: Adrián Epifanio
-* @Date:   2020-04-03 20:29:45
-* @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-03 20:38:45
-*/
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
+#pragma once
+#include "graph.hpp"
+#define STARTMEAN -9999999;
 
 /*------------------------------------------------*/
+/*----------  DECLARACION DE LIBRERIAS  ----------*/
+
+#include <string>
+#include <algorithm>
+
+/*------------------------------------------------*/
+
+class Algorithm {
+
+	private:
+		std::vector<Vertex> solutions_;
+
+	public:
+		// Builders & Destroyer
+		Algorithm ();
+		virtual ~Algorithm ();
+
+		// Getter & Setter
+		std::vector<Vertex> get_Solution (void) const;
+
+		void set_Solution (std::vector<Vertex> solution);
+
+		// Functions
+		virtual void runAlgorithm (Graph& graph);
+		virtual std::ostream& printResult (std::ostream& os);
+		float findMean (std::vector<Vertex> vertex, Graph& graph);
+		void addVertex (Vertex newVertex);
+
+};

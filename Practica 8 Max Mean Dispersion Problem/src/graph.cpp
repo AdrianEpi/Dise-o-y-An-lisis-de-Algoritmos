@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-15 20:01:17
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-15 21:18:44
+* @Last Modified time: 2020-04-16 18:31:50
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -29,7 +29,7 @@
  * @brief      Constructs a new instance.
  */
 Graph::Graph() {
-	std::cout << std::endl << "ERROR, a Graph requires a texfile for a correct generation" << std::endl;
+	//std::cout << std::endl << "ERROR, a Graph requires a texfile for a correct generation" << std::endl;
 }
 
 /**
@@ -156,7 +156,6 @@ void Graph::generateGraph(void) {
  * @brief      Prints the graph by console.
  */
 void Graph::printGraph(void) {
-	std::cout << edges_.size();
 	for (int i = 0; i < vertex_.size(); i++) {
 		std::string node = vertex_[i].get_Name();
 		node += "\n";
