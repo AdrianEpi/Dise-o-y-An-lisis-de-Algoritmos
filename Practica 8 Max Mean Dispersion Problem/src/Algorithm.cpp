@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-17 13:30:04
+* @Last Modified time: 2020-04-17 19:31:30
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -85,11 +85,21 @@ void Algorithm::runAlgorithm (Graph& graph) {
 /**
  * @brief      Prints a result.
  *
- * @param      os    The operating system
+ * @param      os      The output stream
+ * @param      chrono  The chrono
  *
- * @return     { description_of_the_return_value }
+ * @return     The output stream
  */
-std::ostream& Algorithm::printResult (std::ostream& os) {
+std::ostream& Algorithm::printResult (std::ostream& os, Chrono& chrono) {
+	assert(get_Solution().size() > 0);
+	os << std::endl << "CPU Time: " << chrono.get_Seconds(5) << " seconds";
+	os << std::endl << "Solution: { ";
+	for (int i = 0; i < get_Solution().size() - 1; i++) {
+		os << get_Solution()[i].get_Number() << ", ";
+	}
+	os << get_Solution()[get_Solution().size() - 1].get_Number() << " }" << std::endl;
+	os << "Max-Mean value: " << get_MaxMean() << std::endl;
+	return os;
 }
 
 /**
@@ -102,6 +112,9 @@ std::ostream& Algorithm::printResult (std::ostream& os) {
  */
 float Algorithm::findMean (std::vector<Vertex> vertex, Graph& graph) {
 	float mean = 0;
+	if (vertex.size() == 0) {
+		return 0.0;
+	}
 	for (int i = 0; i < vertex.size(); i++) {
 		for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
 			if (vertex[i].get_Number() == graph.get_Edges()[edge].get_VertexA()) {

@@ -17,9 +17,11 @@
 
 #pragma once
 #include "graph.hpp"
+#include "Chrono.hpp"
 #include "Algorithm.hpp"
 #include "GreedyAlgorithm.hpp"
 #include "AnotherGreedyAlgorithm.hpp"
+#include "GraspAlgorithm.hpp"
 
 /*------------------------------------------------*/
 /*----------  DECLARACION DE LIBRERIAS  ----------*/
@@ -35,6 +37,7 @@ class FrameWork {
 		Graph graph_;
 		std::string textFile_;
 		Algorithm* algorithm_;
+		Chrono chrono_;
 
 	public:
 		// Builders & Destroyer
@@ -46,13 +49,16 @@ class FrameWork {
 		Graph get_Graph (void) const;
 		std::string get_TextFile (void) const;
 		Algorithm* get_Algorithm (void) const;
+		Chrono get_Chrono (void) const;
 
 		void set_Graph (Graph graph);
 		void set_TextFile (std::string textFile);
 		void set_Algorithm (Algorithm* algorithm);
+		void set_Chrono (Chrono chrono);
 
 		// Function
 		void initialize (void);
+		void executeFrameWork (void);
 		int printMenu (void);
 
 };

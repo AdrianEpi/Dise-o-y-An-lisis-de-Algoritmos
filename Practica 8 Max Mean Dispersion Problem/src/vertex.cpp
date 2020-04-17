@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-15 19:34:52
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-15 21:18:11
+* @Last Modified time: 2020-04-17 17:58:07
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -84,6 +84,16 @@ void Vertex::set_Number (int number) {
 void Vertex::set_Name (std::string name) {
 	name_ = name;
 }
+
+/**
+ * @brief      Assignment operator.
+ *
+ * @param[in]  vertex  The vertex
+ */
+void Vertex::operator= (const Vertex& vertex) {
+    set_Name(vertex.get_Name());
+    set_Number(vertex.get_Number());
+} 
 
 /**
  * @brief      Generates the name for the vertex

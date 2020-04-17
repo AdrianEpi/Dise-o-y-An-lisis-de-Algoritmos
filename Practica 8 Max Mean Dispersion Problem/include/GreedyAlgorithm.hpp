@@ -23,14 +23,16 @@
 class GreedyAlgorithm : public Algorithm {
 
 	public:
+		// Builder & Destroyer
 		GreedyAlgorithm ();
 		virtual ~GreedyAlgorithm ();
 
+		// Public Function
 		void runAlgorithm (Graph& graph);
+
+	private:
+		// Private Functions
 		int findMaxDistance (Graph& graph, std::vector<Vertex> vertex);
 		int findMaxVertexDispersion (Graph& graph, std::vector<Vertex> vertex);
 		bool isInVector (int number, std::vector<Vertex> vertex);
-		std::ostream& printResult (std::ostream& os);
-
-
 };

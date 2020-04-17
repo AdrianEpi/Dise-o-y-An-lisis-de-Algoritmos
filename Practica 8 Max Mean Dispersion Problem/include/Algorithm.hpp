@@ -17,6 +17,7 @@
 
 #pragma once
 #include "graph.hpp"
+#include "Chrono.hpp"
 #define STARTMEAN -9999999;
 
 /*------------------------------------------------*/
@@ -47,7 +48,7 @@ class Algorithm {
 
 		// Functions
 		virtual void runAlgorithm (Graph& graph);
-		virtual std::ostream& printResult (std::ostream& os);
+		std::ostream& printResult (std::ostream& os, Chrono& chrono);
 		float findMean (std::vector<Vertex> vertex, Graph& graph);
 		void addVertex (Vertex newVertex);
 

@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:28:44
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-16 17:32:51
+* @Last Modified time: 2020-04-17 19:19:22
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -31,4 +31,5 @@ int main() {
     std::string asd = "../inputs/max-mean-div-10.txt";
     FrameWork a(asd);
     a.initialize();
+    a.executeFrameWork();
 }

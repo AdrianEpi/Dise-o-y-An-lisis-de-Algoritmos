@@ -1,6 +1,6 @@
 #Variable objetos
-OBJECTS = main.o vertex.o edge.o graph.o Framework.o Algorithm.o $(ALGORITHMS)
-ALGORITHMS = GreedyAlgorithm.o AnotherGreedyAlgorithm.o
+OBJECTS = main.o vertex.o edge.o graph.o Framework.o Algorithm.o Chrono.o $(ALGORITHMS)
+ALGORITHMS = GreedyAlgorithm.o AnotherGreedyAlgorithm.o GraspAlgorithm.o
 #Flags de compilacion
 CFLAGS = -c -std=c++17
 
@@ -24,6 +24,9 @@ graph.o: ../src/graph.cpp ../include/graph.hpp
 Framework.o: ../src/Framework.cpp ../include/Framework.hpp
 	g++ $(CFLAGS) ../src/Framework.cpp
 
+Chrono.o: ../src/Chrono.cpp ../include/Chrono.hpp
+	g++ $(CFLAGS) ../src/Chrono.cpp
+
 Algorithm.o: ../src/Algorithm.cpp ../include/Algorithm.hpp
 	g++ $(CFLAGS) ../src/Algorithm.cpp
 
@@ -32,6 +35,9 @@ GreedyAlgorithm.o: ../src/GreedyAlgorithm.cpp ../include/GreedyAlgorithm.hpp
 
 AnotherGreedyAlgorithm.o: ../src/AnotherGreedyAlgorithm.cpp ../include/AnotherGreedyAlgorithm.hpp
 	g++ $(CFLAGS) ../src/AnotherGreedyAlgorithm.cpp
+
+GraspAlgorithm.o: ../src/GraspAlgorithm.cpp ../include/GraspAlgorithm.hpp
+	g++ $(CFLAGS) ../src/GraspAlgorithm.cpp
 
 .PHONY: clean
 clean:

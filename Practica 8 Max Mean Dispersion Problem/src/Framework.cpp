@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-17 13:54:56
+* @Last Modified time: 2020-04-17 19:29:30
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -75,6 +75,15 @@ Algorithm* FrameWork::get_Algorithm (void) const {
 }
 
 /**
+ * @brief      Gets the chrono.
+ *
+ * @return     The chrono.
+ */
+Chrono FrameWork::get_Chrono (void) const {
+	return chrono_;
+}
+
+/**
  * @brief      Sets the graph.
  *
  * @param[in]  graph  The graph
@@ -102,6 +111,15 @@ void FrameWork::set_Algorithm (Algorithm* algorithm) {
 }
 
 /**
+ * @brief      Sets the chrono.
+ *
+ * @param[in]  chrono  The chrono
+ */
+void FrameWork::set_Chrono (Chrono chrono) {
+	chrono_ = chrono;
+}
+
+/**
  * @brief      Initializes the object.
  */
 void FrameWork::initialize (void) {
@@ -119,6 +137,7 @@ void FrameWork::initialize (void) {
 			break;
 			
 		case 3:
+			algorithm_ = new GraspAlgorithm();
 			break;
 
 		case 4:
@@ -137,9 +156,13 @@ void FrameWork::initialize (void) {
 			exit(0);
 			break;
 	}
-	algorithm_ -> runAlgorithm(graph_);
-	algorithm_ -> printResult(std::cout);
+}
 
+void FrameWork::executeFrameWork (void) {
+	chrono_.startChrono();
+	algorithm_ -> runAlgorithm(graph_);
+	chrono_.stopChrono();
+	algorithm_ -> printResult(std::cout, chrono_);
 }
 
 int FrameWork::printMenu (void) {

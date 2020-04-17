@@ -44,6 +44,9 @@ class Vertex {
 		void set_Number (int number);
 		void set_Name (std::string name);
 
+		// Operator Overload
+		void operator= (const Vertex& vertex);
+
 		// Functions
 		void generateName (void);
 

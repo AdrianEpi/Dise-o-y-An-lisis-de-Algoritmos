@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-17 13:53:00
+* @Last Modified time: 2020-04-17 19:08:59
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -139,21 +139,4 @@ bool GreedyAlgorithm::isInVector (int number, std::vector<Vertex> vertex) {
 		}
 	}
 	return false;
-}
-
-/**
- * @brief      Prints the solurion result.
- *
- * @param      os    The output stream
- *
- * @return     output Stream
- */
-std::ostream& GreedyAlgorithm::printResult (std::ostream& os) {
-	os << std::endl << "Solution: { ";
-	for (int i = 0; i < get_Solution().size() - 1; i++) {
-		os << get_Solution()[i].get_Number() << ", ";
-	}
-	os << get_Solution()[get_Solution().size() - 1].get_Number() << " }" << std::endl;
-	os << "Max-Mean value: " << get_MaxMean() << std::endl;
-	return os;
 }
