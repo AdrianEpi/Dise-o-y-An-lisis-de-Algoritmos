@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-16 21:40:34
+* @Last Modified time: 2020-04-17 13:53:00
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -62,11 +62,11 @@ void GreedyAlgorithm::runAlgorithm (Graph& graph) {
 		}
 		tempSolution.push_back(graph.get_Vertex()[vertexNumber]);
 		if (findMean(tempSolution, graph) >= findMean(solution, graph)) {
-			std::cout << std::endl << "metemos" << std::endl;
 			solution.push_back(graph.get_Vertex()[vertexNumber]);
 		}
 	} while (findMean(tempSolution, graph) == findMean(solution, graph));
 	set_Solution(tempSolution);
+	set_MaxMean(findMean(tempSolution, graph));
 }
 
 /**
@@ -154,5 +154,6 @@ std::ostream& GreedyAlgorithm::printResult (std::ostream& os) {
 		os << get_Solution()[i].get_Number() << ", ";
 	}
 	os << get_Solution()[get_Solution().size() - 1].get_Number() << " }" << std::endl;
+	os << "Max-Mean value: " << get_MaxMean() << std::endl;
 	return os;
 }

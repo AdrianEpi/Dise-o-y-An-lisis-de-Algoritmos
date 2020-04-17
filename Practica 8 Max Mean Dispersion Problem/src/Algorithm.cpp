@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-16 21:40:19
+* @Last Modified time: 2020-04-17 13:30:04
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -38,8 +38,22 @@ Algorithm::Algorithm () {
 Algorithm::~Algorithm () {
 }
 
+/**
+ * @brief      Gets the solution.
+ *
+ * @return     The solution.
+ */
 std::vector<Vertex> Algorithm::get_Solution (void) const {
 	return solutions_;
+}
+
+/**
+ * @brief      Gets the maximum mean.
+ *
+ * @return     The maximum mean.
+ */
+float Algorithm::get_MaxMean (void) const {
+	return maxMean_;
 }
 
 /**
@@ -49,6 +63,15 @@ std::vector<Vertex> Algorithm::get_Solution (void) const {
  */
 void Algorithm::set_Solution (std::vector<Vertex> solution) {
 	solutions_ = solution;
+}
+
+/**
+ * @brief      Sets the maximum mean.
+ *
+ * @param[in]  maxMean  The maximum mean
+ */
+void Algorithm::set_MaxMean (float maxMean) {
+	maxMean_ = maxMean;
 }
 
 /**

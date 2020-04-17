@@ -19,6 +19,7 @@
 #include "graph.hpp"
 #include "Algorithm.hpp"
 #include "GreedyAlgorithm.hpp"
+#include "AnotherGreedyAlgorithm.hpp"
 
 /*------------------------------------------------*/
 /*----------  DECLARACION DE LIBRERIAS  ----------*/

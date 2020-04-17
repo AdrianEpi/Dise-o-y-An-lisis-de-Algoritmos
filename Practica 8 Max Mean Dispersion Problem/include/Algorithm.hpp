@@ -31,6 +31,7 @@ class Algorithm {
 
 	private:
 		std::vector<Vertex> solutions_;
+		float maxMean_;
 
 	public:
 		// Builders & Destroyer
@@ -39,8 +40,10 @@ class Algorithm {
 
 		// Getter & Setter
 		std::vector<Vertex> get_Solution (void) const;
+		float get_MaxMean (void) const;
 
 		void set_Solution (std::vector<Vertex> solution);
+		void set_MaxMean (float mean);
 
 		// Functions
 		virtual void runAlgorithm (Graph& graph);
