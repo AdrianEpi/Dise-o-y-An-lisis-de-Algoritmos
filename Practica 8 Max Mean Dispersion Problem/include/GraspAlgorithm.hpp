@@ -23,7 +23,7 @@
 
 #pragma once
 #include "Framework.hpp"
-#define ITERATIONS 100
+#define ITERATIONS 10
 
 /*------------------------------------------------*/
 
@@ -41,4 +41,5 @@ class GraspAlgorithm : public Algorithm {
 		// Private Functions
 		void generateRLC (std::vector<Vertex>& RLC, std::vector<Vertex> solution, Graph graph);
 		int getRandomVertex (std::vector<Vertex> RLC);
+		void baseSolution (Graph& graph, std::vector<Vertex>& vertex);
 };

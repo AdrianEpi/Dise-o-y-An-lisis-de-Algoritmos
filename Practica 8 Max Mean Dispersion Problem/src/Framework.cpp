@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-17 19:29:30
+* @Last Modified time: 2020-04-22 19:54:20
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -137,10 +137,11 @@ void FrameWork::initialize (void) {
 			break;
 			
 		case 3:
-			algorithm_ = new GraspAlgorithm();
+			
 			break;
 
 		case 4:
+			algorithm_ = new GraspAlgorithm();
 			break;
 
 		case 5:

@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-17 17:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-22 19:29:20
+* @Last Modified time: 2020-04-22 19:56:16
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -47,6 +47,7 @@ void GraspAlgorithm::runAlgorithm (Graph& graph) {
 	std::vector<Vertex> solution;
 	bool endAlgorithm = false;
 	int counterLoops = 0;
+	baseSolution(graph, solution);
 	while (endAlgorithm == false) {
 		std::vector<Vertex> RLC;	// Restricted List of Candidates
 		std::vector<Vertex> tempSolution = solution;
@@ -71,7 +72,7 @@ void GraspAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Vertex> s
 	float tempMean = findMean(solution, graph);
 	for (int vertexCounter = 0; vertexCounter < graph.get_Vertex().size(); vertexCounter++) {
 		if (isInVector(vertexCounter, solution) == false) {
-			std::vector<Vertex> tempSolution;
+			std::vector<Vertex> tempSolution = solution;
 			tempSolution.push_back(graph.get_Vertex()[vertexCounter]);
 			if (findMean(tempSolution, graph) > tempMean) {
 				RLC.push_back(graph.get_Vertex()[vertexCounter]);
@@ -88,4 +89,31 @@ int GraspAlgorithm::getRandomVertex (std::vector<Vertex> RLC) {
 	else {
 		return -1;
 	}
+}
+
+/**
+ * @brief      Generates the base solution of the algorithm
+ *
+ * @param      graph   The graph
+ * @param      vertex  The vertex
+ */
+void GraspAlgorithm::baseSolution (Graph& graph, std::vector<Vertex>& vertex) {
+	int vertexNumberA = -1;
+	int vertexNumberB = -1;
+	int tempMaxMean = STARTMEAN;
+	for (int i = 0; i < graph.get_Vertex().size(); i++) {
+		for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
+			if ((graph.get_Vertex()[i].get_Number() == graph.get_Edges()[edge].get_VertexA())) {
+				if (isInVector(graph.get_Vertex()[i].get_Number(), vertex) == false) {
+					if (graph.get_Edges()[edge].get_Distance() > tempMaxMean) {
+						tempMaxMean = graph.get_Edges()[edge].get_Distance();
+						vertexNumberA = graph.get_Edges()[edge].get_VertexA();
+						vertexNumberB = graph.get_Edges()[edge].get_VertexB();
+					}
+				}
+			}
+		}
+	}
+	vertex.push_back(graph.get_Vertex()[vertexNumberA]);
+	vertex.push_back(graph.get_Vertex()[vertexNumberB]);
 }
