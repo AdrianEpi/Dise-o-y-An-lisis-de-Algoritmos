@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-17 19:08:59
+* @Last Modified time: 2020-04-22 19:23:54
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -44,19 +44,10 @@ GreedyAlgorithm::~GreedyAlgorithm () {
  */
 void GreedyAlgorithm::runAlgorithm (Graph& graph) {
 	std::vector<Vertex> tempSolution;
-	std::vector<Vertex> solution;
-	int vertexNumber = findMaxDistance(graph, tempSolution);
-	bool found = false;
-	if (vertexNumber >= 0) {
-		solution.push_back(graph.get_Vertex()[vertexNumber]);
-		tempSolution.push_back(graph.get_Vertex()[vertexNumber]);
-	}
-	else {
-		std::cout << std::endl << "ERROR in GreedyAlgorithm" << std::endl;
-		exit(0);
-	}
+	baseSolution(graph, tempSolution);
+	std::vector<Vertex> solution = tempSolution;
 	do {
-		vertexNumber = findMaxVertexDispersion(graph, tempSolution);
+		int vertexNumber = findMaxDispersion(graph, tempSolution);
 		if (vertexNumber == -1) {
 			break;
 		}
@@ -65,20 +56,20 @@ void GreedyAlgorithm::runAlgorithm (Graph& graph) {
 			solution.push_back(graph.get_Vertex()[vertexNumber]);
 		}
 	} while (findMean(tempSolution, graph) == findMean(solution, graph));
-	set_Solution(tempSolution);
-	set_MaxMean(findMean(tempSolution, graph));
+	set_Solution(solution);
+	set_MaxMean(findMean(solution, graph));
 }
 
+
 /**
- * @brief      Finds a the maximum vertex distance witout being in vector.
+ * @brief      Generates the base solution of the algorithm
  *
  * @param      graph   The graph
- * @param[in]  vertex  The vertex
- *
- * @return     The number of the vertex
+ * @param      vertex  The vertex
  */
-int GreedyAlgorithm::findMaxDistance (Graph& graph, std::vector<Vertex> vertex) {
-	int vertexNumber = -1;
+void GreedyAlgorithm::baseSolution (Graph& graph, std::vector<Vertex>& vertex) {
+	int vertexNumberA = -1;
+	int vertexNumberB = -1;
 	int tempMaxMean = STARTMEAN;
 	for (int i = 0; i < graph.get_Vertex().size(); i++) {
 		for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
@@ -86,38 +77,39 @@ int GreedyAlgorithm::findMaxDistance (Graph& graph, std::vector<Vertex> vertex) 
 				if (isInVector(graph.get_Vertex()[i].get_Number(), vertex) == false) {
 					if (graph.get_Edges()[edge].get_Distance() > tempMaxMean) {
 						tempMaxMean = graph.get_Edges()[edge].get_Distance();
-						vertexNumber = i;
+						vertexNumberA = graph.get_Edges()[edge].get_VertexA();
+						vertexNumberB = graph.get_Edges()[edge].get_VertexB();
 					}
 				}
 			}
 		}
 	}
-	return vertexNumber;
+	vertex.push_back(graph.get_Vertex()[vertexNumberA]);
+	vertex.push_back(graph.get_Vertex()[vertexNumberB]);
 }
 
 /**
- * @brief      Finds the maximum vertex mean dispersion.
+ * @brief      Finds a the maximum dispersion without being in the graph.
  *
  * @param      graph   The graph
  * @param[in]  vertex  The vertex
  *
- * @return     The number of the vertex
+ * @return     The position of the maximum dispersion vertex
  */
-int GreedyAlgorithm::findMaxVertexDispersion (Graph& graph, std::vector<Vertex> vertex) {
+int GreedyAlgorithm::findMaxDispersion (Graph& graph, std::vector<Vertex> vertex) {
+	int mean = STARTMEAN;
 	int vertexNumber = -1;
-	int tempMaxMean = STARTMEAN;
 	for (int i = 0; i < graph.get_Vertex().size(); i++) {
 		int tempMean = 0;
-		for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
-			if ((graph.get_Vertex()[i].get_Number() == graph.get_Edges()[edge].get_VertexA())) {
-				tempMean += graph.get_Edges()[edge].get_Distance();
+		if (isInVector(graph.get_Vertex()[i].get_Number(), vertex) == false) {
+			for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
+				if ((isInVector(graph.get_Edges()[edge].get_VertexA(), vertex) == true) && (graph.get_Vertex()[i].get_Number()) == graph.get_Edges()[edge].get_VertexB()) {
+					tempMean += graph.get_Edges()[edge].get_Distance();
+				}
 			}
-		}
-		if (isInVector(i, vertex) == false) {
-			if (tempMean > tempMaxMean) {
+			if (mean < tempMean) {
+				mean = tempMean;
 				vertexNumber = i;
-
-				tempMaxMean = tempMean;
 			}
 		}
 	}

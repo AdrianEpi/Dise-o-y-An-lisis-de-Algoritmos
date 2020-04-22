@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-17 19:31:30
+* @Last Modified time: 2020-04-22 19:14:03
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -116,13 +116,15 @@ float Algorithm::findMean (std::vector<Vertex> vertex, Graph& graph) {
 		return 0.0;
 	}
 	for (int i = 0; i < vertex.size(); i++) {
-		for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
-			if (vertex[i].get_Number() == graph.get_Edges()[edge].get_VertexA()) {
-				mean += graph.get_Edges()[edge].get_Distance();
+		for (int j = i + 1; j < vertex.size(); j++) {
+			for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
+				if ((vertex[i].get_Number() == graph.get_Edges()[edge].get_VertexA()) && (vertex[j].get_Number() == graph.get_Edges()[edge].get_VertexB())) {
+					mean += graph.get_Edges()[edge].get_Distance();
+				}
 			}
 		}
 	}
-	mean /= ((graph.get_Vertex().size() -1)* vertex.size());
+	mean /= vertex.size();
 	return mean;
 }
 

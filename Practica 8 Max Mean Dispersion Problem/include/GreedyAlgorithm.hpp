@@ -32,7 +32,7 @@ class GreedyAlgorithm : public Algorithm {
 
 	private:
 		// Private Functions
-		int findMaxDistance (Graph& graph, std::vector<Vertex> vertex);
-		int findMaxVertexDispersion (Graph& graph, std::vector<Vertex> vertex);
+		void baseSolution (Graph& graph, std::vector<Vertex>& vertex);
+		int findMaxDispersion (Graph& graph, std::vector<Vertex> vertex);
 		bool isInVector (int number, std::vector<Vertex> vertex);
 };
