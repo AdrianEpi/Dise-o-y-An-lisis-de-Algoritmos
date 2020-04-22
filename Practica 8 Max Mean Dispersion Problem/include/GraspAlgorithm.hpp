@@ -41,7 +41,4 @@ class GraspAlgorithm : public Algorithm {
 		// Private Functions
 		void generateRLC (std::vector<Vertex>& RLC, std::vector<Vertex> solution, Graph graph);
 		int getRandomVertex (std::vector<Vertex> RLC);
-		bool isInVector (int number, std::vector<Vertex> vertex);
-
-
 };

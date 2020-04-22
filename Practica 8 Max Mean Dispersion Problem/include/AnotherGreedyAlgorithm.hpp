@@ -29,5 +29,6 @@ class AnotherGreedyAlgorithm : public Algorithm {
 
 		// Public Function
 		void runAlgorithm (Graph& graph);
+		void baseSolution (Graph& graph, std::vector<Vertex>& vertex);
 
 };

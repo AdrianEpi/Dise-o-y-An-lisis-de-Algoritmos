@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-22 19:14:03
+* @Last Modified time: 2020-04-22 19:27:37
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -135,4 +135,21 @@ float Algorithm::findMean (std::vector<Vertex> vertex, Graph& graph) {
  */
 void Algorithm::addVertex (Vertex newVertex) {
 	solutions_.push_back(newVertex);
+}
+
+/**
+ * @brief      Determines if a vertex is in vector.
+ *
+ * @param[in]  number  The number
+ * @param[in]  vertex  The vertex
+ *
+ * @return     True if in vector, False otherwise.
+ */
+bool Algorithm::isInVector (int number, std::vector<Vertex> vertex) {
+	for (int i = 0; i < vertex.size(); i++) {
+		if (vertex[i].get_Number() == number) {
+			return true;
+		}
+	}
+	return false;
 }

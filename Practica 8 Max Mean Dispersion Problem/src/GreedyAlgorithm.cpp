@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-22 19:23:54
+* @Last Modified time: 2020-04-22 19:26:58
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -116,19 +116,3 @@ int GreedyAlgorithm::findMaxDispersion (Graph& graph, std::vector<Vertex> vertex
 	return vertexNumber;
 }
 
-/**
- * @brief      Determines if a vertex is in vector.
- *
- * @param[in]  number  The number
- * @param[in]  vertex  The vertex
- *
- * @return     True if in vector, False otherwise.
- */
-bool GreedyAlgorithm::isInVector (int number, std::vector<Vertex> vertex) {
-	for (int i = 0; i < vertex.size(); i++) {
-		if (vertex[i].get_Number() == number) {
-			return true;
-		}
-	}
-	return false;
-}

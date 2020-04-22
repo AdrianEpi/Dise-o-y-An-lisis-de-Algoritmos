@@ -51,5 +51,7 @@ class Algorithm {
 		std::ostream& printResult (std::ostream& os, Chrono& chrono);
 		float findMean (std::vector<Vertex> vertex, Graph& graph);
 		void addVertex (Vertex newVertex);
+		bool isInVector (int number, std::vector<Vertex> vertex);
+
 
 };

@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-17 17:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-17 19:08:47
+* @Last Modified time: 2020-04-22 19:29:20
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -88,20 +88,4 @@ int GraspAlgorithm::getRandomVertex (std::vector<Vertex> RLC) {
 	else {
 		return -1;
 	}
-}
-/**
- * @brief      Determines if a vertex is in vector.
- *
- * @param[in]  number  The number
- * @param[in]  vertex  The vertex
- *
- * @return     True if in vector, False otherwise.
- */
-bool GraspAlgorithm::isInVector (int number, std::vector<Vertex> vertex) {
-	for (int i = 0; i < vertex.size(); i++) {
-		if (vertex[i].get_Number() == number) {
-			return true;
-		}
-	}
-	return false;
 }

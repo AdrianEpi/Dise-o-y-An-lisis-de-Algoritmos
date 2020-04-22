@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-17 09:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-17 19:07:19
+* @Last Modified time: 2020-04-22 19:31:41
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -45,8 +45,9 @@ AnotherGreedyAlgorithm::~AnotherGreedyAlgorithm () {
 void AnotherGreedyAlgorithm::runAlgorithm (Graph& graph) {
 	std::vector<Vertex> solution;
 	solution.push_back(graph.get_Vertex()[0]);
-	for (int vertexCounter = 0; vertexCounter < graph.get_Vertex().size(); vertexCounter++) {
-		std::vector<Vertex> tempSolution;
+	solution.push_back(graph.get_Vertex()[1]);
+	for (int vertexCounter = 2; vertexCounter < graph.get_Vertex().size(); vertexCounter++) {
+		std::vector<Vertex> tempSolution = solution;
 		tempSolution.push_back(graph.get_Vertex()[vertexCounter]);
 		if (findMean(tempSolution, graph) > findMean(solution, graph)) {
 			solution.push_back(graph.get_Vertex()[vertexCounter]);
