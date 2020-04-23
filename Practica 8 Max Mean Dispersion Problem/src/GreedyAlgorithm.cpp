@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-22 19:26:58
+* @Last Modified time: 2020-04-23 12:00:19
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -44,7 +44,7 @@ GreedyAlgorithm::~GreedyAlgorithm () {
  */
 void GreedyAlgorithm::runAlgorithm (Graph& graph) {
 	std::vector<Vertex> tempSolution;
-	baseSolution(graph, tempSolution);
+	initialSolution(graph, tempSolution);
 	std::vector<Vertex> solution = tempSolution;
 	do {
 		int vertexNumber = findMaxDispersion(graph, tempSolution);
@@ -62,12 +62,12 @@ void GreedyAlgorithm::runAlgorithm (Graph& graph) {
 
 
 /**
- * @brief      Generates the base solution of the algorithm
+ * @brief      Generates the initial solution of the algorithm
  *
  * @param      graph   The graph
  * @param      vertex  The vertex
  */
-void GreedyAlgorithm::baseSolution (Graph& graph, std::vector<Vertex>& vertex) {
+void GreedyAlgorithm::initialSolution (Graph& graph, std::vector<Vertex>& vertex) {
 	int vertexNumberA = -1;
 	int vertexNumberB = -1;
 	int tempMaxMean = STARTMEAN;

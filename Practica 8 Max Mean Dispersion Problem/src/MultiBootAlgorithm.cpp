@@ -2,7 +2,7 @@
 =========================================================================================
 	=                                                                              =
 	=            Proyect:       Practica 8 Max-Mean Problem                        =
-	=            File name:     GraspAlgorithm.cpp                                 =
+	=            File name:     MultiBootAlgorithm.cpp                             =
 	=            Author:        Adrián Epifanio Rodríguez Hernández                =
 	=            Fecha:         17/04/2020                                         =
 	=            Subject:       Diseño y Análisis de Algoritmos                    =
@@ -15,39 +15,63 @@
 =======================================================================================*/
 /*
 * @Author: Adrián Epifanio
-* @Date:   2020-04-17 17:29:34
+* @Date:   2020-04-23 12:09:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-23 12:22:11
+* @Last Modified time: 2020-04-23 13:50:37
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
-#include "../include/GraspAlgorithm.hpp"
+#include "../include/MultiBootAlgorithm.hpp"
 
 /*------------------------------------------------*/
 
 /**
  * @brief      Constructs a new instance.
  */
-GraspAlgorithm::GraspAlgorithm () {
+MultiBootAlgorithm::MultiBootAlgorithm () {
 }
 
 /**
  * @brief      Destroys the object.
  */
-GraspAlgorithm::~GraspAlgorithm () {
+MultiBootAlgorithm::~MultiBootAlgorithm () {
 }
 
 /**
- * @brief      Executes the Grasp algorithm
+ * @brief      Switchs wich of the 2 available modes is going to run the code.
  *
  * @param      graph  The graph
  */
-void GraspAlgorithm::runAlgorithm (Graph& graph) {
+void MultiBootAlgorithm::runAlgorithm (Graph& graph) {
+	switch (MODE) {
+		case 1:
+			runAlgorithmMode1(graph);
+			break;
+
+		case 2:
+			runAlgorithmMode2(graph);
+			break;
+
+		default:
+			std::cout << std::endl << "ERROR, not a valid mode un MultiBootAlgorithm" << std::endl;
+			exit(0);
+			break;
+	}
+}
+
+
+
+/**
+ * @brief      Executes the MultiBoot algorithm MODE 1 (Random initial solution & Grasp local search  )
+ *
+ * @param      graph  The graph
+ */
+void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph) {
 	srand(time(NULL));
 	std::vector<Vertex> solution;
 	bool endAlgorithm = false;
 	int counterLoops = 0;
-	initialSolution(graph, solution);
+	initialRandomSolution(graph, solution);
 	while (endAlgorithm == false) {
 		std::vector<Vertex> RLC;	// Restricted List of Candidates
 		std::vector<Vertex> tempSolution = solution;
@@ -69,13 +93,37 @@ void GraspAlgorithm::runAlgorithm (Graph& graph) {
 }
 
 /**
+ * @brief      Executes the MultiBoot algorithm MODE 2 (Grasp initial solution & different local search  )
+ *
+ * @param      graph  The graph
+ */
+void MultiBootAlgorithm::runAlgorithmMode2 (Graph& graph) {
+	std::vector<Vertex> solution;
+	initialGraspSolution(graph, solution);
+	int iteration = 0;
+	do {
+		int vertexNumber = getRandomVertex(graph.get_Vertex());
+		if (isInVector(vertexNumber, solution) == false) {
+			std::vector<Vertex> tempSolution = solution;
+			//tempSolution.push_back(graph.get_Vertex()[vertexNumber]);
+			std::cout << std::endl << "node " << vertexNumber << " " << findMean(tempSolution, graph)<< " " <<findMean(solution, graph);
+			if (findMean(tempSolution, graph) >= findMean(solution, graph)) {
+				solution.push_back(graph.get_Vertex()[vertexNumber]);
+			}
+		}
+		iteration++;
+	} while (iteration < ITERATIONS);
+	set_Solution(solution);
+	set_MaxMean(findMean(solution, graph));
+}
+/**
  * @brief      Generates the Random List of Candidates
  *
  * @param      RLC       The rlc
  * @param[in]  solution  The solution
  * @param[in]  graph     The graph
  */
-void GraspAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Vertex> solution, Graph graph) {
+void MultiBootAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Vertex> solution, Graph graph) {
 	float tempMean = findMean(solution, graph);
 	for (int vertexCounter = 0; vertexCounter < graph.get_Vertex().size() && RLC.size() < RLCSIZE; vertexCounter++) {
 		if (isInVector(vertexCounter, solution) == false) {
@@ -95,7 +143,7 @@ void GraspAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Vertex> s
  *
  * @return     The random vertex.
  */
-int GraspAlgorithm::getRandomVertex (std::vector<Vertex> RLC) {
+int MultiBootAlgorithm::getRandomVertex (std::vector<Vertex> RLC) {
 	if (RLC.size() > 0) {
 		int num = rand() % RLC.size();
 		return RLC[num].get_Number();
@@ -106,12 +154,12 @@ int GraspAlgorithm::getRandomVertex (std::vector<Vertex> RLC) {
 }
 
 /**
- * @brief      Generates the initial solution of the algorithm
+ * @brief      Generates the initialGrasp solution of the algorithm
  *
  * @param      graph   The graph
  * @param      vertex  The vertex
  */
-void GraspAlgorithm::initialSolution (Graph& graph, std::vector<Vertex>& vertex) {
+void MultiBootAlgorithm::initialGraspSolution (Graph& graph, std::vector<Vertex>& vertex) {
 	int vertexNumberA = -1;
 	int vertexNumberB = -1;
 	int tempMaxMean = STARTMEAN;
@@ -130,4 +178,19 @@ void GraspAlgorithm::initialSolution (Graph& graph, std::vector<Vertex>& vertex)
 	}
 	vertex.push_back(graph.get_Vertex()[vertexNumberA]);
 	vertex.push_back(graph.get_Vertex()[vertexNumberB]);
+}
+
+/**
+ * @brief      Generates a random initial solution
+ *
+ * @param      graph     The graph
+ * @param      solution  The solution
+ */
+void MultiBootAlgorithm::initialRandomSolution (Graph& graph, std::vector<Vertex>& solution) {
+	int node = getRandomVertex(graph.get_Vertex());
+	solution.push_back(graph.get_Vertex()[node]);
+	while (isInVector(node, solution)) {
+		node = getRandomVertex(graph.get_Vertex());
+	}
+	solution.push_back(graph.get_Vertex()[node]);
 }
