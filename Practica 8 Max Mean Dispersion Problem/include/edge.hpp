@@ -24,6 +24,9 @@
 
 /*------------------------------------------------*/
 
+/**
+ * @brief      This class describes an edge.
+ */
 class Edge {
 
 	private:

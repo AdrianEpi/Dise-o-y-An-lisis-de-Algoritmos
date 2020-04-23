@@ -29,6 +29,9 @@
 /*------------------------------------------------*/
 
 
+/**
+ * @brief      This class describes a graph.
+ */
 class Graph {
 
 	private:
@@ -40,26 +43,26 @@ class Graph {
 
 	public:
 		// Builders & Destroyer
-		Graph();
-		Graph(std::string textFile);
-		~Graph();
+		Graph ();
+		Graph (std::string textFile);
+		~Graph ();
 
 		// Getters & Setters
-		std::vector<Vertex> get_Vertex(void) const;
-		std::vector<Edge> get_Edges(void) const;
-		std::string get_TextFile(void) const;
+		std::vector<Vertex> get_Vertex (void) const;
+		std::vector<Edge> get_Edges (void) const;
+		std::string get_TextFile (void) const;
 		int get_VertexNum (void) const;
 
-		void set_Vertex(std::vector<Vertex> vertex);
-		void set_Edges(std::vector<Edge> edge);
-		void set_TextFile(std::string textFile);
+		void set_Vertex (std::vector<Vertex> vertex);
+		void set_Edges (std::vector<Edge> edge);
+		void set_TextFile (std::string textFile);
 		void set_VertexNum (int vertexNum);
 
 		// Functions
-		void generateGraph(void);
+		void generateGraph (void);
 
 		// Write
-		void printGraph(void);
+		void printGraph (void);
 
 
 };

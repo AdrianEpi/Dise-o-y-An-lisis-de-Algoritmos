@@ -25,6 +25,9 @@
 
 /*------------------------------------------------*/
 
+/**
+ * @brief      This class describes a vertex.
+ */
 class Vertex {
 	
 	private:

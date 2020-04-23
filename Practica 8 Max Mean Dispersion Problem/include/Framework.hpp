@@ -32,6 +32,9 @@
 
 /*------------------------------------------------*/
 
+/**
+ * @brief      This class describes a frame work.
+ */
 class FrameWork {
 	
 	private:
