@@ -25,7 +25,7 @@
 #include "Framework.hpp"
 #define ITERATIONS 30
 #define RLCSIZE 4
-#define MODE 2
+#define MODE 1
 
 /*------------------------------------------------*/
 

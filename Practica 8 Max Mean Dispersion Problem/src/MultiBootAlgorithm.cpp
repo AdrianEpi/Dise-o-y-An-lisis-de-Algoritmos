@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-23 12:09:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-23 13:50:37
+* @Last Modified time: 2020-04-23 16:29:08
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -43,6 +43,7 @@ MultiBootAlgorithm::~MultiBootAlgorithm () {
  * @param      graph  The graph
  */
 void MultiBootAlgorithm::runAlgorithm (Graph& graph) {
+	srand(time(NULL));
 	switch (MODE) {
 		case 1:
 			runAlgorithmMode1(graph);
@@ -67,7 +68,6 @@ void MultiBootAlgorithm::runAlgorithm (Graph& graph) {
  * @param      graph  The graph
  */
 void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph) {
-	srand(time(NULL));
 	std::vector<Vertex> solution;
 	bool endAlgorithm = false;
 	int counterLoops = 0;
@@ -77,9 +77,11 @@ void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph) {
 		std::vector<Vertex> tempSolution = solution;
 		generateRLC(RLC, solution, graph);
 		int vertexPosition = getRandomVertex(RLC);
-		tempSolution.push_back(graph.get_Vertex()[vertexPosition]);
-		if ((findMean(tempSolution, graph) > findMean(solution, graph)) && (vertexPosition != -1)) {
-			solution.push_back(graph.get_Vertex()[vertexPosition]);
+		if (vertexPosition >= 0) {
+			tempSolution.push_back(graph.get_Vertex()[vertexPosition]);
+			if ((findMean(tempSolution, graph) > findMean(solution, graph)) && (vertexPosition != -1)) {
+				solution.push_back(graph.get_Vertex()[vertexPosition]);
+			}		
 		}
 		else {
 			counterLoops++;
@@ -103,12 +105,13 @@ void MultiBootAlgorithm::runAlgorithmMode2 (Graph& graph) {
 	int iteration = 0;
 	do {
 		int vertexNumber = getRandomVertex(graph.get_Vertex());
-		if (isInVector(vertexNumber, solution) == false) {
-			std::vector<Vertex> tempSolution = solution;
-			//tempSolution.push_back(graph.get_Vertex()[vertexNumber]);
-			std::cout << std::endl << "node " << vertexNumber << " " << findMean(tempSolution, graph)<< " " <<findMean(solution, graph);
-			if (findMean(tempSolution, graph) >= findMean(solution, graph)) {
-				solution.push_back(graph.get_Vertex()[vertexNumber]);
+		if (vertexNumber >= 0) {
+			if (isInVector(vertexNumber, solution) == false) {
+				std::vector<Vertex> tempSolution = solution;
+				tempSolution.push_back(graph.get_Vertex()[vertexNumber]);
+				if (findMean(tempSolution, graph) > findMean(solution, graph)) {
+					solution.push_back(graph.get_Vertex()[vertexNumber]);
+				}
 			}
 		}
 		iteration++;
