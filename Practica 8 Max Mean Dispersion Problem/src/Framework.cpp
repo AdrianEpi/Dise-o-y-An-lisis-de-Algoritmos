@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-23 13:12:59
+* @Last Modified time: 2020-04-24 12:09:57
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -145,6 +145,7 @@ void FrameWork::initialize (void) {
 			break;
 
 		case 5:
+			algorithm_ = new VNSAlgorithm();
 			break;
 
 		case 0:

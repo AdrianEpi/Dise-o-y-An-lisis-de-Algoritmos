@@ -23,6 +23,7 @@
 #include "AnotherGreedyAlgorithm.hpp"
 #include "GraspAlgorithm.hpp"
 #include "MultiBootAlgorithm.hpp"
+#include "VNSAlgorithm.hpp"
 
 /*------------------------------------------------*/
 /*----------  DECLARACION DE LIBRERIAS  ----------*/

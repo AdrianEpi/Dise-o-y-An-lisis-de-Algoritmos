@@ -1,6 +1,6 @@
 #Variable objetos
 OBJECTS = main.o vertex.o edge.o graph.o Framework.o Algorithm.o Chrono.o $(ALGORITHMS)
-ALGORITHMS = GreedyAlgorithm.o AnotherGreedyAlgorithm.o GraspAlgorithm.o MultiBootAlgorithm.o
+ALGORITHMS = GreedyAlgorithm.o AnotherGreedyAlgorithm.o GraspAlgorithm.o MultiBootAlgorithm.o VNSAlgorithm.o
 #Flags de compilacion
 CFLAGS = -c -std=c++17
 
@@ -41,6 +41,9 @@ GraspAlgorithm.o: ../src/GraspAlgorithm.cpp ../include/GraspAlgorithm.hpp
 
 MultiBootAlgorithm.o: ../src/MultiBootAlgorithm.cpp ../include/MultiBootAlgorithm.hpp
 	g++ $(CFLAGS) ../src/MultiBootAlgorithm.cpp
+
+VNSAlgorithm.o: ../src/VNSAlgorithm.cpp ../include/VNSAlgorithm.hpp
+	g++ $(CFLAGS) ../src/VNSAlgorithm.cpp
 
 .PHONY: clean
 clean:
