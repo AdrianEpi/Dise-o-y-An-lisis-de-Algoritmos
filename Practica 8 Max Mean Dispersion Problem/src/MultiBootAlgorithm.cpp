@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-23 12:09:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-23 16:29:08
+* @Last Modified time: 2020-04-25 22:17:58
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -43,7 +43,6 @@ MultiBootAlgorithm::~MultiBootAlgorithm () {
  * @param      graph  The graph
  */
 void MultiBootAlgorithm::runAlgorithm (Graph& graph) {
-	srand(time(NULL));
 	switch (MODE) {
 		case 1:
 			runAlgorithmMode1(graph);
@@ -60,14 +59,13 @@ void MultiBootAlgorithm::runAlgorithm (Graph& graph) {
 	}
 }
 
-
-
 /**
  * @brief      Executes the MultiBoot algorithm MODE 1 (Random initial solution & Grasp local search  )
  *
  * @param      graph  The graph
  */
 void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph) {
+	srand(time(NULL));
 	std::vector<Vertex> solution;
 	bool endAlgorithm = false;
 	int counterLoops = 0;
@@ -77,12 +75,10 @@ void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph) {
 		std::vector<Vertex> tempSolution = solution;
 		generateRLC(RLC, solution, graph);
 		int vertexPosition = getRandomVertex(RLC);
-		if (vertexPosition >= 0) {
-			tempSolution.push_back(graph.get_Vertex()[vertexPosition]);
-			if ((findMean(tempSolution, graph) > findMean(solution, graph)) && (vertexPosition != -1)) {
-				solution.push_back(graph.get_Vertex()[vertexPosition]);
-			}		
-		}
+		tempSolution.push_back(graph.get_Vertex()[vertexPosition]);
+		if ((findMean(tempSolution, graph) > findMean(solution, graph)) && (vertexPosition != -1)) {
+			solution.push_back(graph.get_Vertex()[vertexPosition]);
+		}		
 		else {
 			counterLoops++;
 			if (counterLoops >= ITERATIONS) {
@@ -119,6 +115,7 @@ void MultiBootAlgorithm::runAlgorithmMode2 (Graph& graph) {
 	set_Solution(solution);
 	set_MaxMean(findMean(solution, graph));
 }
+
 /**
  * @brief      Generates the Random List of Candidates
  *
@@ -127,15 +124,22 @@ void MultiBootAlgorithm::runAlgorithmMode2 (Graph& graph) {
  * @param[in]  graph     The graph
  */
 void MultiBootAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Vertex> solution, Graph graph) {
-	float tempMean = findMean(solution, graph);
-	for (int vertexCounter = 0; vertexCounter < graph.get_Vertex().size() && RLC.size() < RLCSIZE; vertexCounter++) {
+	std::vector<Vertex> tempRLC;
+	for (int vertexCounter = 0; vertexCounter < graph.get_Vertex().size(); vertexCounter++) {
 		if (isInVector(vertexCounter, solution) == false) {
-			std::vector<Vertex> tempSolution = solution;
-			tempSolution.push_back(graph.get_Vertex()[vertexCounter]);
-			if (findMean(tempSolution, graph) > tempMean) {
-				RLC.push_back(graph.get_Vertex()[vertexCounter]);
-			}
+			tempRLC.push_back(graph.get_Vertex()[vertexCounter]);
 		}
+	}
+	int size = tempRLC.size();
+	while ((RLC.size() < RLCSIZE) && (size > 0)) {
+		int vertex = getRandomVertex(tempRLC);
+		if (vertex == -1) {
+			break;
+		}
+		if (isInVector(vertex, RLC) == false) {
+			RLC.push_back(graph.get_Vertex()[vertex]);
+		}
+		size--;
 	}
 }
 

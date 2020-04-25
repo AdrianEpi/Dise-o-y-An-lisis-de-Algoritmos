@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-17 17:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-23 12:22:11
+* @Last Modified time: 2020-04-25 22:18:15
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -76,15 +76,22 @@ void GraspAlgorithm::runAlgorithm (Graph& graph) {
  * @param[in]  graph     The graph
  */
 void GraspAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Vertex> solution, Graph graph) {
-	float tempMean = findMean(solution, graph);
-	for (int vertexCounter = 0; vertexCounter < graph.get_Vertex().size() && RLC.size() < RLCSIZE; vertexCounter++) {
+	std::vector<Vertex> tempRLC;
+	for (int vertexCounter = 0; vertexCounter < graph.get_Vertex().size(); vertexCounter++) {
 		if (isInVector(vertexCounter, solution) == false) {
-			std::vector<Vertex> tempSolution = solution;
-			tempSolution.push_back(graph.get_Vertex()[vertexCounter]);
-			if (findMean(tempSolution, graph) > tempMean) {
-				RLC.push_back(graph.get_Vertex()[vertexCounter]);
-			}
+			tempRLC.push_back(graph.get_Vertex()[vertexCounter]);
 		}
+	}
+	int size = tempRLC.size();
+	while ((RLC.size() < RLCSIZE) && (size > 0)) {
+		int vertex = getRandomVertex(tempRLC);
+		if (vertex == -1) {
+			break;
+		}
+		if (isInVector(vertex, RLC) == false) {
+			RLC.push_back(graph.get_Vertex()[vertex]);
+		}
+		size--;
 	}
 }
 

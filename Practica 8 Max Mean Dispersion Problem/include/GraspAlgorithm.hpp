@@ -23,7 +23,7 @@
 
 #pragma once
 #include "Framework.hpp"
-#define ITERATIONS 30
+#define ITERATIONS 50
 #define RLCSIZE 4
 
 /*------------------------------------------------*/

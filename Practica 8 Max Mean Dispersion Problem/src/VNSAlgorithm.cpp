@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-24 11:51:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-24 13:19:42
+* @Last Modified time: 2020-04-25 13:25:58
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -118,7 +118,7 @@ void VNSAlgorithm::runAlgorithm (Graph& graph) {
 
 void VNSAlgorithm::generateNeighbourHoodStructure(std::vector<Vertex>& neighbourHood, std::vector<Vertex> solution, Graph graph, int neighbourHoodSelector) {
 	float tempMean = findMean(solution, graph);
-	for (int vertexCounter = 0; vertexCounter < graph.get_Vertex().size() && neighbourHood.size() < neighbourHoodSIZE; vertexCounter++) {
+	for (int vertexCounter = 0; vertexCounter < graph.get_Vertex().size() && neighbourHood.size() < 10; vertexCounter++) {
 		if (isInVector(vertexCounter, solution) == false) {
 			std::vector<Vertex> tempSolution = solution;
 			tempSolution.push_back(graph.get_Vertex()[vertexCounter]);
