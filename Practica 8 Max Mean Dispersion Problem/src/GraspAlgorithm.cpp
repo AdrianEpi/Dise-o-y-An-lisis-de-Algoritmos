@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-17 17:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 13:45:22
+* @Last Modified time: 2020-04-26 21:55:56
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -49,6 +49,7 @@ void GraspAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 	std::vector<Vertex> solution;
 	int counterLoops = 0;
 	initialSolution(graph, solution);
+	float mean = findMean(solution, graph);
 	if (mode == 2) {
 		while (counterLoops < iterations) {
 			std::vector<Vertex> RLC;	// Restricted List of Candidates
@@ -57,8 +58,10 @@ void GraspAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 			int vertexPosition = getRandomVertex(RLC);
 			if (vertexPosition != -1) {
 				tempSolution.push_back(graph.get_Vertex()[vertexPosition]);
-				if (findMean(tempSolution, graph) > findMean(solution, graph)) {
+				float tmpMean = findMean(tempSolution, graph);
+				if (tmpMean > mean) {
 					solution.push_back(graph.get_Vertex()[vertexPosition]);
+					mean = tmpMean;
 				}
 				else {
 					counterLoops++;
@@ -77,8 +80,10 @@ void GraspAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 			int vertexPosition = getRandomVertex(RLC);
 			if (vertexPosition != -1) {
 				tempSolution.push_back(graph.get_Vertex()[vertexPosition]);
-				if (findMean(tempSolution, graph) > findMean(solution, graph)) {
+				float tmpMean = findMean(tempSolution, graph);
+				if (tmpMean > mean) {
 					solution.push_back(graph.get_Vertex()[vertexPosition]);
+					mean = tmpMean;
 				}
 			}
 			counterLoops++;
@@ -125,17 +130,17 @@ void GraspAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Vertex>& 
  */
 void GraspAlgorithm::selectData (int& RLCSize, int& iterations, int& stopMode) {
 	int aux;
-	std::cout << std::endl << "Please select the stop mode: ";
+	std::cout << std::endl << "Please select the stop mode for Grasp algorithm: ";
 	std::cout << std::endl << "\t 1. Number of iterations";
 	std::cout << std::endl << "\t 2. Number of iterations without improvement" << std::endl;
 	std::cin >> aux;
 	assert(aux == 1 || aux == 2);
 	stopMode = aux;
-	std::cout << std::endl << "Please select the Restricted List of Candidates (RLC) size: ";
+	std::cout << std::endl << "Please select the Restricted List of Candidates (RLC) size for Grasp algorithm: ";
 	std::cin >> aux;
 	assert(aux > 0);
 	RLCSize = aux;
-	std::cout << std::endl << "Please select the number of itreations: ";
+	std::cout << std::endl << "Please select the number of itreations for Grasp algorithm: ";
 	std::cin >> aux;
 	assert(aux > 0);
 	iterations = aux;

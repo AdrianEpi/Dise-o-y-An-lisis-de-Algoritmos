@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-23 12:09:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 13:47:08
+* @Last Modified time: 2020-04-26 21:33:34
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -50,7 +50,7 @@ void MultiBootAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 	std::cin >> mode;
 	assert(mode == 1 || mode == 2);
 
-	switch (MODE) {
+	switch (mode) {
 		case 1:
 			runAlgorithmMode1(graph, chrono);
 			break;
@@ -78,6 +78,7 @@ void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph, Chrono& chrono) {
 	std::vector<Vertex> solution;
 	int counterLoops = 0;
 	initialRandomSolution(graph, solution);
+	float mean = findMean(solution, graph);
 	if (mode == 1) {
 		while (counterLoops < iterations) {
 			std::vector<Vertex> RLC;	// Restricted List of Candidates
@@ -86,8 +87,10 @@ void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph, Chrono& chrono) {
 			int vertexPosition = getRandomVertex(RLC);
 			if (vertexPosition != -1) {
 				tempSolution.push_back(graph.get_Vertex()[vertexPosition]);
-				if (findMean(tempSolution, graph) > findMean(solution, graph)) {
+				float tmpMean = findMean(tempSolution, graph);
+				if (tmpMean > mean) {
 					solution.push_back(graph.get_Vertex()[vertexPosition]);
+					mean = tmpMean;
 				}
 			}		
 			counterLoops++;
@@ -101,8 +104,10 @@ void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph, Chrono& chrono) {
 			int vertexPosition = getRandomVertex(RLC);
 			if (vertexPosition != -1) {
 				tempSolution.push_back(graph.get_Vertex()[vertexPosition]);
-				if (findMean(tempSolution, graph) > findMean(solution, graph)) {
+				float tmpMean = findMean(tempSolution, graph);
+				if (tmpMean > mean) {
 					solution.push_back(graph.get_Vertex()[vertexPosition]);
+					mean = tmpMean;
 				}
 				else {
 					counterLoops++;
@@ -114,7 +119,7 @@ void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph, Chrono& chrono) {
 		}
 	}
 	set_Solution(solution);
-	set_MaxMean(findMean(solution, graph));
+	set_MaxMean(mean);
 	chrono.stopChrono();
 }
 
@@ -130,6 +135,7 @@ void MultiBootAlgorithm::runAlgorithmMode2 (Graph& graph, Chrono& chrono) {
 	std::vector<Vertex> solution;
 	initialSolution(graph, solution);
 	int counterLoops = 0;
+	float mean = findMean(solution, graph);
 	if (mode == 1) {
 		do {
 			int vertexNumber = getRandomVertex(graph.get_Vertex());
@@ -137,8 +143,10 @@ void MultiBootAlgorithm::runAlgorithmMode2 (Graph& graph, Chrono& chrono) {
 				if (isInVector(vertexNumber, solution) == false) {
 					std::vector<Vertex> tempSolution = solution;
 					tempSolution.push_back(graph.get_Vertex()[vertexNumber]);
-					if (findMean(tempSolution, graph) > findMean(solution, graph)) {
+					float tmpMean = findMean(tempSolution, graph);
+					if (tmpMean > mean) {
 						solution.push_back(graph.get_Vertex()[vertexNumber]);
+						mean = tmpMean;
 					}
 				}
 			}
@@ -152,9 +160,12 @@ void MultiBootAlgorithm::runAlgorithmMode2 (Graph& graph, Chrono& chrono) {
 				if (isInVector(vertexNumber, solution) == false) {
 					std::vector<Vertex> tempSolution = solution;
 					tempSolution.push_back(graph.get_Vertex()[vertexNumber]);
-					if (findMean(tempSolution, graph) > findMean(solution, graph)) {
+					float tmpMean = findMean(tempSolution, graph);
+					if (tmpMean > mean) {
 						solution.push_back(graph.get_Vertex()[vertexNumber]);
-					}else {
+						mean = tmpMean;
+					}
+					else {
 						counterLoops++;
 					}
 				}
@@ -169,7 +180,7 @@ void MultiBootAlgorithm::runAlgorithmMode2 (Graph& graph, Chrono& chrono) {
 		} while (counterLoops < iterations);
 	}
 	set_Solution(solution);
-	set_MaxMean(findMean(solution, graph));
+	set_MaxMean(mean);
 	chrono.stopChrono();
 }
 

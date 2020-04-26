@@ -53,6 +53,7 @@ class Algorithm {
 		void addVertex (Vertex newVertex);
 		bool isInVector (int number, std::vector<Vertex> vertex);
 		int getRandomVertex (std::vector<Vertex> vector);
+		int getRandomPosition (std::vector<Vertex> vector);
 		void initialSolution (Graph& graph, std::vector<Vertex>& vertex);
 		void initialRandomSolution (Graph& graph, std::vector<Vertex>& solution);
 };

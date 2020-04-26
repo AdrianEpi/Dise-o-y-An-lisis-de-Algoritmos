@@ -17,20 +17,21 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:28:44
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 13:06:30
+* @Last Modified time: 2020-04-26 19:46:56
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
-#include "../include/vertex.hpp"
-#include "../include/edge.hpp"
-#include "../include/graph.hpp"
 #include "../include/Framework.hpp"
 
 /*------------------------------------------------*/
-int main() {
+int main(int argc, char *argv[]) {
     srand(time(NULL));
-    std::string asd = "../inputs/max-mean-div-10.txt";
-    FrameWork a(asd);
-    a.initialize();
-    a.executeFrameWork();
+    if((argc != 2)) {
+        std::cout << std::endl << "Error en la entrada del programa" << std::endl;
+        exit(0);
+    }
+    std::string fileName(argv[1]);
+    FrameWork maxMeanDispersionProblem(fileName);
+    maxMeanDispersionProblem.initialize();
+    maxMeanDispersionProblem.executeFrameWork();
 }

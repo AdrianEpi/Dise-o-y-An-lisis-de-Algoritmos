@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-17 09:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 11:56:51
+* @Last Modified time: 2020-04-26 22:45:23
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -45,16 +45,20 @@ AnotherGreedyAlgorithm::~AnotherGreedyAlgorithm () {
 void AnotherGreedyAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 	chrono.startChrono();
 	std::vector<Vertex> solution;
-	solution.push_back(graph.get_Vertex()[0]);
-	solution.push_back(graph.get_Vertex()[1]);
+	initialSolution(graph, solution);
+	float mean = findMean(solution, graph);
 	for (int vertexCounter = 2; vertexCounter < graph.get_Vertex().size(); vertexCounter++) {
-		std::vector<Vertex> tempSolution = solution;
-		tempSolution.push_back(graph.get_Vertex()[vertexCounter]);
-		if (findMean(tempSolution, graph) > findMean(solution, graph)) {
-			solution.push_back(graph.get_Vertex()[vertexCounter]);
+		if (isInVector(vertexCounter, solution) == false) {
+			std::vector<Vertex> tempSolution = solution;
+			tempSolution.push_back(graph.get_Vertex()[vertexCounter]);
+			float tempMean = findMean(tempSolution, graph);
+			if (tempMean > mean) {
+				solution.push_back(graph.get_Vertex()[vertexCounter]);
+				mean = tempMean;
+			}
 		}
 	}
 	set_Solution(solution);
-	set_MaxMean(findMean(solution, graph));
+	set_MaxMean(mean);
 	chrono.stopChrono();
 }

@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 13:45:52
+* @Last Modified time: 2020-04-26 18:59:44
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -47,18 +47,22 @@ void GreedyAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 	std::vector<Vertex> tempSolution;
 	initialSolution(graph, tempSolution);
 	std::vector<Vertex> solution = tempSolution;
+	float mean = findMean(solution, graph);
+	float tempMean = 0;
 	do {
 		int vertexNumber = findMaxDispersion(graph, tempSolution);
 		if (vertexNumber == -1) {
 			break;
 		}
 		tempSolution.push_back(graph.get_Vertex()[vertexNumber]);
-		if (findMean(tempSolution, graph) >= findMean(solution, graph)) {
+		tempMean = findMean(tempSolution, graph);
+		if (tempMean >= mean) {
 			solution.push_back(graph.get_Vertex()[vertexNumber]);
+			mean = tempMean;
 		}
-	} while (findMean(tempSolution, graph) == findMean(solution, graph));
+	} while (tempMean == mean);
 	set_Solution(solution);
-	set_MaxMean(findMean(solution, graph));
+	set_MaxMean(mean);
 	chrono.stopChrono();
 }
 

@@ -48,6 +48,6 @@ class VNSAlgorithm : public Algorithm {
 		void getGraspSolution (std::vector<Vertex>& solution, Graph& graph, int& RLCSize, int& iterations);
 		void genertePossiblesChanges (std::vector<Vertex>& possibilities, std::vector<Vertex>& solution, Graph& graph);
 		void swapVertex (std::vector<Vertex>& possibilities, std::vector<Vertex>& tempSolution, int& swapsNum);
-		void selectData (int& RLCSize, int& iterations, int& stopMode);
+		void selectData (int& iterations, int& stopMode);
 		void generateRLC(std::vector<Vertex>& RLC, std::vector<Vertex>& solution, Graph& graph, int& RLCSize);
 };

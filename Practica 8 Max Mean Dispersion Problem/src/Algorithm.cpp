@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 12:23:10
+* @Last Modified time: 2020-04-26 18:55:27
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -75,7 +75,7 @@ void Algorithm::set_MaxMean (float maxMean) {
 }
 
 /**
- * @brief      { function_description }
+ * @brief      Runs the code
  *
  * @param      graph  The graph
  */
@@ -116,10 +116,12 @@ float Algorithm::findMean (std::vector<Vertex> vertex, Graph& graph) {
 		return 0.0;
 	}
 	for (int i = 0; i < vertex.size(); i++) {
-		for (int j = i + 1; j < vertex.size(); j++) {
-			for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
-				if ((vertex[i].get_Number() == graph.get_Edges()[edge].get_VertexA()) && (vertex[j].get_Number() == graph.get_Edges()[edge].get_VertexB())) {
-					mean += graph.get_Edges()[edge].get_Distance();
+		for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
+			if (graph.get_Edges()[edge].get_VertexA() == vertex[i].get_Number()) {
+				for (int j = i + 1; j < vertex.size(); j++) {
+					if (vertex[j].get_Number() == graph.get_Edges()[edge].get_VertexB()) {
+						mean += graph.get_Edges()[edge].get_Distance();
+					}
 				}
 			}
 		}
@@ -172,6 +174,23 @@ int Algorithm::getRandomVertex (std::vector<Vertex> vector) {
 }
 
 /**
+ * @brief      Gets a random position of the vector.
+ *
+ * @param[in]  vector  The vector
+ *
+ * @return     The random position.
+ */
+int Algorithm::getRandomPosition (std::vector<Vertex> vector) {
+	if (vector.size() > 0) {
+		int num = rand() % vector.size();
+		return num;
+	}
+	else {
+		return -1;
+	}
+}
+
+/**
  * @brief      Generates the initial solution of the algorithm by finding the best edge for start
  *
  * @param      graph   The graph
@@ -181,17 +200,11 @@ void Algorithm::initialSolution (Graph& graph, std::vector<Vertex>& vertex) {
 	int vertexNumberA = -1;
 	int vertexNumberB = -1;
 	int tempMaxMean = STARTMEAN;
-	for (int i = 0; i < graph.get_Vertex().size(); i++) {
-		for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
-			if ((graph.get_Vertex()[i].get_Number() == graph.get_Edges()[edge].get_VertexA())) {
-				if (isInVector(graph.get_Vertex()[i].get_Number(), vertex) == false) {
-					if (graph.get_Edges()[edge].get_Distance() > tempMaxMean) {
-						tempMaxMean = graph.get_Edges()[edge].get_Distance();
-						vertexNumberA = graph.get_Edges()[edge].get_VertexA();
-						vertexNumberB = graph.get_Edges()[edge].get_VertexB();
-					}
-				}
-			}
+	for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
+		if (graph.get_Edges()[edge].get_Distance() > tempMaxMean) {
+			tempMaxMean = graph.get_Edges()[edge].get_Distance();
+			vertexNumberA = graph.get_Edges()[edge].get_VertexA();
+			vertexNumberB = graph.get_Edges()[edge].get_VertexB();
 		}
 	}
 	vertex.push_back(graph.get_Vertex()[vertexNumberA]);
@@ -212,14 +225,3 @@ void Algorithm::initialRandomSolution (Graph& graph, std::vector<Vertex>& soluti
 	}
 	solution.push_back(graph.get_Vertex()[node]);
 }
-
-/*
-
-{ 0, 2, 4, 6, 7, 8, 5 }
-{ 0, 2, 4, 6, 7, 8, 5 }
-Solution: { 0, 2, 4, 6, 7, 5, 8 }
-Solution: { 0, 2, 4, 6 }
-Solution: { 0, 2, 4, 6, 7, 5, 8 }
-Solution: { 0, 2, 4, 6, 7, 8, 9 }
-
-*/

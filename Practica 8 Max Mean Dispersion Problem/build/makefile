@@ -50,6 +50,11 @@ clean:
 	rm -rf ../objects/*.o
 	rm -rf ../bin/*
 
-run:
-	../bin/maxmean
+run1:
+	../bin/maxmean ../inputs/max-mean-div-10.txt
 
+run2:
+	../bin/maxmean ../inputs/max-mean-div-15.txt
+
+run3:
+	../bin/maxmean ../inputs/max-mean-div-20.txt
