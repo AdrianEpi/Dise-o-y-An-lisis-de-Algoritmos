@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-17 09:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-22 19:31:41
+* @Last Modified time: 2020-04-26 11:56:51
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -42,7 +42,8 @@ AnotherGreedyAlgorithm::~AnotherGreedyAlgorithm () {
  *
  * @param      graph  The graph
  */
-void AnotherGreedyAlgorithm::runAlgorithm (Graph& graph) {
+void AnotherGreedyAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
+	chrono.startChrono();
 	std::vector<Vertex> solution;
 	solution.push_back(graph.get_Vertex()[0]);
 	solution.push_back(graph.get_Vertex()[1]);
@@ -55,4 +56,5 @@ void AnotherGreedyAlgorithm::runAlgorithm (Graph& graph) {
 	}
 	set_Solution(solution);
 	set_MaxMean(findMean(solution, graph));
+	chrono.stopChrono();
 }

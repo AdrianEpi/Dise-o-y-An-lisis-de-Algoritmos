@@ -47,7 +47,7 @@ class Algorithm {
 		void set_MaxMean (float mean);
 
 		// Functions
-		virtual void runAlgorithm (Graph& graph);
+		virtual void runAlgorithm (Graph& graph, Chrono& chrono);
 		std::ostream& printResult (std::ostream& os, Chrono& chrono);
 		float findMean (std::vector<Vertex> vertex, Graph& graph);
 		void addVertex (Vertex newVertex);
@@ -55,6 +55,4 @@ class Algorithm {
 		int getRandomVertex (std::vector<Vertex> vector);
 		void initialSolution (Graph& graph, std::vector<Vertex>& vertex);
 		void initialRandomSolution (Graph& graph, std::vector<Vertex>& solution);
-
-
 };

@@ -28,5 +28,5 @@ class AnotherGreedyAlgorithm : public Algorithm {
 		virtual ~AnotherGreedyAlgorithm ();
 
 		// Public Function
-		void runAlgorithm (Graph& graph);
+		void runAlgorithm (Graph& graph, Chrono& chrono);
 };

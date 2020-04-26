@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 11:27:56
+* @Last Modified time: 2020-04-26 11:55:10
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -79,7 +79,7 @@ void Algorithm::set_MaxMean (float maxMean) {
  *
  * @param      graph  The graph
  */
-void Algorithm::runAlgorithm (Graph& graph) {
+void Algorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 }
 
 /**

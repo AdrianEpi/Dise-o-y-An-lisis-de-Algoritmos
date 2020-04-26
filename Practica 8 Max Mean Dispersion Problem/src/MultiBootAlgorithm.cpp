@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-23 12:09:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 11:29:04
+* @Last Modified time: 2020-04-26 12:01:38
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -42,14 +42,14 @@ MultiBootAlgorithm::~MultiBootAlgorithm () {
  *
  * @param      graph  The graph
  */
-void MultiBootAlgorithm::runAlgorithm (Graph& graph) {
+void MultiBootAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 	switch (MODE) {
 		case 1:
-			runAlgorithmMode1(graph);
+			runAlgorithmMode1(graph, chrono);
 			break;
 
 		case 2:
-			runAlgorithmMode2(graph);
+			runAlgorithmMode2(graph, chrono);
 			break;
 
 		default:
@@ -64,8 +64,9 @@ void MultiBootAlgorithm::runAlgorithm (Graph& graph) {
  *
  * @param      graph  The graph
  */
-void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph) {
+void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph, Chrono& chrono) {
 	srand(time(NULL));
+	chrono.startChrono();
 	std::vector<Vertex> solution;
 	bool endAlgorithm = false;
 	int counterLoops = 0;
@@ -88,6 +89,7 @@ void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph) {
 	}
 	set_Solution(solution);
 	set_MaxMean(findMean(solution, graph));
+	chrono.stopChrono();
 }
 
 /**
@@ -95,7 +97,9 @@ void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph) {
  *
  * @param      graph  The graph
  */
-void MultiBootAlgorithm::runAlgorithmMode2 (Graph& graph) {
+void MultiBootAlgorithm::runAlgorithmMode2 (Graph& graph, Chrono& chrono) {
+	srand(time(NULL));
+	chrono.startChrono();
 	std::vector<Vertex> solution;
 	initialSolution(graph, solution);
 	int iteration = 0;
@@ -114,6 +118,7 @@ void MultiBootAlgorithm::runAlgorithmMode2 (Graph& graph) {
 	} while (iteration < ITERATIONS);
 	set_Solution(solution);
 	set_MaxMean(findMean(solution, graph));
+	chrono.stopChrono();
 }
 
 /**

@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-24 12:09:57
+* @Last Modified time: 2020-04-26 12:03:14
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -161,9 +161,7 @@ void FrameWork::initialize (void) {
 }
 
 void FrameWork::executeFrameWork (void) {
-	chrono_.startChrono();
-	algorithm_ -> runAlgorithm(graph_);
-	chrono_.stopChrono();
+	algorithm_ -> runAlgorithm(graph_, chrono_);
 	algorithm_ -> printResult(std::cout, chrono_);
 }
 

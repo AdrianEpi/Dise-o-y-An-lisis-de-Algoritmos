@@ -28,7 +28,7 @@ class GreedyAlgorithm : public Algorithm {
 		virtual ~GreedyAlgorithm ();
 
 		// Public Function
-		void runAlgorithm (Graph& graph);
+		void runAlgorithm (Graph& graph, Chrono& chrono);
 
 	private:
 		// Private Functions

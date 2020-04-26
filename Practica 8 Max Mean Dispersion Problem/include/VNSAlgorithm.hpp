@@ -41,7 +41,7 @@ class VNSAlgorithm : public Algorithm {
 		void set_NeighbourHoodSize (int size);
 
 		// Public Function
-		void runAlgorithm (Graph& graph);
+		void runAlgorithm (Graph& graph, Chrono& chrono);
 
 	private:
 		// Private Functions

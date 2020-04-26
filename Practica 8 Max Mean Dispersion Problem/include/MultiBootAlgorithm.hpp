@@ -37,12 +37,12 @@ class MultiBootAlgorithm : public Algorithm {
 		virtual ~MultiBootAlgorithm ();
 
 		// Public Function
-		void runAlgorithm (Graph& graph);
+		void runAlgorithm (Graph& graph, Chrono& chrono);
 
 	private:
 		// Private Functions
-		void runAlgorithmMode1 (Graph& graph);
-		void runAlgorithmMode2 (Graph& grpah);
+		void runAlgorithmMode1 (Graph& graph, Chrono& chrono);
+		void runAlgorithmMode2 (Graph& graph, Chrono& chrono);
 		void generateRLC (std::vector<Vertex>& RLC, std::vector<Vertex> solution, Graph graph);
 		int findRandomNode (Graph& graph, std::vector<Vertex> vertex);
 };

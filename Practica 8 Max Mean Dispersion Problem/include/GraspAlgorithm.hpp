@@ -36,9 +36,10 @@ class GraspAlgorithm : public Algorithm {
 		virtual ~GraspAlgorithm ();
 
 		// Public Function
-		void runAlgorithm (Graph& graph);
+		void runAlgorithm (Graph& graph, Chrono& chrono);
 
 	private:
 		// Private Functions
-		void generateRLC (std::vector<Vertex>& RLC, std::vector<Vertex> solution, Graph graph);
+		void generateRLC (std::vector<Vertex>& RLC, std::vector<Vertex> solution, Graph graph, int RLCSize);
+		void selectData (int& RLCSize, int& iterations, int& stopMode);
 };
