@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-24 11:51:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 12:01:56
+* @Last Modified time: 2020-04-26 12:29:14
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -61,7 +61,6 @@ void VNSAlgorithm::set_NeighbourHoodSize (int size) {
  * @param      graph  The graph
  */
 void VNSAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
-	srand(time(NULL));
 	chrono.startChrono();
 	int size = 2;
 	if (rint(graph.get_VertexNum()) / 4 > 2) {
@@ -116,6 +115,15 @@ void VNSAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 	}
 	*/
 }
+
+void VNSAlgorithm::getGraspSolution (std::vector<Vertex>& solution, Graph& graph) {
+
+}
+
+
+
+
+
 
 void VNSAlgorithm::generateNeighbourHoodStructure(std::vector<Vertex>& neighbourHood, std::vector<Vertex> solution, Graph graph, int neighbourHoodSelector) {
 	float tempMean = findMean(solution, graph);

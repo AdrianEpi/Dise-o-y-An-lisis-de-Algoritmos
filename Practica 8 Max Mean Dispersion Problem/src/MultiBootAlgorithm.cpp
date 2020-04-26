@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-23 12:09:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 12:01:38
+* @Last Modified time: 2020-04-26 12:49:33
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -43,6 +43,13 @@ MultiBootAlgorithm::~MultiBootAlgorithm () {
  * @param      graph  The graph
  */
 void MultiBootAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
+	int mode;
+	std::cout << std::endl << "Switch mode: ";
+	std::cout << std::endl << "\t 1. Random initial solution & Grasp local search";
+	std::cout << std::endl << "\t 2. Grasp initial solution & different local search" << std::endl;
+	std::cin >> mode;
+	assert(mode == 1 || mode == 2);
+
 	switch (MODE) {
 		case 1:
 			runAlgorithmMode1(graph, chrono);
@@ -65,26 +72,45 @@ void MultiBootAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
  * @param      graph  The graph
  */
 void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph, Chrono& chrono) {
-	srand(time(NULL));
+	int RLCSize, iterations, mode;
+	selectData(RLCSize, iterations, mode);
 	chrono.startChrono();
 	std::vector<Vertex> solution;
-	bool endAlgorithm = false;
 	int counterLoops = 0;
 	initialRandomSolution(graph, solution);
-	while (endAlgorithm == false) {
-		std::vector<Vertex> RLC;	// Restricted List of Candidates
-		std::vector<Vertex> tempSolution = solution;
-		generateRLC(RLC, solution, graph);
-		int vertexPosition = getRandomVertex(RLC);
-		tempSolution.push_back(graph.get_Vertex()[vertexPosition]);
-		if ((findMean(tempSolution, graph) > findMean(solution, graph)) && (vertexPosition != -1)) {
-			solution.push_back(graph.get_Vertex()[vertexPosition]);
-		}		
-		else {
+	if (mode == 1) {
+		while (counterLoops < iterations) {
+			std::vector<Vertex> RLC;	// Restricted List of Candidates
+			std::vector<Vertex> tempSolution = solution;
+			generateRLC(RLC, solution, graph);
+			int vertexPosition = getRandomVertex(RLC);
+			if (vertexPosition != -1) {
+				tempSolution.push_back(graph.get_Vertex()[vertexPosition]);
+				if (findMean(tempSolution, graph) > findMean(solution, graph)) {
+					solution.push_back(graph.get_Vertex()[vertexPosition]);
+				}
+			}		
 			counterLoops++;
-			if (counterLoops >= ITERATIONS) {
-				endAlgorithm = true;
-			}
+		}
+	}
+	else {
+		while (counterLoops < iterations) {
+			std::vector<Vertex> RLC;	// Restricted List of Candidates
+			std::vector<Vertex> tempSolution = solution;
+			generateRLC(RLC, solution, graph);
+			int vertexPosition = getRandomVertex(RLC);
+			if (vertexPosition != -1) {
+				tempSolution.push_back(graph.get_Vertex()[vertexPosition]);
+				if (findMean(tempSolution, graph) > findMean(solution, graph)) {
+					solution.push_back(graph.get_Vertex()[vertexPosition]);
+				}
+				else {
+					counterLoops++;
+				}
+			}	
+			else {
+				counterLoops++;
+			}	
 		}
 	}
 	set_Solution(solution);
@@ -98,24 +124,50 @@ void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph, Chrono& chrono) {
  * @param      graph  The graph
  */
 void MultiBootAlgorithm::runAlgorithmMode2 (Graph& graph, Chrono& chrono) {
-	srand(time(NULL));
+	int RLCSize = -1, iterations, mode;
+	selectData(RLCSize, iterations, mode);
 	chrono.startChrono();
 	std::vector<Vertex> solution;
 	initialSolution(graph, solution);
-	int iteration = 0;
-	do {
-		int vertexNumber = getRandomVertex(graph.get_Vertex());
-		if (vertexNumber >= 0) {
-			if (isInVector(vertexNumber, solution) == false) {
-				std::vector<Vertex> tempSolution = solution;
-				tempSolution.push_back(graph.get_Vertex()[vertexNumber]);
-				if (findMean(tempSolution, graph) > findMean(solution, graph)) {
-					solution.push_back(graph.get_Vertex()[vertexNumber]);
+	int counterLoops = 0;
+	if (mode == 1) {
+		do {
+			int vertexNumber = getRandomVertex(graph.get_Vertex());
+			if (vertexNumber >= 0) {
+				if (isInVector(vertexNumber, solution) == false) {
+					std::vector<Vertex> tempSolution = solution;
+					tempSolution.push_back(graph.get_Vertex()[vertexNumber]);
+					if (findMean(tempSolution, graph) > findMean(solution, graph)) {
+						solution.push_back(graph.get_Vertex()[vertexNumber]);
+					}
 				}
 			}
-		}
-		iteration++;
-	} while (iteration < ITERATIONS);
+			counterLoops++;
+		} while (counterLoops < iterations);
+	}
+	else {
+		do {
+			int vertexNumber = getRandomVertex(graph.get_Vertex());
+			if (vertexNumber >= 0) {
+				if (isInVector(vertexNumber, solution) == false) {
+					std::vector<Vertex> tempSolution = solution;
+					tempSolution.push_back(graph.get_Vertex()[vertexNumber]);
+					if (findMean(tempSolution, graph) > findMean(solution, graph)) {
+						solution.push_back(graph.get_Vertex()[vertexNumber]);
+					}else {
+						counterLoops++;
+					}
+				}
+				else {
+					counterLoops++;
+				}
+			}
+			else {
+				counterLoops++;
+			}
+			
+		} while (counterLoops < iterations);
+	}
 	set_Solution(solution);
 	set_MaxMean(findMean(solution, graph));
 	chrono.stopChrono();
@@ -146,4 +198,31 @@ void MultiBootAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Verte
 		}
 		size--;
 	}
+}
+
+/**
+ * @brief      Prints a menu for let the user select the parameters of the algorithm.
+ *
+ * @param      RLCSize     The rlc size
+ * @param      iterations  The iterations
+ * @param      stopMode    The stop mode
+ */
+void MultiBootAlgorithm::selectData (int& RLCSize, int& iterations, int& stopMode) {
+	int aux;
+	std::cout << std::endl << "Please select the stop mode: ";
+	std::cout << std::endl << "\t 1. Number of iterations";
+	std::cout << std::endl << "\t 2. Number of iterations without improvement" << std::endl;
+	std::cin >> aux;
+	assert(aux == 1 || aux == 2);
+	stopMode = aux;
+	if (RLCSize != -1) {
+		std::cout << std::endl << "Please select the Restricted List of Candidates (RLC) size: ";
+		std::cin >> aux;
+	}
+	assert(aux > 0);
+	RLCSize = aux;
+	std::cout << std::endl << "Please select the number of itreations: ";
+	std::cin >> aux;
+	assert(aux > 0);
+	iterations = aux;
 }

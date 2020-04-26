@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:28:44
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-25 21:26:01
+* @Last Modified time: 2020-04-26 12:49:53
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -28,7 +28,8 @@
 
 /*------------------------------------------------*/
 int main() {
-    std::string asd = "../inputs/max-mean-div-10.txt";
+    srand(time(NULL));
+    std::string asd = "../inputs/max-mean-div-20.txt";
     FrameWork a(asd);
     a.initialize();
     a.executeFrameWork();

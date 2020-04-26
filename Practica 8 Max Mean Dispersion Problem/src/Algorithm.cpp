@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 11:55:10
+* @Last Modified time: 2020-04-26 12:23:10
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -212,3 +212,14 @@ void Algorithm::initialRandomSolution (Graph& graph, std::vector<Vertex>& soluti
 	}
 	solution.push_back(graph.get_Vertex()[node]);
 }
+
+/*
+
+{ 0, 2, 4, 6, 7, 8, 5 }
+{ 0, 2, 4, 6, 7, 8, 5 }
+Solution: { 0, 2, 4, 6, 7, 5, 8 }
+Solution: { 0, 2, 4, 6 }
+Solution: { 0, 2, 4, 6, 7, 5, 8 }
+Solution: { 0, 2, 4, 6, 7, 8, 9 }
+
+*/

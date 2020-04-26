@@ -46,4 +46,5 @@ class VNSAlgorithm : public Algorithm {
 	private:
 		// Private Functions
 		void generateNeighbourHoodStructure (std::vector<Vertex>& RLC, std::vector<Vertex> solution, Graph graph, int neighbourHoodSelector);
+		void getGraspSolution (std::vector<Vertex>& solution, Graph& graph);
 };

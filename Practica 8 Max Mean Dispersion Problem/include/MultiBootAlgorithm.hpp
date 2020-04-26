@@ -45,4 +45,5 @@ class MultiBootAlgorithm : public Algorithm {
 		void runAlgorithmMode2 (Graph& graph, Chrono& chrono);
 		void generateRLC (std::vector<Vertex>& RLC, std::vector<Vertex> solution, Graph graph);
 		int findRandomNode (Graph& graph, std::vector<Vertex> vertex);
+		void selectData (int& RLCSize, int& iterations, int& stopMode); 
 };
