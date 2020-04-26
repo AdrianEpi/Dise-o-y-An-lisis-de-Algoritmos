@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 12:00:36
+* @Last Modified time: 2020-04-26 13:45:52
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -71,7 +71,7 @@ void GreedyAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
  *
  * @return     The position of the maximum dispersion vertex
  */
-int GreedyAlgorithm::findMaxDispersion (Graph& graph, std::vector<Vertex> vertex) {
+int GreedyAlgorithm::findMaxDispersion (Graph& graph, std::vector<Vertex>& vertex) {
 	int mean = STARTMEAN;
 	int vertexNumber = -1;
 	for (int i = 0; i < graph.get_Vertex().size(); i++) {

@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-17 17:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 12:45:27
+* @Last Modified time: 2020-04-26 13:45:22
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -96,7 +96,7 @@ void GraspAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
  * @param[in]  solution  The solution
  * @param[in]  graph     The graph
  */
-void GraspAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Vertex> solution, Graph graph, int RLCSize) {
+void GraspAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Vertex>& solution, Graph& graph, int& RLCSize) {
 	std::vector<Vertex> tempRLC;
 	for (int vertexCounter = 0; vertexCounter < graph.get_Vertex().size(); vertexCounter++) {
 		if (isInVector(vertexCounter, solution) == false) {

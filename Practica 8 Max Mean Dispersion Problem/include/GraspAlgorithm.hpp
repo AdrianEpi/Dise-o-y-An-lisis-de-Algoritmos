@@ -40,6 +40,6 @@ class GraspAlgorithm : public Algorithm {
 
 	private:
 		// Private Functions
-		void generateRLC (std::vector<Vertex>& RLC, std::vector<Vertex> solution, Graph graph, int RLCSize);
+		void generateRLC (std::vector<Vertex>& RLC, std::vector<Vertex>& solution, Graph& graph, int& RLCSize);
 		void selectData (int& RLCSize, int& iterations, int& stopMode);
 };

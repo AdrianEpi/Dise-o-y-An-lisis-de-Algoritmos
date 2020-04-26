@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-23 12:09:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 12:49:33
+* @Last Modified time: 2020-04-26 13:47:08
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -180,7 +180,7 @@ void MultiBootAlgorithm::runAlgorithmMode2 (Graph& graph, Chrono& chrono) {
  * @param[in]  solution  The solution
  * @param[in]  graph     The graph
  */
-void MultiBootAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Vertex> solution, Graph graph) {
+void MultiBootAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Vertex>& solution, Graph& graph) {
 	std::vector<Vertex> tempRLC;
 	for (int vertexCounter = 0; vertexCounter < graph.get_Vertex().size(); vertexCounter++) {
 		if (isInVector(vertexCounter, solution) == false) {
