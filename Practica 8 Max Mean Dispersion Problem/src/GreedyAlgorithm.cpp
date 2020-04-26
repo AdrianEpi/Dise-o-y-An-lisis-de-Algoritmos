@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-23 12:00:19
+* @Last Modified time: 2020-04-26 11:28:40
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -60,33 +60,6 @@ void GreedyAlgorithm::runAlgorithm (Graph& graph) {
 	set_MaxMean(findMean(solution, graph));
 }
 
-
-/**
- * @brief      Generates the initial solution of the algorithm
- *
- * @param      graph   The graph
- * @param      vertex  The vertex
- */
-void GreedyAlgorithm::initialSolution (Graph& graph, std::vector<Vertex>& vertex) {
-	int vertexNumberA = -1;
-	int vertexNumberB = -1;
-	int tempMaxMean = STARTMEAN;
-	for (int i = 0; i < graph.get_Vertex().size(); i++) {
-		for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
-			if ((graph.get_Vertex()[i].get_Number() == graph.get_Edges()[edge].get_VertexA())) {
-				if (isInVector(graph.get_Vertex()[i].get_Number(), vertex) == false) {
-					if (graph.get_Edges()[edge].get_Distance() > tempMaxMean) {
-						tempMaxMean = graph.get_Edges()[edge].get_Distance();
-						vertexNumberA = graph.get_Edges()[edge].get_VertexA();
-						vertexNumberB = graph.get_Edges()[edge].get_VertexB();
-					}
-				}
-			}
-		}
-	}
-	vertex.push_back(graph.get_Vertex()[vertexNumberA]);
-	vertex.push_back(graph.get_Vertex()[vertexNumberB]);
-}
 
 /**
  * @brief      Finds a the maximum dispersion without being in the graph.

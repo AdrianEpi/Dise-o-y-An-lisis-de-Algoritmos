@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-17 17:29:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-25 22:18:15
+* @Last Modified time: 2020-04-26 11:28:10
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -93,48 +93,4 @@ void GraspAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Vertex> s
 		}
 		size--;
 	}
-}
-
-/**
- * @brief      Gets a random vertex form the RLC.
- *
- * @param[in]  RLC   The rlc
- *
- * @return     The random vertex.
- */
-int GraspAlgorithm::getRandomVertex (std::vector<Vertex> RLC) {
-	if (RLC.size() > 0) {
-		int num = rand() % RLC.size();
-		return RLC[num].get_Number();
-	}
-	else {
-		return -1;
-	}
-}
-
-/**
- * @brief      Generates the initial solution of the algorithm
- *
- * @param      graph   The graph
- * @param      vertex  The vertex
- */
-void GraspAlgorithm::initialSolution (Graph& graph, std::vector<Vertex>& vertex) {
-	int vertexNumberA = -1;
-	int vertexNumberB = -1;
-	int tempMaxMean = STARTMEAN;
-	for (int i = 0; i < graph.get_Vertex().size(); i++) {
-		for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
-			if ((graph.get_Vertex()[i].get_Number() == graph.get_Edges()[edge].get_VertexA())) {
-				if (isInVector(graph.get_Vertex()[i].get_Number(), vertex) == false) {
-					if (graph.get_Edges()[edge].get_Distance() > tempMaxMean) {
-						tempMaxMean = graph.get_Edges()[edge].get_Distance();
-						vertexNumberA = graph.get_Edges()[edge].get_VertexA();
-						vertexNumberB = graph.get_Edges()[edge].get_VertexB();
-					}
-				}
-			}
-		}
-	}
-	vertex.push_back(graph.get_Vertex()[vertexNumberA]);
-	vertex.push_back(graph.get_Vertex()[vertexNumberB]);
 }

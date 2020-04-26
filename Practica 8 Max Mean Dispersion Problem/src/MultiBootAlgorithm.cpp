@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-23 12:09:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-25 22:17:58
+* @Last Modified time: 2020-04-26 11:29:04
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -97,7 +97,7 @@ void MultiBootAlgorithm::runAlgorithmMode1 (Graph& graph) {
  */
 void MultiBootAlgorithm::runAlgorithmMode2 (Graph& graph) {
 	std::vector<Vertex> solution;
-	initialGraspSolution(graph, solution);
+	initialSolution(graph, solution);
 	int iteration = 0;
 	do {
 		int vertexNumber = getRandomVertex(graph.get_Vertex());
@@ -141,63 +141,4 @@ void MultiBootAlgorithm::generateRLC(std::vector<Vertex>& RLC, std::vector<Verte
 		}
 		size--;
 	}
-}
-
-/**
- * @brief      Gets a random vertex form the RLC.
- *
- * @param[in]  RLC   The rlc
- *
- * @return     The random vertex.
- */
-int MultiBootAlgorithm::getRandomVertex (std::vector<Vertex> RLC) {
-	if (RLC.size() > 0) {
-		int num = rand() % RLC.size();
-		return RLC[num].get_Number();
-	}
-	else {
-		return -1;
-	}
-}
-
-/**
- * @brief      Generates the initialGrasp solution of the algorithm
- *
- * @param      graph   The graph
- * @param      vertex  The vertex
- */
-void MultiBootAlgorithm::initialGraspSolution (Graph& graph, std::vector<Vertex>& vertex) {
-	int vertexNumberA = -1;
-	int vertexNumberB = -1;
-	int tempMaxMean = STARTMEAN;
-	for (int i = 0; i < graph.get_Vertex().size(); i++) {
-		for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
-			if ((graph.get_Vertex()[i].get_Number() == graph.get_Edges()[edge].get_VertexA())) {
-				if (isInVector(graph.get_Vertex()[i].get_Number(), vertex) == false) {
-					if (graph.get_Edges()[edge].get_Distance() > tempMaxMean) {
-						tempMaxMean = graph.get_Edges()[edge].get_Distance();
-						vertexNumberA = graph.get_Edges()[edge].get_VertexA();
-						vertexNumberB = graph.get_Edges()[edge].get_VertexB();
-					}
-				}
-			}
-		}
-	}
-	vertex.push_back(graph.get_Vertex()[vertexNumberA]);
-	vertex.push_back(graph.get_Vertex()[vertexNumberB]);
-}
-
-/**
- * @brief      Generates a random initial solution
- *
- * @param      graph     The graph
- * @param      solution  The solution
- */
-void MultiBootAlgorithm::initialRandomSolution (Graph& graph, std::vector<Vertex>& solution) {
-	int node = getRandomVertex(graph.get_Vertex());
-	solution.push_back(graph.get_Vertex()[node]);
-	while (isInVector(node, solution)) {
-		node = getRandomVertex(graph.get_Vertex());
-	}
-	solution.push_back(graph.get_Vertex()[node]);
 }

@@ -32,6 +32,5 @@ class GreedyAlgorithm : public Algorithm {
 
 	private:
 		// Private Functions
-		void initialSolution (Graph& graph, std::vector<Vertex>& vertex);
 		int findMaxDispersion (Graph& graph, std::vector<Vertex> vertex);
 };

@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-22 19:27:37
+* @Last Modified time: 2020-04-26 11:27:56
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -152,4 +152,63 @@ bool Algorithm::isInVector (int number, std::vector<Vertex> vertex) {
 		}
 	}
 	return false;
+}
+
+/**
+ * @brief      Gets a random vertex form the vector.
+ *
+ * @param[in]  vector   The vector
+ *
+ * @return     The random vertex.
+ */
+int Algorithm::getRandomVertex (std::vector<Vertex> vector) {
+	if (vector.size() > 0) {
+		int num = rand() % vector.size();
+		return vector[num].get_Number();
+	}
+	else {
+		return -1;
+	}
+}
+
+/**
+ * @brief      Generates the initial solution of the algorithm by finding the best edge for start
+ *
+ * @param      graph   The graph
+ * @param      vertex  The vertex
+ */
+void Algorithm::initialSolution (Graph& graph, std::vector<Vertex>& vertex) {
+	int vertexNumberA = -1;
+	int vertexNumberB = -1;
+	int tempMaxMean = STARTMEAN;
+	for (int i = 0; i < graph.get_Vertex().size(); i++) {
+		for (int edge = 0; edge < graph.get_Edges().size(); edge++) {
+			if ((graph.get_Vertex()[i].get_Number() == graph.get_Edges()[edge].get_VertexA())) {
+				if (isInVector(graph.get_Vertex()[i].get_Number(), vertex) == false) {
+					if (graph.get_Edges()[edge].get_Distance() > tempMaxMean) {
+						tempMaxMean = graph.get_Edges()[edge].get_Distance();
+						vertexNumberA = graph.get_Edges()[edge].get_VertexA();
+						vertexNumberB = graph.get_Edges()[edge].get_VertexB();
+					}
+				}
+			}
+		}
+	}
+	vertex.push_back(graph.get_Vertex()[vertexNumberA]);
+	vertex.push_back(graph.get_Vertex()[vertexNumberB]);
+}
+
+/**
+ * @brief      Generates a random initial solution
+ *
+ * @param      graph     The graph
+ * @param      solution  The solution
+ */
+void Algorithm::initialRandomSolution (Graph& graph, std::vector<Vertex>& solution) {
+	int node = getRandomVertex(graph.get_Vertex());
+	solution.push_back(graph.get_Vertex()[node]);
+	while (isInVector(node, solution)) {
+		node = getRandomVertex(graph.get_Vertex());
+	}
+	solution.push_back(graph.get_Vertex()[node]);
 }

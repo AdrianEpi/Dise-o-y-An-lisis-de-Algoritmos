@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-24 11:51:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-25 13:25:58
+* @Last Modified time: 2020-04-26 11:29:50
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -69,7 +69,7 @@ void VNSAlgorithm::runAlgorithm (Graph& graph) {
 	set_NeighbourHoodSize(size);
 	size = 0;
 	std::vector<Vertex> solution;
-	initialSolution(graph, solution);
+	initialRandomSolution(graph, solution);
 	int counterLoops = 0;
 
 
@@ -127,29 +127,4 @@ void VNSAlgorithm::generateNeighbourHoodStructure(std::vector<Vertex>& neighbour
 			}
 		}
 	}
-}
-
-int VNSAlgorithm::getRandomVertex (std::vector<Vertex> neighbourHood) {
-	if (neighbourHood.size() > 0) {
-		int num = rand() % neighbourHood.size();
-		return neighbourHood[num].get_Number();
-	}
-	else {
-		return -1;
-	}
-}
-
-/**
- * @brief      Generates an initial random solution for the algorithm
- *
- * @param      graph   The graph
- * @param      solution  The solution
- */
-void VNSAlgorithm::initialSolution (Graph& graph, std::vector<Vertex>& solution) {
-	int node = getRandomVertex(graph.get_Vertex());
-	solution.push_back(graph.get_Vertex()[node]);
-	while (isInVector(node, solution)) {
-		node = getRandomVertex(graph.get_Vertex());
-	}
-	solution.push_back(graph.get_Vertex()[node]);
 }
