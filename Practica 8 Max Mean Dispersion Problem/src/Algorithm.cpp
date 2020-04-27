@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 18:55:27
+* @Last Modified time: 2020-04-27 08:05:50
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -110,7 +110,7 @@ std::ostream& Algorithm::printResult (std::ostream& os, Chrono& chrono) {
  *
  * @return     The mean
  */
-float Algorithm::findMean (std::vector<Vertex> vertex, Graph& graph) {
+float Algorithm::findMean (std::vector<Vertex>& vertex, Graph& graph) {
 	float mean = 0;
 	if (vertex.size() == 0) {
 		return 0.0;
@@ -135,7 +135,7 @@ float Algorithm::findMean (std::vector<Vertex> vertex, Graph& graph) {
  *
  * @param[in]  newVertex  The new vertex
  */
-void Algorithm::addVertex (Vertex newVertex) {
+void Algorithm::addVertex (Vertex& newVertex) {
 	solutions_.push_back(newVertex);
 }
 
@@ -147,7 +147,7 @@ void Algorithm::addVertex (Vertex newVertex) {
  *
  * @return     True if in vector, False otherwise.
  */
-bool Algorithm::isInVector (int number, std::vector<Vertex> vertex) {
+bool Algorithm::isInVector (int number, std::vector<Vertex>& vertex) {
 	for (int i = 0; i < vertex.size(); i++) {
 		if (vertex[i].get_Number() == number) {
 			return true;
@@ -180,7 +180,7 @@ int Algorithm::getRandomVertex (std::vector<Vertex> vector) {
  *
  * @return     The random position.
  */
-int Algorithm::getRandomPosition (std::vector<Vertex> vector) {
+int Algorithm::getRandomPosition (std::vector<Vertex>& vector) {
 	if (vector.size() > 0) {
 		int num = rand() % vector.size();
 		return num;

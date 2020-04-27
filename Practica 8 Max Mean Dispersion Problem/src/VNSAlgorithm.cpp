@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-24 11:51:34
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 22:26:07
+* @Last Modified time: 2020-04-27 07:59:05
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -35,24 +35,6 @@ VNSAlgorithm::VNSAlgorithm () {
  * @brief      Destroys the object.
  */
 VNSAlgorithm::~VNSAlgorithm () {
-}
-
-/**
- * @brief      Gets the neighbour hood size.
- *
- * @return     The neighbour hood size.
- */
-int VNSAlgorithm::get_NeighbourHoodSize (void) {
-	return neighbourHoodSize_;
-}
-
-/**
- * @brief      Sets the neighbour hood size.
- *
- * @param[in]  size  The size
- */
-void VNSAlgorithm::set_NeighbourHoodSize (int size) {
-	neighbourHoodSize_ = size;
 }
 
 /**

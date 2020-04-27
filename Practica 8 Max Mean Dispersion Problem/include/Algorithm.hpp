@@ -49,11 +49,11 @@ class Algorithm {
 		// Functions
 		virtual void runAlgorithm (Graph& graph, Chrono& chrono);
 		std::ostream& printResult (std::ostream& os, Chrono& chrono);
-		float findMean (std::vector<Vertex> vertex, Graph& graph);
-		void addVertex (Vertex newVertex);
-		bool isInVector (int number, std::vector<Vertex> vertex);
+		float findMean (std::vector<Vertex>& vertex, Graph& graph);
+		void addVertex (Vertex& newVertex);
+		bool isInVector (int number, std::vector<Vertex>& vertex);
 		int getRandomVertex (std::vector<Vertex> vector);
-		int getRandomPosition (std::vector<Vertex> vector);
+		int getRandomPosition (std::vector<Vertex>& vector);
 		void initialSolution (Graph& graph, std::vector<Vertex>& vertex);
 		void initialRandomSolution (Graph& graph, std::vector<Vertex>& solution);
 };
