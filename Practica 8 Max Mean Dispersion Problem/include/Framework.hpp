@@ -24,6 +24,7 @@
 #include "GraspAlgorithm.hpp"
 #include "MultiBootAlgorithm.hpp"
 #include "VNSAlgorithm.hpp"
+#include "HibridGraspVNS.hpp"
 
 /*------------------------------------------------*/
 /*----------  DECLARACION DE LIBRERIAS  ----------*/

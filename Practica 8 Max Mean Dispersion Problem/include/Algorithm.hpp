@@ -15,8 +15,8 @@
 =======================================================================================*/
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
-#pragma once
-#include "graph.hpp"
+#pragma once 
+#include "graph.hpp" 
 #include "Chrono.hpp"
 #define STARTMEAN -9999999;
 

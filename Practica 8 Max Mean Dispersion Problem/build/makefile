@@ -1,6 +1,6 @@
 #Variable objetos
 OBJECTS = main.o vertex.o edge.o graph.o Framework.o Algorithm.o Chrono.o $(ALGORITHMS)
-ALGORITHMS = GreedyAlgorithm.o AnotherGreedyAlgorithm.o GraspAlgorithm.o MultiBootAlgorithm.o VNSAlgorithm.o
+ALGORITHMS = GreedyAlgorithm.o AnotherGreedyAlgorithm.o GraspAlgorithm.o MultiBootAlgorithm.o VNSAlgorithm.o HibridGraspVNS.o
 #Flags de compilacion
 CFLAGS = -c -std=c++17
 
@@ -45,6 +45,9 @@ MultiBootAlgorithm.o: ../src/MultiBootAlgorithm.cpp ../include/MultiBootAlgorith
 VNSAlgorithm.o: ../src/VNSAlgorithm.cpp ../include/VNSAlgorithm.hpp
 	g++ $(CFLAGS) ../src/VNSAlgorithm.cpp
 
+HibridGraspVNS.o: ../src/HibridGraspVNS.cpp ../include/HibridGraspVNS.hpp
+	g++ $(CFLAGS) ../src/HibridGraspVNS.cpp
+
 .PHONY: clean
 clean:
 	rm -rf ../objects/*.o
@@ -58,3 +61,6 @@ run2:
 
 run3:
 	../bin/maxmean ../inputs/max-mean-div-20.txt
+
+run4:
+	../bin/maxmean ../inputs/max-mean-div-25.txt

@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-15 19:20:56
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-15 21:19:27
+* @Last Modified time: 2020-04-28 09:33:41
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -39,7 +39,7 @@ Edge::Edge () {
  * @param[in]  vertexB     The vertex b
  * @param[in]  distance  The distance
  */
-Edge::Edge (int vertexA, int vertexB, int distance) {
+Edge::Edge (int vertexA, int vertexB, float distance) {
 	assert(vertexA >= 0 && vertexB >= 0);
 	set_VertexA(vertexA);
 	set_VertexB(vertexB);
@@ -57,7 +57,7 @@ Edge::~Edge () {
  *
  * @return     The distance.
  */
-int Edge::get_Distance (void) const {
+float Edge::get_Distance (void) const {
 	return distance_;
 }
 
@@ -84,7 +84,7 @@ int Edge::get_VertexB (void) const {
  *
  * @param[in]  distance  The distance
  */
-void Edge::set_Distance (int distance) {
+void Edge::set_Distance (float distance) {
 	distance_ = distance;
 }
 

@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-26 21:03:25
+* @Last Modified time: 2020-04-28 12:11:17
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -148,6 +148,10 @@ void FrameWork::initialize (void) {
 			algorithm_ = new VNSAlgorithm();
 			break;
 
+		case 6:
+			algorithm_ = new HibridGraspVNS();
+			break;
+
 		case 0:
 			std::cout << std::endl << "Aborting program . . ." << std::endl;
 			exit(0);
@@ -172,6 +176,7 @@ int FrameWork::printMenu (void) {
 	std::cout << std::endl << "\t 3. MultiStart Algorithm";
 	std::cout << std::endl << "\t 4. GRASP Algorithm";
 	std::cout << std::endl << "\t 5. VNS Algorithm";
+	std::cout << std::endl << "\t 6. Híbrido Grasp-VNS";
 	std::cout << std::endl << "\t 0. Abort program";
 	std::cout << std::endl;
 	int selector;

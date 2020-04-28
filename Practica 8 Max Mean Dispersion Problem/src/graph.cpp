@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-15 20:01:17
 * @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-16 19:54:25
+* @Last Modified time: 2020-04-28 09:35:37
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -126,6 +126,7 @@ void Graph::generateGraph(void) {
 	std::ifstream textfile;
 	textfile.open(get_TextFile());
 	int readValue;
+	float readDistance;
 	if (textfile.is_open()) {
 		while (!textfile.eof()) {
 			textfile >> readValue;
@@ -134,10 +135,10 @@ void Graph::generateGraph(void) {
 				Vertex newVertex(i);
 				vertex_.push_back(newVertex);
 				for (int j = i + 1; j < get_VertexNum(); j++) {
-					textfile >> readValue;
-					if (!isdigit(readValue)) {
-						Edge newEdgeAB(i, j, readValue);
-						Edge newEdgeBA(j, i, readValue);
+					textfile >> readDistance;
+					if (!isdigit(readDistance)) {
+						Edge newEdgeAB(i, j, readDistance);
+						Edge newEdgeBA(j, i, readDistance);
 						edges_.push_back(newEdgeAB);
 						edges_.push_back(newEdgeBA);
 					}
