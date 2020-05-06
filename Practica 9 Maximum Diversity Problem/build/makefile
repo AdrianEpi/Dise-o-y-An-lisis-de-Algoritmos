@@ -62,3 +62,8 @@ run5:
 
 run6:
 	../bin/maxmean ../inputs/max_div_30_3.txt
+
+git:
+	git add ../.
+	git commit -m "Upload"
+	git push
