@@ -17,6 +17,7 @@
 
 #include <cassert>
 #include <string>
+#include <vector>
 
 /*------------------------------------------------*/
 /*----------  DECLARACION DE FUNCIONES  ----------*/
@@ -33,6 +34,7 @@ class Vertex {
 	private:
 		int number_;
 		std::string name_;
+		std::vector<float> coordinates_;
 
 	public: 
 		// Builders & Destroyer
@@ -43,14 +45,17 @@ class Vertex {
 		// Getters & Setters
 		int get_Number (void) const;
 		std::string get_Name (void) const;
+		std::vector<float> get_Coordinates (void) const;
 
 		void set_Number (int number);
 		void set_Name (std::string name);
+		void set_Coordinates (std::vector<float> coordinates);
 
 		// Operator Overload
 		void operator= (const Vertex& vertex);
 
 		// Functions
 		void generateName (void);
+		void addCoordinate (float coordinate);
 
 };

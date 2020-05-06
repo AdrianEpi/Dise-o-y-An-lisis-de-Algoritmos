@@ -16,8 +16,8 @@
 /*
 * @Author: Adrián Epifanio
 * @Date:   2020-04-15 20:01:17
-* @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-28 09:35:37
+* @Last Modified by:   Adrian Epifanio
+* @Last Modified time: 2020-05-06 17:16:19
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -56,14 +56,6 @@ std::vector<Vertex> Graph::get_Vertex(void) const {
 	return vertex_;
 }
 
-/**
- * @brief      Gets the edges.
- *
- * @return     The edges.
- */
-std::vector<Edge> Graph::get_Edges(void) const {
-	return edges_;
-}
 
 /**
  * @brief      Gets the text file.
@@ -84,21 +76,21 @@ int Graph::get_VertexNum (void) const {
 }
 
 /**
+ * @brief      Gets the coordinates number.
+ *
+ * @return     The coordinates number.
+ */
+int Graph::get_CoordinatesNum (void) const {
+	return coordinatesNum_;
+}
+
+/**
  * @brief      Sets the vertex.
  *
  * @param[in]  vertex  The vertex
  */
 void Graph::set_Vertex(std::vector<Vertex> vertex) {
 	vertex_ = vertex;
-}
-
-/**
- * @brief      Sets the edges.
- *
- * @param[in]  edge  The edge
- */
-void Graph::set_Edges(std::vector<Edge> edge) {
-	edges_ = edge;
 }
 
 /**
@@ -120,29 +112,37 @@ void Graph::set_VertexNum (int vertexNum) {
 }
 
 /**
+ * @brief      Sets the coordinates number.
+ *
+ * @param[in]  coordinatesNum  The coordinates number
+ */
+void Graph::set_CoordinatesNum (int coordinatesNum) {
+	coordinatesNum_ = coordinatesNum;
+}
+
+/**
  * @brief      Generates the graph from the textfile give to the constructor
  */
 void Graph::generateGraph(void) {
 	std::ifstream textfile;
 	textfile.open(get_TextFile());
-	int readValue;
-	float readDistance;
+	int readInt;
+	float readFloat;
 	if (textfile.is_open()) {
 		while (!textfile.eof()) {
-			textfile >> readValue;
-			set_VertexNum(readValue);
+			textfile >> readInt;
+			assert(readInt > 0);
+			set_VertexNum(readInt);
+			textfile >> readInt;
+			assert(readInt > 0);
+			set_CoordinatesNum(readInt);
 			for (int i = 0; i < get_VertexNum(); i++) {
 				Vertex newVertex(i);
-				vertex_.push_back(newVertex);
-				for (int j = i + 1; j < get_VertexNum(); j++) {
-					textfile >> readDistance;
-					if (!isdigit(readDistance)) {
-						Edge newEdgeAB(i, j, readDistance);
-						Edge newEdgeBA(j, i, readDistance);
-						edges_.push_back(newEdgeAB);
-						edges_.push_back(newEdgeBA);
-					}
+				for (int j = 0; j < get_CoordinatesNum(); j++) {
+					textfile >> readFloat;
+					newVertex.addCoordinate(readFloat);
 				}
+				vertex_.push_back(newVertex);
 			}
 		}
 		textfile.close();
@@ -157,13 +157,13 @@ void Graph::generateGraph(void) {
  * @brief      Prints the graph by console.
  */
 void Graph::printGraph(void) {
+	char LETTERS[] = {'x', 'y', 'z', 'w', 't', 's'};
 	for (int i = 0; i < vertex_.size(); i++) {
 		std::string node = vertex_[i].get_Name();
 		node += "\n";
-		for (int j = 0; j < edges_.size(); j++) {
-			if (edges_[j].get_VertexA() == vertex_[i].get_Number()) {
-				node += "\tVertex " + std::to_string(edges_[j].get_VertexB()) + " -> " + std::to_string(edges_[j].get_Distance()) + "\n";
-			}
+		for (int j = 0; j < get_CoordinatesNum(); j++) {
+			char tmp = LETTERS[j];
+			node = node + "\t\tCoordinate " + LETTERS[j] + " -> " + std::to_string(vertex_[i].get_Coordinates()[j]) + '\n';
 		}
 		node += "\n";
 		std::cout << node;

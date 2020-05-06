@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-06 16:25:37
+* @Last Modified time: 2020-05-06 17:15:44
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -125,7 +125,7 @@ void FrameWork::set_Chrono (Chrono chrono) {
 void FrameWork::initialize (void) {
 	graph_.set_TextFile(get_TextFile());
 	graph_.generateGraph();
-	//graph_.printGraph();
+	graph_.printGraph();
 	int choice = printMenu();
 	/*switch (choice) {
 		case 1:
@@ -154,8 +154,8 @@ void FrameWork::initialize (void) {
 }
 
 void FrameWork::executeFrameWork (void) {
-	algorithm_ -> runAlgorithm(graph_, chrono_);
-	algorithm_ -> printResult(std::cout, chrono_);
+	//algorithm_ -> runAlgorithm(graph_, chrono_);
+	//algorithm_ -> printResult(std::cout, chrono_);
 }
 
 int FrameWork::printMenu (void) {

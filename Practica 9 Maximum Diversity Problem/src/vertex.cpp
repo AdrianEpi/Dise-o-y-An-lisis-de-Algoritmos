@@ -16,8 +16,8 @@
 /*
 * @Author: Adrián Epifanio
 * @Date:   2020-04-15 19:34:52
-* @Last Modified by:   Adrián Epifanio
-* @Last Modified time: 2020-04-17 17:58:07
+* @Last Modified by:   Adrian Epifanio
+* @Last Modified time: 2020-05-06 17:06:55
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -30,16 +30,18 @@
  * @brief      Constructs a new instance.
  */
 Vertex::Vertex () {
+    coordinates_.resize(0);
 }
 
 /**
  * @brief      Constructs a new instance.
  *
  * @param[in]  number  The number
- */
+ */ 
 Vertex::Vertex (int number) {
 	assert(number >= 0);
 	set_Number(number);
+    coordinates_.resize(0);
 	generateName();
 }
 
@@ -47,6 +49,7 @@ Vertex::Vertex (int number) {
  * @brief      Destroys the object.
  */
 Vertex::~Vertex () {
+    coordinates_.resize(0);
 }
 
 /**
@@ -68,6 +71,15 @@ std::string Vertex::get_Name (void) const {
 }
 
 /**
+ * @brief      Gets the coordinates.
+ *
+ * @return     The coordinates.
+ */
+std::vector<float> Vertex::get_Coordinates (void) const {
+    return coordinates_;
+}
+
+/**
  * @brief      Sets the number.
  *
  * @param[in]  number  The number
@@ -83,6 +95,15 @@ void Vertex::set_Number (int number) {
  */
 void Vertex::set_Name (std::string name) {
 	name_ = name;
+}
+
+/**
+ * @brief      Sets the coordinates.
+ *
+ * @param[in]  coordinates  The coordinates
+ */
+void Vertex::set_Coordinates (std::vector<float> coordinates) {
+    coordinates_ = coordinates;
 }
 
 /**
@@ -102,4 +123,13 @@ void Vertex::generateName (void) {
 	std::string name = "Vertex ";
 	name += std::to_string(get_Number());
 	set_Name(name);
+}
+
+/**
+ * @brief      Adds a coordinate to the coords vecctor.
+ *
+ * @param[in]  coordinate  The coordinate
+ */
+void Vertex::addCoordinate (float coordinate) {
+    coordinates_.push_back(coordinate);
 }
