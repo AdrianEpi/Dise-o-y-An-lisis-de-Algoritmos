@@ -1,5 +1,5 @@
 # Variables
-TIME = $(date)
+TIME = date
 # Variable objetos
 OBJECTS = main.o vertex.o edge.o graph.o Framework.o Algorithm.o Chrono.o $(ALGORITHMS)
 ALGORITHMS = GreedyAlgorithm.o AnotherGreedyAlgorithm.o GraspAlgorithm.o
