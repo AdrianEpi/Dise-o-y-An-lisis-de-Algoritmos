@@ -1,23 +1,23 @@
 /*=======================================================================================
 =========================================================================================
-	=                                                                              =
-	=            Proyect:       Practica 8 Max-Mean Problem                        =
-	=            File name:     Algorithm.cpp                                      =
-	=            Author:        Adrián Epifanio Rodríguez Hernández                =
-	=            Fecha:         03/04/2020                                         =
-	=            Subject:       Diseño y Análisis de Algoritmos                    =
-	=            Language:      C++                                                =
-	=            Email:         alu0101158280@ull.edu.es                           =
-	=            Place:         Universidad De La Laguna                           =
-	=                           Escuela Superior de Ingeniería y Tecnología        =
-	=                                                                              =
+    =                                                                              =
+    =            Proyect:       Practica 9 Maximum Diversity                       =
+    =            File name:     Algorithm.cpp                                      =
+    =            Author:        Adrián Epifanio Rodríguez Hernández                =
+    =            Fecha:         06/05/2020                                         =
+    =            Subject:       Diseño y Análisis de Algoritmos                    =
+    =            Language:      C++                                                =
+    =            Email:         alu0101158280@ull.edu.es                           =
+    =            Place:         Universidad De La Laguna                           =
+    =                           Escuela Superior de Ingeniería y Tecnología        =
+    =                                                                              =
 =========================================================================================
 =======================================================================================*/
 /*
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-06 16:48:23
+* @Last Modified time: 2020-05-06 17:26:10
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 

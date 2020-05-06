@@ -1,10 +1,10 @@
 /*=======================================================================================
 =========================================================================================
     =                                                                              =
-    =            Proyect:       Practica 8 Max-Mean Problem                        =
+    =            Proyect:       Practica 9 Maximum Diversity                       =
     =            File name:     main.cpp                                           =
     =            Author:        Adrián Epifanio Rodríguez Hernández                =
-    =            Fecha:         03/04/2020                                         =
+    =            Fecha:         06/05/2020                                         =
     =            Subject:       Diseño y Análisis de Algoritmos                    =
     =            Language:      C++                                                =
     =            Email:         alu0101158280@ull.edu.es                           =
@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:28:44
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-06 16:25:44
+* @Last Modified time: 2020-05-06 17:27:22
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 

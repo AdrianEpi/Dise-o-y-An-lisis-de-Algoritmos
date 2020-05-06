@@ -1,10 +1,10 @@
 /*=======================================================================================
 =========================================================================================
     =                                                                              =
-    =            Proyect:       Practica 8 Max-Mean Problem                        =
+    =            Proyect:       Practica 9 Maximum Diversity                       =
     =            File name:     Framework.hpp                                      =
     =            Author:        Adrián Epifanio Rodríguez Hernández                =
-    =            Fecha:         03/04/2020                                         =
+    =            Fecha:         06/05/2020                                         =
     =            Subject:       Diseño y Análisis de Algoritmos                    =
     =            Language:      C++                                                =
     =            Email:         alu0101158280@ull.edu.es                           =
