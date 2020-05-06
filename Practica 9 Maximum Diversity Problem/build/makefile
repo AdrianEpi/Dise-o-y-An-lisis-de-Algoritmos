@@ -1,7 +1,9 @@
-#Variable objetos
+# Variables
+TIME = $(date)
+# Variable objetos
 OBJECTS = main.o vertex.o edge.o graph.o Framework.o Algorithm.o Chrono.o $(ALGORITHMS)
 ALGORITHMS = GreedyAlgorithm.o AnotherGreedyAlgorithm.o GraspAlgorithm.o
-#Flags de compilacion
+# Flags de compilacion
 CFLAGS = -c -std=c++17
 
 maxmean: $(OBJECTS)
@@ -65,6 +67,5 @@ run6:
 
 git:
 	git add ../.
-	git commit -m "Upload"
+	git commit -m "Upload $(TIME)"
 	git push
-	AdrianEpi
