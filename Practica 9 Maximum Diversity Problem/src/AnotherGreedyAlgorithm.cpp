@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-17 09:29:34
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-06 17:28:06
+* @Last Modified time: 2020-05-06 17:28:42
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -60,5 +60,5 @@ void AnotherGreedyAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 	}
 	set_Solution(solution);
 	set_MaxMean(mean);
-	chrono.stopChrono();
+	chrono.stopChrono(); 
 }
