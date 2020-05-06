@@ -57,5 +57,6 @@ class Vertex {
 		// Functions
 		void generateName (void);
 		void addCoordinate (float coordinate);
+		void setCoordinate(int position, float number);
 
 };

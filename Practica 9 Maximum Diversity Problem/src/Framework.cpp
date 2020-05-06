@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-06 17:27:54
+* @Last Modified time: 2020-05-06 19:03:28
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -84,6 +84,15 @@ Chrono FrameWork::get_Chrono (void) const {
 }
 
 /**
+ * @brief      Gets the solution size.
+ *
+ * @return     The solution size.
+ */
+int FrameWork::get_SolutionSize (void) const {
+	return solutionSize_;
+}
+
+/**
  * @brief      Sets the graph.
  *
  * @param[in]  graph  The graph
@@ -120,6 +129,15 @@ void FrameWork::set_Chrono (Chrono chrono) {
 }
 
 /**
+ * @brief      Sets the solution size.
+ *
+ * @param[in]  size  The size
+ */
+void FrameWork::set_SolutionSize (int size) {
+	solutionSize_ = size;
+}
+
+/**
  * @brief      Initializes the object.
  */
 void FrameWork::initialize (void) {
@@ -127,18 +145,18 @@ void FrameWork::initialize (void) {
 	graph_.generateGraph();
 	graph_.printGraph();
 	int choice = printMenu();
-	/*switch (choice) {
+	switch (choice) {
 		case 1:
 			algorithm_ = new GreedyAlgorithm();
 			break;
 
-		case 2:
+		/*case 2:
 			algorithm_ = new AnotherGreedyAlgorithm();
 			break;
 
 		case 3:
 			algorithm_ = new GraspAlgorithm();
-			break;
+			break;*/
 
 
 		case 0:
@@ -150,12 +168,13 @@ void FrameWork::initialize (void) {
 			std::cout << std::endl << "Error selecting Algorithm" << std::endl;
 			exit(0);
 			break;
-	}*/
+	}
 }
 
 void FrameWork::executeFrameWork (void) {
-	//algorithm_ -> runAlgorithm(graph_, chrono_);
-	//algorithm_ -> printResult(std::cout, chrono_);
+	algorithm_ -> set_SolutionSize(2);
+	algorithm_ -> runAlgorithm(graph_, chrono_);
+	algorithm_ -> printResult(std::cout, chrono_);
 }
 
 int FrameWork::printMenu (void) {

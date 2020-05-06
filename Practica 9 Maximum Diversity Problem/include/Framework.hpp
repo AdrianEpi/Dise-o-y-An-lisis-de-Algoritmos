@@ -19,8 +19,8 @@
 #include "graph.hpp"
 #include "Chrono.hpp"
 #include "Algorithm.hpp"
-/*#include "GreedyAlgorithm.hpp"
-#include "AnotherGreedyAlgorithm.hpp"
+#include "GreedyAlgorithm.hpp"
+/*#include "AnotherGreedyAlgorithm.hpp"
 #include "GraspAlgorithm.hpp" */
 
 /*------------------------------------------------*/
@@ -41,6 +41,7 @@ class FrameWork {
 		std::string textFile_;
 		Algorithm* algorithm_;
 		Chrono chrono_;
+		int solutionSize_;
 
 	public:
 		// Builders & Destroyer
@@ -53,11 +54,13 @@ class FrameWork {
 		std::string get_TextFile (void) const;
 		Algorithm* get_Algorithm (void) const;
 		Chrono get_Chrono (void) const;
+		int get_SolutionSize (void) const;
 
 		void set_Graph (Graph graph);
 		void set_TextFile (std::string textFile);
 		void set_Algorithm (Algorithm* algorithm);
 		void set_Chrono (Chrono chrono);
+		void set_SolutionSize (int size);
 
 		// Function
 		void initialize (void);

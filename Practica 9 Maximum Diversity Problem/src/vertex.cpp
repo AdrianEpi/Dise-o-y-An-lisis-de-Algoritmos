@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-15 19:34:52
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-06 17:27:13
+* @Last Modified time: 2020-05-06 19:17:48
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -103,7 +103,11 @@ void Vertex::set_Name (std::string name) {
  * @param[in]  coordinates  The coordinates
  */
 void Vertex::set_Coordinates (std::vector<float> coordinates) {
-    coordinates_ = coordinates;
+    coordinates_.clear();
+    coordinates_.resize(coordinates.size());
+    for (int i = 0; i < coordinates.size(); i++) {
+        coordinates_[i] = coordinates[i];
+    }
 }
 
 /**
@@ -114,6 +118,7 @@ void Vertex::set_Coordinates (std::vector<float> coordinates) {
 void Vertex::operator= (const Vertex& vertex) {
     set_Name(vertex.get_Name());
     set_Number(vertex.get_Number());
+    set_Coordinates(vertex.get_Coordinates());
 } 
 
 /**
@@ -132,4 +137,14 @@ void Vertex::generateName (void) {
  */
 void Vertex::addCoordinate (float coordinate) {
     coordinates_.push_back(coordinate);
+}
+
+/**
+ * @brief      Sets the coordinate.
+ *
+ * @param[in]  position  The position
+ * @param[in]  number    The number
+ */
+void Vertex::setCoordinate(int position, float number) {
+    coordinates_[position] = number;
 }

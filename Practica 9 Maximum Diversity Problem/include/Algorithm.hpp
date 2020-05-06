@@ -32,7 +32,9 @@ class Algorithm {
 
 	private:
 		std::vector<Vertex> solutions_;
-		float maxMean_;
+		float diversity_;
+		std::vector<Vertex> freeVertex_;
+		int solutionSize_;
 
 	public:
 		// Builders & Destroyer
@@ -41,14 +43,19 @@ class Algorithm {
 
 		// Getter & Setter
 		std::vector<Vertex> get_Solution (void) const;
-		float get_MaxMean (void) const;
+		float get_Diversity (void) const;
+		std::vector<Vertex>& get_FreeVertex (void);
+		int get_SolutionSize (void) const;
 
 		void set_Solution (std::vector<Vertex> solution);
-		void set_MaxMean (float mean);
+		void set_Diversity (float diversity);
+		void set_FreeVertex (std::vector<Vertex> freeElements);
+		void set_SolutionSize (int size);
 
 		// Functions
 		virtual void runAlgorithm (Graph& graph, Chrono& chrono);
 		std::ostream& printResult (std::ostream& os, Chrono& chrono);
 		float findDiversity (std::vector<Vertex>& vertex);
-		std::vector<float> generateGravityCenter (std::vector<Vertex>& vertex);
+		Vertex generateGravityCenter (std::vector<Vertex>& vertex);
+		int findFurthestFromGravityCenter (std::vector<Vertex>& vertex, Vertex& gravityCenter);
 };

@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:28:44
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-06 17:27:22
+* @Last Modified time: 2020-05-06 19:02:22
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -33,5 +33,5 @@ int main(int argc, char *argv[]) {
     std::string fileName(argv[1]);
     FrameWork maxMeanDispersionProblem(fileName);
     maxMeanDispersionProblem.initialize();
-    //maxMeanDispersionProblem.executeFrameWork();
+    maxMeanDispersionProblem.executeFrameWork();
 }
