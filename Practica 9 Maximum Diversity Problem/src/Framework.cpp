@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-07 18:45:05
+* @Last Modified time: 2020-05-07 18:59:17
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -172,7 +172,7 @@ void FrameWork::initialize (void) {
 }
 
 void FrameWork::executeFrameWork (void) {
-	algorithm_ -> set_SolutionSize(2);
+	algorithm_ -> set_SolutionSize(3);
 	algorithm_ -> runAlgorithm(graph_, chrono_);
 	algorithm_ -> printResult(std::cout, chrono_);
 }

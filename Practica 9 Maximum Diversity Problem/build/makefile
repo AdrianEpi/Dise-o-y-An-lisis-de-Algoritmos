@@ -2,7 +2,7 @@
 TIME =$(LOGPATH)$(shell date)
 # Variable objetos
 OBJECTS = main.o vertex.o graph.o Framework.o Algorithm.o Chrono.o $(ALGORITHMS)
-ALGORITHMS = GreedyAlgorithm.o #AnotherGreedyAlgorithm.o GraspAlgorithm.o
+ALGORITHMS = GreedyAlgorithm.o AnotherGreedyAlgorithm.o #GraspAlgorithm.o
 # Flags de compilacion
 CFLAGS = -c -std=c++17
 
@@ -32,8 +32,8 @@ Algorithm.o: ../src/Algorithm.cpp ../include/Algorithm.hpp
 GreedyAlgorithm.o: ../src/GreedyAlgorithm.cpp ../include/GreedyAlgorithm.hpp
 	g++ $(CFLAGS) ../src/GreedyAlgorithm.cpp
 
-#AnotherGreedyAlgorithm.o: ../src/AnotherGreedyAlgorithm.cpp ../include/AnotherGreedyAlgorithm.hpp
-#	g++ $(CFLAGS) ../src/AnotherGreedyAlgorithm.cpp
+AnotherGreedyAlgorithm.o: ../src/AnotherGreedyAlgorithm.cpp ../include/AnotherGreedyAlgorithm.hpp
+	g++ $(CFLAGS) ../src/AnotherGreedyAlgorithm.cpp
 
 #GraspAlgorithm.o: ../src/GraspAlgorithm.cpp ../include/GraspAlgorithm.hpp
 #	g++ $(CFLAGS) ../src/GraspAlgorithm.cpp

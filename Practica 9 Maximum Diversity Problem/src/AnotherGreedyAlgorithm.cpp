@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-17 09:29:34
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-07 18:44:17
+* @Last Modified time: 2020-05-07 18:58:19
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -63,13 +63,6 @@ void AnotherGreedyAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 
 		}
 	}
-	/*Vertex gravityCenter;
-	gravityCenter = generateGravityCenter(get_FreeVertex());
-	do {
-		int candidate = findFurthestFromGravityCenter(get_FreeVertex(), gravityCenter);
-		addition(solution, candidate);
-		gravityCenter = generateGravityCenter(solution);
-	} while (solution.size() < get_SolutionSize());*/
 	set_Solution(solution);
 	set_Diversity(findDiversity(solution));
 	chrono.stopChrono();
