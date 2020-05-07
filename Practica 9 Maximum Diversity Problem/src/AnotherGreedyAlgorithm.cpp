@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-17 09:29:34
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-06 17:28:42
+* @Last Modified time: 2020-05-07 18:44:17
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -45,20 +45,32 @@ AnotherGreedyAlgorithm::~AnotherGreedyAlgorithm () {
 void AnotherGreedyAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 	chrono.startChrono();
 	std::vector<Vertex> solution;
-	initialSolution(graph, solution);
-	float mean = findMean(solution, graph);
-	for (int vertexCounter = 2; vertexCounter < graph.get_Vertex().size(); vertexCounter++) {
-		if (isInVector(vertexCounter, solution) == false) {
-			std::vector<Vertex> tempSolution = solution;
-			tempSolution.push_back(graph.get_Vertex()[vertexCounter]);
-			float tempMean = findMean(tempSolution, graph);
-			if (tempMean > mean) {
-				solution.push_back(graph.get_Vertex()[vertexCounter]);
-				mean = tempMean;
+	set_FreeVertex(graph.get_Vertex());
+	for (int i = 0; i < get_SolutionSize(); i++) {
+		addition(solution, i);
+	}
+	float diversity = findDiversity(solution); 
+	for (int i = 0; i < get_SolutionSize(); i++) {
+		for (int j = 0; j < get_FreeVertex().size(); j++) {
+			std::vector<Vertex> tmp = solution;
+			tmp.erase(tmp.begin() + i);
+			tmp.push_back(get_FreeVertex()[j]);
+			float tmpDiversity = findDiversity(tmp);
+			if (tmpDiversity > diversity) {
+				swap(solution, i, j);
+				diversity = tmpDiversity;
 			}
+
 		}
 	}
+	/*Vertex gravityCenter;
+	gravityCenter = generateGravityCenter(get_FreeVertex());
+	do {
+		int candidate = findFurthestFromGravityCenter(get_FreeVertex(), gravityCenter);
+		addition(solution, candidate);
+		gravityCenter = generateGravityCenter(solution);
+	} while (solution.size() < get_SolutionSize());*/
 	set_Solution(solution);
-	set_MaxMean(mean);
-	chrono.stopChrono(); 
+	set_Diversity(findDiversity(solution));
+	chrono.stopChrono();
 }

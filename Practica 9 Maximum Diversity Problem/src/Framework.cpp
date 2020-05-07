@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-06 19:03:28
+* @Last Modified time: 2020-05-07 18:45:05
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -150,11 +150,11 @@ void FrameWork::initialize (void) {
 			algorithm_ = new GreedyAlgorithm();
 			break;
 
-		/*case 2:
+		case 2:
 			algorithm_ = new AnotherGreedyAlgorithm();
 			break;
 
-		case 3:
+		/*case 3:
 			algorithm_ = new GraspAlgorithm();
 			break;*/
 

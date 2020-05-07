@@ -20,8 +20,8 @@
 #include "Chrono.hpp"
 #include "Algorithm.hpp"
 #include "GreedyAlgorithm.hpp"
-/*#include "AnotherGreedyAlgorithm.hpp"
-#include "GraspAlgorithm.hpp" */
+#include "AnotherGreedyAlgorithm.hpp"
+//#include "GraspAlgorithm.hpp"
 
 /*------------------------------------------------*/
 /*----------  DECLARACION DE LIBRERIAS  ----------*/
