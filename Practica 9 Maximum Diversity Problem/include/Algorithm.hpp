@@ -58,4 +58,9 @@ class Algorithm {
 		float findDiversity (std::vector<Vertex>& vertex);
 		Vertex generateGravityCenter (std::vector<Vertex>& vertex);
 		int findFurthestFromGravityCenter (std::vector<Vertex>& vertex, Vertex& gravityCenter);
+
+		// Enviroment Structures
+		void addition (std::vector<Vertex>& vertex, int& vertexNum);
+		void swap (std::vector<Vertex>& vertex, int& vertexNum, int& freeVertexNum);
+		void extraction (std::vector<Vertex>& vertex, int& vertexNum);
 };

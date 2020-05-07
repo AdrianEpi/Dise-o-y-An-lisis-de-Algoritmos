@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-03 20:29:34
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-06 19:25:40
+* @Last Modified time: 2020-05-07 18:28:09
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -50,8 +50,7 @@ void GreedyAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 	gravityCenter = generateGravityCenter(get_FreeVertex());
 	do {
 		int candidate = findFurthestFromGravityCenter(get_FreeVertex(), gravityCenter);
-		solution.push_back(get_FreeVertex()[candidate]);
-		get_FreeVertex().erase(get_FreeVertex().begin() + candidate);
+		addition(solution, candidate);
 		gravityCenter = generateGravityCenter(solution);
 	} while (solution.size() < get_SolutionSize());
 	set_Solution(solution);

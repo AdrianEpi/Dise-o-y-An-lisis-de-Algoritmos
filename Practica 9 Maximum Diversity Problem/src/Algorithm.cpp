@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-07 17:43:26
+* @Last Modified time: 2020-05-07 18:35:55
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -122,6 +122,14 @@ void Algorithm::set_SolutionSize (int size) {
 void Algorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 } 
 
+/**
+ * @brief      Prints a result.
+ *
+ * @param      os      The output stream
+ * @param      chrono  The chrono
+ *
+ * @return     The output stream
+ */
 std::ostream& Algorithm::printResult (std::ostream& os, Chrono& chrono) {
 	assert(get_Solution().size() > 0);
 	os << std::endl << "CPU Time: " << chrono.get_Seconds(5) << " seconds";
@@ -203,4 +211,38 @@ int Algorithm::findFurthestFromGravityCenter (std::vector<Vertex>& vertex, Verte
 		}
 	}
 	return number;
+}
+
+/**
+ * @brief      Adds a vertes to the vector and removes it from the free vertex vector
+ *
+ * @param      vertex     The vertex
+ * @param[in]  vertexNum  The vertex number
+ */
+void Algorithm::addition (std::vector<Vertex>& vertex, int& vertexNum) {
+	vertex.push_back(get_FreeVertex()[vertexNum]);
+	freeVertex_.erase(freeVertex_.begin() + vertexNum);
+}
+
+/**
+ * @brief      Swaps a vertex from the given vector with another from the freeSolution vector
+ *
+ * @param      vertex         The vertex
+ * @param[in]  vertexNum      The vertex number
+ * @param[in]  freeVertexNum  The free vertex number
+ */
+void Algorithm::swap (std::vector<Vertex>& vertex, int& vertexNum, int& freeVertexNum) {
+	addition(vertex, freeVertexNum);
+	extraction(vertex, vertexNum);
+}
+
+/**
+ * @brief      Extracs a vertex form the vector given and returns it to the free vertex vector
+ *
+ * @param      vertex     The vertex
+ * @param      vertexNum  The vertex number
+ */
+void Algorithm::extraction (std::vector<Vertex>& vertex, int& vertexNum) {
+	freeVertex_.push_back(vertex[vertexNum]);
+	vertex.erase(vertex.begin() + vertexNum);
 }
