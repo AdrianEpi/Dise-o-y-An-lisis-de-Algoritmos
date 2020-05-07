@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-06 19:26:29
+* @Last Modified time: 2020-05-07 17:43:26
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -120,7 +120,7 @@ void Algorithm::set_SolutionSize (int size) {
  * @param      graph  The graph
  */
 void Algorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
-}
+} 
 
 std::ostream& Algorithm::printResult (std::ostream& os, Chrono& chrono) {
 	assert(get_Solution().size() > 0);
