@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-08 07:58:02
+* @Last Modified time: 2020-05-08 09:24:38
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -155,6 +155,10 @@ void FrameWork::initialize (void) {
 			break;
 
 		case 3:
+			algorithm_ = new LocalSearchAlgorithm();
+			break;
+
+		case 4:
 			int RLC, iterations;
 			std::cout << std::endl << "Introduce the Restricted Cantidates List (RLC) size: ";
 			std::cin >> RLC;
@@ -186,7 +190,8 @@ int FrameWork::printMenu (void) {
 	std::cout << std::endl << "Please select one of the following Algorithms: ";
 	std::cout << std::endl << "\t 1. Greedy Algorithm (Figure)";
 	std::cout << std::endl << "\t 2. Greedy Algorithm (Own)";
-	std::cout << std::endl << "\t 3. GRASP Algorithm";
+	std::cout << std::endl << "\t 3. Local Search Algorithm";
+	std::cout << std::endl << "\t 4. GRASP Algorithm";
 	std::cout << std::endl << "\t 0. Abort program";
 	std::cout << std::endl;
 	int selector;

@@ -2,14 +2,14 @@
 TIME =$(LOGPATH)$(shell date)
 # Variable objetos
 OBJECTS = main.o vertex.o graph.o Framework.o Algorithm.o Chrono.o $(ALGORITHMS)
-ALGORITHMS = GreedyAlgorithm.o AnotherGreedyAlgorithm.o GraspAlgorithm.o
+ALGORITHMS = GreedyAlgorithm.o AnotherGreedyAlgorithm.o GraspAlgorithm.o LocalSearchAlgorithm.o
 # Flags de compilacion
 CFLAGS = -c -std=c++17
 
-maxmean: $(OBJECTS)
-	g++  $(OBJECTS) -o maxmean
+max-diversity: $(OBJECTS)
+	g++  $(OBJECTS) -o max-diversity
 	mv *.o ../objects
-	mv maxmean ../bin
+	mv max-diversity ../bin
 
 main.o: ../src/main.cpp
 	g++ $(CFLAGS) ../src/main.cpp
@@ -38,6 +38,9 @@ AnotherGreedyAlgorithm.o: ../src/AnotherGreedyAlgorithm.cpp ../include/AnotherGr
 GraspAlgorithm.o: ../src/GraspAlgorithm.cpp ../include/GraspAlgorithm.hpp
 	g++ $(CFLAGS) ../src/GraspAlgorithm.cpp
 
+LocalSearchAlgorithm.o: ../src/LocalSearchAlgorithm.cpp ../include/LocalSearchAlgorithm.hpp
+	g++ $(CFLAGS) ../src/LocalSearchAlgorithm.cpp
+
 
 .PHONY: clean
 clean:
@@ -45,22 +48,22 @@ clean:
 	rm -rf ../bin/*
 
 run1:
-	../bin/maxmean ../inputs/max_div_15_2.txt
+	../bin/max-diversity ../inputs/max_div_15_2.txt
 
 run2:
-	../bin/maxmean ../inputs/max_div_15_3.txt
+	../bin/max-diversity ../inputs/max_div_15_3.txt
 
 run3:
-	../bin/maxmean ../inputs/max_div_20_2.txt
+	../bin/max-diversity ../inputs/max_div_20_2.txt
 
 run4:
-	../bin/maxmean ../inputs/max_div_20_3.txt
+	../bin/max-diversity ../inputs/max_div_20_3.txt
 
 run5:
-	../bin/maxmean ../inputs/max_div_30_2.txt
+	../bin/max-diversity ../inputs/max_div_30_2.txt
 
 run6:
-	../bin/maxmean ../inputs/max_div_30_3.txt
+	../bin/max-diversity ../inputs/max_div_30_3.txt
 
 git:
 	git add ../.
