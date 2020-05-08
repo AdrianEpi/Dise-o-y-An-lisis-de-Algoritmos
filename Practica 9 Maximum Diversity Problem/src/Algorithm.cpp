@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-07 18:58:04
+* @Last Modified time: 2020-05-08 09:01:39
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -214,6 +214,23 @@ int Algorithm::findFurthestFromGravityCenter (std::vector<Vertex>& vertex, Verte
 }
 
 /**
+ * @brief      Gets the position in the vector of a given vertex.
+ *
+ * @param      vertex     The vertex
+ * @param[in]  vertexNum  The vertex number
+ *
+ * @return     The position from vector.
+ */
+int Algorithm::getPositionFromVector (std::vector<Vertex>& vertex, int vertexNum) {
+	for (int i = 0; i < vertex.size(); i++) {
+		if (vertex[i].get_Number() == vertexNum) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+/**
  * @brief      Adds a vertes to the vector and removes it from the free vertex vector
  *
  * @param      vertex     The vertex
@@ -245,4 +262,21 @@ void Algorithm::swap (std::vector<Vertex>& vertex, int& vertexNum, int& freeVert
 void Algorithm::extraction (std::vector<Vertex>& vertex, int& vertexNum) {
 	freeVertex_.push_back(vertex[vertexNum]);
 	vertex.erase(vertex.begin() + vertexNum);
+}
+
+/**
+ * @brief      Gets a random vertex form the vector.
+ *
+ * @param[in]  vector   The vector
+ *
+ * @return     The random vertex.
+ */
+int Algorithm::getRandomVertex (std::vector<Vertex>& vector) {
+	if (vector.size() > 0) {
+		int num = rand() % vector.size();
+		return num;
+	}
+	else {
+		return -1;
+	}
 }

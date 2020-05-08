@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-07 18:59:17
+* @Last Modified time: 2020-05-08 07:58:02
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -154,9 +154,14 @@ void FrameWork::initialize (void) {
 			algorithm_ = new AnotherGreedyAlgorithm();
 			break;
 
-		/*case 3:
-			algorithm_ = new GraspAlgorithm();
-			break;*/
+		case 3:
+			int RLC, iterations;
+			std::cout << std::endl << "Introduce the Restricted Cantidates List (RLC) size: ";
+			std::cin >> RLC;
+			std::cout << std::endl << "Introduce the number of iterations: ";
+			std::cin >> iterations;
+			algorithm_ = new GraspAlgorithm(RLC, iterations);
+			break;
 
 
 		case 0:
