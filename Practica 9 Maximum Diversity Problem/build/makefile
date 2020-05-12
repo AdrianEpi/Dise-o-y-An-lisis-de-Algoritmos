@@ -2,7 +2,7 @@
 TIME =$(LOGPATH)$(shell date)
 # Variable objetos
 OBJECTS = main.o vertex.o graph.o Framework.o Algorithm.o Chrono.o $(ALGORITHMS)
-ALGORITHMS = GreedyAlgorithm.o AnotherGreedyAlgorithm.o GraspAlgorithm.o LocalSearchAlgorithm.o
+ALGORITHMS = GreedyAlgorithm.o AnotherGreedyAlgorithm.o GraspAlgorithm.o LocalSearchAlgorithm.o BranchingAndPruningAlgorithm.o
 # Flags de compilacion
 CFLAGS = -c -std=c++17
 
@@ -40,6 +40,9 @@ GraspAlgorithm.o: ../src/GraspAlgorithm.cpp ../include/GraspAlgorithm.hpp
 
 LocalSearchAlgorithm.o: ../src/LocalSearchAlgorithm.cpp ../include/LocalSearchAlgorithm.hpp
 	g++ $(CFLAGS) ../src/LocalSearchAlgorithm.cpp
+
+BranchingAndPruningAlgorithm.o: ../src/BranchingAndPruningAlgorithm.cpp ../include/BranchingAndPruningAlgorithm.hpp
+	g++ $(CFLAGS) ../src/BranchingAndPruningAlgorithm.cpp
 
 
 .PHONY: clean

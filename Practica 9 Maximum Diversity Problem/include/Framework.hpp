@@ -23,6 +23,7 @@
 #include "AnotherGreedyAlgorithm.hpp"
 #include "GraspAlgorithm.hpp"
 #include "LocalSearchAlgorithm.hpp"
+#include "BranchingAndPruningAlgorithm.hpp"
 
 /*------------------------------------------------*/
 /*----------  DECLARACION DE LIBRERIAS  ----------*/

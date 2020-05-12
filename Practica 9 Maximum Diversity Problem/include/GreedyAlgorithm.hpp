@@ -29,8 +29,4 @@ class GreedyAlgorithm : public Algorithm {
 
 		// Public Function
 		void runAlgorithm (Graph& graph, Chrono& chrono);
-
-	private:
-		// Private Functions
-		int findMaxDispersion (Graph& graph, std::vector<Vertex>& vertex);
 };

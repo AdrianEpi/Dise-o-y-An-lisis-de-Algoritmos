@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-08 09:24:38
+* @Last Modified time: 2020-05-12 08:13:23
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -165,6 +165,10 @@ void FrameWork::initialize (void) {
 			std::cout << std::endl << "Introduce the number of iterations: ";
 			std::cin >> iterations;
 			algorithm_ = new GraspAlgorithm(RLC, iterations);
+			break;
+
+		case 5:
+			algorithm_ = new BranchingAndPruningAlgorithm();
 			break;
 
 
