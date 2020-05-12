@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-12 08:13:23
+* @Last Modified time: 2020-05-12 09:27:18
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -196,6 +196,7 @@ int FrameWork::printMenu (void) {
 	std::cout << std::endl << "\t 2. Greedy Algorithm (Own)";
 	std::cout << std::endl << "\t 3. Local Search Algorithm";
 	std::cout << std::endl << "\t 4. GRASP Algorithm";
+	std::cout << std::endl << "\t 5. Branching And Pruning Algorithm";
 	std::cout << std::endl << "\t 0. Abort program";
 	std::cout << std::endl;
 	int selector;

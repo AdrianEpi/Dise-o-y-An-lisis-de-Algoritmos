@@ -17,7 +17,7 @@
 * @Author: Adrian Epifanio
 * @Date:   2020-05-12 08:08:12
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-12 08:21:21
+* @Last Modified time: 2020-05-12 10:04:37
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -74,6 +74,15 @@ std::vector<Vertex> BranchingAndPruningAlgorithm::get_TmpSolution (void) const {
 }
 
 /**
+ * @brief      Gets the possible vertex.
+ *
+ * @return     The possible vertex.
+ */
+std::vector<Vertex> BranchingAndPruningAlgorithm::get_PossibleVertex (void) const {
+	return possibleVertex_;
+}
+
+/**
  * @brief      Sets the upper bound.
  *
  * @param[in]  bound  The bound
@@ -110,24 +119,87 @@ void BranchingAndPruningAlgorithm::set_TmpSolution (std::vector<Vertex> tmp) {
 }
 
 /**
+ * @brief      Sets the possible vertex.
+ *
+ * @param[in]  possibilities  The possibilities
+ */
+void BranchingAndPruningAlgorithm::set_PossibleVertex (std::vector<Vertex> possibilities) {
+	possibleVertex_ = possibilities;
+}
+
+/**
  * @brief      Executes the BranchingAndPruning algorithm
  *
  * @param      graph  The graph
  */
 void BranchingAndPruningAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 	chrono.startChrono();
-	std::vector<Vertex> solution;
-	set_FreeVertex(graph.get_Vertex());
-	Vertex gravityCenter;
-	gravityCenter = generateGravityCenter(get_FreeVertex());
-	do {
-		int candidate = findFurthestFromGravityCenter(get_FreeVertex(), gravityCenter);
-		addition(solution, candidate);
-		gravityCenter = generateGravityCenter(solution);
-	} while (solution.size() < get_SolutionSize());
-	set_Solution(solution);
-	set_Diversity(findDiversity(solution));
+	set_PossibleVertex(graph.get_Vertex());
+	set_LowerBound(0);
+	std::vector<Vertex> initial;
+	if (get_Strategy() == 1) {
+		for (int i = 0; i < possibleVertex_.size(); i++) {
+			expandNodeStrategy1(initial, i, 0.0);	
+		}
+	}
+	else {
+		expandNodeStrategy0(initial, i, 0.0);	
+	}
+	set_Solution(tmpSolution_);
+	set_Diversity(findDiversity(tmpSolution_));
 	chrono.stopChrono();
+}
+
+/**
+ * @brief      Expands the deepest node, strategy 1.
+ *
+ * @param[in]  tmp        The temporary solution
+ * @param[in]  pos        The position
+ * @param[in]  diversity  The diversity
+ */
+void BranchingAndPruningAlgorithm::expandNodeStrategy1 (std::vector<Vertex> tmp, int pos, float diversity) {
+	if ((tmp.size() > get_SolutionSize())) {
+		return;
+	}
+	else if (tmp.size() < get_SolutionSize()){
+		std::vector<Vertex> newTmp = tmp;
+		newTmp.push_back(possibleVertex_[pos]);
+		float newDiversity = findDiversity(newTmp);
+		if (newDiversity >= diversity) {
+			for (int i = pos; i < possibleVertex_.size(); i++) {
+				expandNode(newTmp, i, newDiversity);
+			}
+		}
+	}
+	else {
+		if (isValidSolution(tmp) && (diversity >= get_LowerBound())) {
+			set_LowerBound(diversity);
+			set_TmpSolution(tmp);
+		}
+	}
+}
+
+void BranchingAndPruningAlgorithm::expandNodeStrategy0 (std::vector<Vertex> tmp, int pos, float diversity) {
+
+}
+
+/**
+ * @brief      Determines whether the specified temporary solution is a valid solution or not.
+ *
+ * @param      tmp   The temporary
+ *
+ * @return     True if the specified temporary is valid solution, False otherwise.
+ */
+bool BranchingAndPruningAlgorithm::isValidSolution (std::vector<Vertex>& tmp) {
+	for (int i = 0; i < (tmp.size() - 1); i++) {
+		int aux = tmp[i].get_Number();
+		for (int j = (i + 1); j < tmp.size(); j++) {
+			if (tmp[j].get_Number() == aux) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 
