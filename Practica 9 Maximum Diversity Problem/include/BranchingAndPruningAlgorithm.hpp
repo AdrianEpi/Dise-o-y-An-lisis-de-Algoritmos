@@ -52,8 +52,8 @@ class BranchingAndPruningAlgorithm : public Algorithm {
 		void runAlgorithm (Graph& graph, Chrono& chrono);
 
 	private:
-		//void generateInitialSolution (int algorithm, Graph& graph);
-		void expandNodeStrategy1 (std::vector<Vertex> tmp, int pos, float diversity);
-		void expandNodeStrategy0 (std::vector<Vertex> tmp, int pos, float diversity);
+		void expandNodeStrategy1 (std::vector<Vertex>& tmp, int pos, float diversity);
+		void expandNodeStrategy0 (std::vector<Vertex> tmp, int pos);
 		bool isValidSolution (std::vector<Vertex>& tmp);
+		bool hasbetterUpperBound (std::vector<Vertex> tmp, int pos);
 };

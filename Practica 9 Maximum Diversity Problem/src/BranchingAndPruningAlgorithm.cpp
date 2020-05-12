@@ -17,7 +17,7 @@
 * @Author: Adrian Epifanio
 * @Date:   2020-05-12 08:08:12
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-12 10:04:37
+* @Last Modified time: 2020-05-12 14:02:45
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -136,6 +136,7 @@ void BranchingAndPruningAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 	chrono.startChrono();
 	set_PossibleVertex(graph.get_Vertex());
 	set_LowerBound(0);
+	set_Strategy(1);
 	std::vector<Vertex> initial;
 	if (get_Strategy() == 1) {
 		for (int i = 0; i < possibleVertex_.size(); i++) {
@@ -143,7 +144,7 @@ void BranchingAndPruningAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 		}
 	}
 	else {
-		expandNodeStrategy0(initial, i, 0.0);	
+		expandNodeStrategy0(initial, 0);	
 	}
 	set_Solution(tmpSolution_);
 	set_Diversity(findDiversity(tmpSolution_));
@@ -157,7 +158,7 @@ void BranchingAndPruningAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
  * @param[in]  pos        The position
  * @param[in]  diversity  The diversity
  */
-void BranchingAndPruningAlgorithm::expandNodeStrategy1 (std::vector<Vertex> tmp, int pos, float diversity) {
+void BranchingAndPruningAlgorithm::expandNodeStrategy1 (std::vector<Vertex>& tmp, int pos, float diversity) {
 	if ((tmp.size() > get_SolutionSize())) {
 		return;
 	}
@@ -167,7 +168,7 @@ void BranchingAndPruningAlgorithm::expandNodeStrategy1 (std::vector<Vertex> tmp,
 		float newDiversity = findDiversity(newTmp);
 		if (newDiversity >= diversity) {
 			for (int i = pos; i < possibleVertex_.size(); i++) {
-				expandNode(newTmp, i, newDiversity);
+				expandNodeStrategy1(newTmp, i, newDiversity);
 			}
 		}
 	}
@@ -179,8 +180,24 @@ void BranchingAndPruningAlgorithm::expandNodeStrategy1 (std::vector<Vertex> tmp,
 	}
 }
 
-void BranchingAndPruningAlgorithm::expandNodeStrategy0 (std::vector<Vertex> tmp, int pos, float diversity) {
-
+void BranchingAndPruningAlgorithm::expandNodeStrategy0 (std::vector<Vertex> tmp, int pos) {
+	if ((tmp.size() > get_SolutionSize())) {
+		return;
+	}
+	else if (tmp.size() < get_SolutionSize()){
+		if (hasbetterUpperBound(tmp, pos) == true) {
+			tmp.push_back(possibleVertex_[pos]);
+			expandNodeStrategy0(tmp, pos + 1);
+		}
+		expandNodeStrategy0(tmp, pos + 1);
+	}
+	else {
+		float diversity  = findDiversity(tmp);
+		if (isValidSolution(tmp) && (diversity >= get_LowerBound())) {
+			set_LowerBound(diversity);
+			set_TmpSolution(tmp);
+		}
+	}
 }
 
 /**
@@ -202,6 +219,28 @@ bool BranchingAndPruningAlgorithm::isValidSolution (std::vector<Vertex>& tmp) {
 	return true;
 }
 
-
+bool BranchingAndPruningAlgorithm::hasbetterUpperBound (std::vector<Vertex> tmp, int pos) {
+	std::vector<Vertex> newTmp = tmp;
+	for (int i = pos; i < possibleVertex_.size(); i++) {
+		tmp.push_back(possibleVertex_[i]);
+	}
+	float tmpDiversity = findDiversity(tmp);
+	for (int i = pos + 1; i < possibleVertex_.size(); i++) {
+		newTmp.push_back(possibleVertex_[i]);
+	}
+	float newTmpDiversity = findDiversity(newTmp);
+	if (tmpDiversity < newTmpDiversity) {
+		if (tmpDiversity < get_UpperBound()) {
+			set_UpperBound(tmpDiversity);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	} 
+}
 
 
