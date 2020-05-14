@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-14 12:08:52
+* @Last Modified time: 2020-05-14 19:01:44
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -185,15 +185,15 @@ void FrameWork::initialize (void) {
 }
 
 void FrameWork::executeFrameWork (void) {
-	/*std::cout << std::endl << "Select the solution size: ";
+	std::cout << std::endl << "Select the solution size: ";
 	int aux;
-	std::cin >> aux;*/
-	for (int i = 2; i < 6; i++) {
-		Chrono chrono;
-		algorithm_ -> set_SolutionSize(i);
-		algorithm_ -> runAlgorithm(graph_, chrono);
-		algorithm_ -> printResult(std::cout, chrono);
-	}
+	std::cin >> aux;
+	//for (int i = 2; i < 6; i++) {
+	//	Chrono chrono;
+		algorithm_ -> set_SolutionSize(aux);
+		algorithm_ -> runAlgorithm(graph_, chrono_);
+		algorithm_ -> printResult(std::cout, chrono_);
+	//}
 }
 
 int FrameWork::printMenu (void) {

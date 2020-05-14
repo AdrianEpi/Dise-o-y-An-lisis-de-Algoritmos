@@ -29,6 +29,7 @@ class BranchingAndPruningAlgorithm : public Algorithm {
 						// 1 -> Expands the deepest node
 		std::vector<Vertex> tmpSolution_;
 		std::vector<Vertex> possibleVertex_;
+		int generatedNodes_;
 
 	public:
 		// Builder & Destroyer

@@ -17,7 +17,7 @@
 * @Author: Adrian Epifanio
 * @Date:   2020-05-12 08:08:12
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-12 14:02:45
+* @Last Modified time: 2020-05-14 19:24:46
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -133,9 +133,15 @@ void BranchingAndPruningAlgorithm::set_PossibleVertex (std::vector<Vertex> possi
  * @param      graph  The graph
  */
 void BranchingAndPruningAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
+	///*
+	std::cout << std::endl << "Select the LowerBound ";
+	float aux;
+	std::cin >> aux;
+	//*/
+	generatedNodes_ = 0;
 	chrono.startChrono();
 	set_PossibleVertex(graph.get_Vertex());
-	set_LowerBound(0);
+	set_LowerBound(aux);
 	set_Strategy(1);
 	std::vector<Vertex> initial;
 	if (get_Strategy() == 1) {
@@ -149,6 +155,7 @@ void BranchingAndPruningAlgorithm::runAlgorithm (Graph& graph, Chrono& chrono) {
 	set_Solution(tmpSolution_);
 	set_Diversity(findDiversity(tmpSolution_));
 	chrono.stopChrono();
+	std::cout << std::endl << "Generated nodes -> " << generatedNodes_ << std::endl;
 }
 
 /**
@@ -173,7 +180,9 @@ void BranchingAndPruningAlgorithm::expandNodeStrategy1 (std::vector<Vertex>& tmp
 		}
 	}
 	else {
+		generatedNodes_++;
 		if (isValidSolution(tmp) && (diversity >= get_LowerBound())) {
+			
 			set_LowerBound(diversity);
 			set_TmpSolution(tmp);
 		}
@@ -181,6 +190,7 @@ void BranchingAndPruningAlgorithm::expandNodeStrategy1 (std::vector<Vertex>& tmp
 }
 
 void BranchingAndPruningAlgorithm::expandNodeStrategy0 (std::vector<Vertex> tmp, int pos) {
+	generatedNodes_++;
 	if ((tmp.size() > get_SolutionSize())) {
 		return;
 	}
