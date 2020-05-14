@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-12 09:27:18
+* @Last Modified time: 2020-05-14 12:08:52
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -143,7 +143,7 @@ void FrameWork::set_SolutionSize (int size) {
 void FrameWork::initialize (void) {
 	graph_.set_TextFile(get_TextFile());
 	graph_.generateGraph();
-	graph_.printGraph();
+	//graph_.printGraph();
 	int choice = printMenu();
 	switch (choice) {
 		case 1:
@@ -185,9 +185,15 @@ void FrameWork::initialize (void) {
 }
 
 void FrameWork::executeFrameWork (void) {
-	algorithm_ -> set_SolutionSize(3);
-	algorithm_ -> runAlgorithm(graph_, chrono_);
-	algorithm_ -> printResult(std::cout, chrono_);
+	/*std::cout << std::endl << "Select the solution size: ";
+	int aux;
+	std::cin >> aux;*/
+	for (int i = 2; i < 6; i++) {
+		Chrono chrono;
+		algorithm_ -> set_SolutionSize(i);
+		algorithm_ -> runAlgorithm(graph_, chrono);
+		algorithm_ -> printResult(std::cout, chrono);
+	}
 }
 
 int FrameWork::printMenu (void) {
