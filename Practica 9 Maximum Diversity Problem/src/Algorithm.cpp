@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 16:48:59
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-08 09:01:39
+* @Last Modified time: 2020-05-15 12:39:47
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -157,10 +157,9 @@ float Algorithm::findDiversity (std::vector<Vertex>& vertex) {
 			for (int k = 0; k < vertex[0].get_Coordinates().size(); k++) {
 				tmp += pow((vertex[i].get_Coordinates()[k] - vertex[j].get_Coordinates()[k]), 2);
 			}
-			diversity += tmp;
+			diversity += sqrt(tmp);
 		}
 	}
-	diversity = sqrt(diversity);
 	return diversity;
 }
 
