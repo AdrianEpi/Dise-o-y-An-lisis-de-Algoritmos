@@ -17,7 +17,7 @@
 * @Author: Adrián Epifanio
 * @Date:   2020-04-16 13:28:27
 * @Last Modified by:   Adrian Epifanio
-* @Last Modified time: 2020-05-15 13:17:35
+* @Last Modified time: 2020-05-19 09:52:40
 */
 /*----------  DECLARACION DE FUNCIONES  ----------*/
 
@@ -143,7 +143,7 @@ void FrameWork::set_SolutionSize (int size) {
 void FrameWork::initialize (void) {
 	graph_.set_TextFile(get_TextFile());
 	graph_.generateGraph();
-	//graph_.printGraph();
+	graph_.printGraph();
 	int choice = printMenu();
 	switch (choice) {
 		case 1:
@@ -168,7 +168,10 @@ void FrameWork::initialize (void) {
 			break;
 
 		case 5:
-			algorithm_ = new BranchingAndPruningAlgorithm();
+			int strategy;
+			std::cout << std::endl << "Select the strategy mode:\n\t0. Expands the node with the lowest upperBound\n\t1. Expands the deepest node " << std::endl;
+			std::cin >> strategy;
+			algorithm_ = new BranchingAndPruningAlgorithm(strategy);
 			break;
 
 
@@ -184,18 +187,26 @@ void FrameWork::initialize (void) {
 	}
 }
 
+/**
+ * @brief      Runs the algorithm selected
+ */
 void FrameWork::executeFrameWork (void) {
-	//std::cout << std::endl << "Select the solution size: ";
-	//int aux;
-	//std::cin >> aux;
-	for (int i = 2; i < 6; i++) {
-		Chrono chrono;
-		algorithm_ -> set_SolutionSize(i);
+	std::cout << std::endl << "Select the solution size: ";
+	int aux;
+	std::cin >> aux;
+	//for (int i = 2; i < 6; i++) {
+	//	Chrono chrono;
+		algorithm_ -> set_SolutionSize(aux /*i*/);
 		algorithm_ -> runAlgorithm(graph_, chrono_);
 		algorithm_ -> printResult(std::cout, chrono_);
-	}
+	//}
 }
 
+/**
+ * @brief      Prints a menu.
+ *
+ * @return     The selected option
+ */
 int FrameWork::printMenu (void) {
 	std::cout << std::endl << "Please select one of the following Algorithms: ";
 	std::cout << std::endl << "\t 1. Greedy Algorithm (Figure)";
